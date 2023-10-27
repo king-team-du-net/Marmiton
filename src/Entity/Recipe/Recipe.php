@@ -2,23 +2,23 @@
 
 namespace App\Entity\Recipe;
 
-use App\Entity\Review;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Post;
-use Doctrine\DBAL\Types\Types;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Delete;
-use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\HasViewsTrait;
 use ApiPlatform\Metadata\ApiResource;
-use App\Entity\Traits\HasContentTrait;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use App\Entity\Traits\HasTimestampTrait;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use App\Entity\Review;
 use App\Entity\Setting\HomepageHeroSetting;
-use App\Repository\Recipe\RecipeRepository;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Traits\HasContentTrait;
 use App\Entity\Traits\HasIdNameSlugAssertTrait;
+use App\Entity\Traits\HasTimestampTrait;
+use App\Entity\Traits\HasViewsTrait;
+use App\Repository\Recipe\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -89,11 +89,13 @@ class Recipe
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Review::class, cascade: ['persist', 'remove'])]
     private Collection $reviews;
 
+    /*
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'favorites', cascade: ['persist', 'merge'])]
     #[ORM\JoinTable(name: 'favorites')]
     #[ORM\JoinColumn(name: 'recipe_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'user_id', referencedColumnName: 'id')]
     private Collection $addedtofavoritesby;
+    */
 
     public function __toString(): string
     {
@@ -108,7 +110,7 @@ class Recipe
         $this->recipeHasSources = new ArrayCollection();
         $this->recipeHasIngredients = new ArrayCollection();
         $this->reviews = new ArrayCollection();
-        $this->addedtofavoritesby = new ArrayCollection();
+        // $this->addedtofavoritesby = new ArrayCollection();
     }
 
     public function getPreparation(): ?int
@@ -364,18 +366,19 @@ class Recipe
 
         return $this;
     }
-/*
-    public function isRatedBy(User $user): Review
-    {
-        foreach ($this->reviews as $review) {
-            if ($review->getUser() === $user) {
-                return $review;
-            }
-        }
 
-        return false;
-    }
-*/
+    /*
+        public function isRatedBy(User $user): Review
+        {
+            foreach ($this->reviews as $review) {
+                if ($review->getUser() === $user) {
+                    return $review;
+                }
+            }
+
+            return false;
+        }
+    */
     public function getRatingsPercentageForRating($rating): int|float
     {
         if (!$this->countVisibleReviews()) {
@@ -448,9 +451,10 @@ class Recipe
         return $count;
     }
 
-    /**
-     * @return Collection<int, User>
+    /*
+     * //@return Collection<int, User>
      */
+    /*
     public function getAddedtofavoritesby(): Collection
     {
         return $this->addedtofavoritesby;
@@ -476,4 +480,5 @@ class Recipe
     {
         return $this->addedtofavoritesby->contains($user);
     }
+    */
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity\Setting;
 
-use App\Entity\Book;
 use App\Entity\Recipe\Recipe;
 use App\Entity\Traits\HasIdTrait;
 use App\Entity\Traits\HasTimestampTrait;
@@ -61,7 +60,7 @@ class HomepageHeroSetting
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
-        //$this->users = new ArrayCollection();
+        // $this->users = new ArrayCollection();
     }
 
     public function clearRecipes(): void
@@ -192,7 +191,7 @@ class HomepageHeroSetting
         return $this;
     }
 
-    /**
+    /*
      * //@return Collection<int, User>
      */
     /*

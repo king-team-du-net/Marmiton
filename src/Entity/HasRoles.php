@@ -19,7 +19,6 @@ final class HasRoles
     // Role User
     public const CUSTOMER = 'ROLE_CUSTOMER';
 
-
     // Role SuperAdmin
     public const ADMINISTRATOR = 'ROLE_ADMINISTRATOR';
 

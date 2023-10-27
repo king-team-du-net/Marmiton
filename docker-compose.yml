@@ -9,6 +9,15 @@ services:
             # You should definitely change the password in production
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-!ChangeMe!}
             MYSQL_DATABASE: ${MYSQL_DATABASE:-marmiton}
+
+    #database:
+        #image: 'mariadb:latest'
+        #environment:
+            # You should definitely change the password in production
+            #MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-!ChangeMe!}
+            #MARIADB_DATABASE: ${MARIADB_DATABASE:-marmiton}
+        #volumes:
+            #- database_data:/var/lib/mysql
 ###< doctrine/doctrine-bundle ###
 
 ###> phpmyadmin/phpmyadmin ###

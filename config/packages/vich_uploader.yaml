@@ -1,8 +1,109 @@
 vich_uploader:
     db_driver: orm
 
-    #mappings:
-    #    products:
-    #        uri_prefix: /images/products
-    #        upload_destination: '%kernel.project_dir%/public/images/products'
-    #        namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+    metadata:
+        type: attribute
+
+    mappings:
+
+        user_avatar:
+            uri_prefix: '%user_avatar%'
+            upload_destination: '%kernel.project_dir%/public%user_avatar%'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options:
+                    property: id
+            directory_namer:
+                service: App\Infrastructural\Vich\Namer\PropertyGroupedDirectoryNamer
+                options:
+                    property: id
+                    modulo: 10000
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        badges:
+            uri_prefix: '%badges%'
+            upload_destination: '%kernel.project_dir%/public%badges%'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'imageName' }
+
+        category_image:
+            uri_prefix: '%categories%'
+            upload_destination: '%kernel.project_dir%/public%categories%'
+            namer: vich_uploader.namer_uniqid
+            inject_on_load: true
+            delete_on_update: true
+            delete_on_remove: true
+
+        attachments:
+            uri_prefix: '%attachments%'
+            upload_destination: '%kernel.project_dir%/public%attachments%'
+            namer: vich_uploader.namer_uniqid
+            directory_namer:
+                service: Vich\UploaderBundle\Naming\CurrentDateTimeDirectoryNamer
+                options:
+                    date_time_format: 'Y' # will create directory "2023/13/01" for curent date "2023-01-13"
+                    date_time_property: createdAt # see above example
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        article_image:
+            uri_prefix: '%article_image%'
+            upload_destination: '%kernel.project_dir%/public%article_image%'
+            namer: vich_uploader.namer_uniqid
+            inject_on_load: true
+            delete_on_update: true
+            delete_on_remove: true
+
+        thumbnails:
+            uri_prefix: '%thumbnails%'
+            upload_destination: '%kernel.project_dir%/public%thumbnails%'
+            namer: vich_uploader.namer_uniqid
+            directory_namer:
+                service: App\Infrastructural\Vich\Namer\ThumbnailDirectoryNamer
+            inject_on_load: true
+            delete_on_update: true
+            delete_on_remove: true
+
+        homepage_hero_custom_background:
+            uri_prefix: '%homepage_hero_custom_background%'
+            upload_destination: '%kernel.project_dir%/public%homepage_hero_custom_background%'
+            namer: vich_uploader.namer_uniqid
+            inject_on_load: true
+            delete_on_update: true
+            delete_on_remove: true
+
+        app_layout:
+            uri_prefix: '%app_layout%'
+            upload_destination: '%kernel.project_dir%/public%app_layout%'
+            namer: vich_uploader.namer_uniqid
+            inject_on_load: true
+            delete_on_update: true
+            delete_on_remove: true
+
+        payment_gateway:
+            uri_prefix: '%payment_gateway%'
+            upload_destination: '%kernel.project_dir%/public%payment_gateway%'
+            namer: vich_uploader.namer_uniqid
+            inject_on_load: true
+            delete_on_update: true
+            delete_on_remove: true
+
+        product_image:
+            uri_prefix: '%product_image%'
+            upload_destination: '%kernel.project_dir%/public%product_image%'
+            namer: vich_uploader.namer_uniqid
+            inject_on_load: true
+            delete_on_update: true
+            delete_on_remove: true
+
+        photo_testimonial:
+            uri_prefix: '%photo_testimonial%'
+            upload_destination: '%kernel.project_dir%/public%photo_testimonial%'
+            namer: vich_uploader.namer_uniqid
+            inject_on_load: true
+            delete_on_update: true
+            delete_on_remove: true

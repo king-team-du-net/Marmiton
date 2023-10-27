@@ -1,0 +1,47 @@
+image: jakzal/phpqa:php8.2
+
+cache:
+    paths:
+        - vendor/
+
+.before_script: &before_script
+    before_script:
+        - composer install
+
+include:
+    - template: Jobs/Secret-Detection.gitlab-ci.yml
+    - template: Jobs/SAST.gitlab-ci.yml
+
+# SecurityChecker stage
+security-checker:
+    stage: SecurityChecker
+    script:
+        - local-php-security-checker composer.lock
+    allow_failure: false
+
+# PHP Coding Standards
+php-code-standard:
+    <<: *before_script
+    stage: CodingStandards
+    script:
+        - php-cs-fixer fix ./src --dry-run --rules=@Symfony --verbose
+        - phpstan analyse ./src -l3
+        - phpdd ./src
+        - phpcpd ./src --exclude './src/Controller/Admin/' --exclude './src/Entity'
+    allow_failure: true
+
+# PHP Lint
+lint:
+    <<: *before_script
+    stage: Lint
+    script:
+        - ./bin/console lint:twig templates --env=prod
+        - ./bin/console lint:yaml config --parse-tags
+        - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+    allow_failure: true
+
+stages:
+    - test
+    - SecurityChecker
+    - CodingStandards
+    - Lint

@@ -1,0 +1,12 @@
+<ul class="flex flex-row justify-start text-xs mt-8">
+	<li>{{ 'Tags' }}: &nbsp;</li>
+	{% for tag in article.tags %}
+		<li>
+			<a href="{{ path('blog_tag', {slug: tag.slug}) }}">{{ tag.name }}</a>
+
+			{% if not loop.last %}
+				<span>&nbsp; - &nbsp;</span>
+			{% endif %}
+		</li>
+	{% endfor %}
+</ul>

@@ -2,12 +2,11 @@
 
 namespace App\Entity\Recipe;
 
-use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Recipe\UserRecipe;
 use App\Entity\Traits\HasIdNameTrait;
 use App\Repository\Recipe\StatusRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StatusRepository::class)]
 class Status

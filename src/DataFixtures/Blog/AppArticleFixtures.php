@@ -2,18 +2,15 @@
 
 namespace App\DataFixtures\Blog;
 
-use App\Entity\User;
-use App\Entity\HasRoles;
-use App\Entity\Blog\Badge;
-use App\Entity\Blog\Article;
-use App\Entity\Blog\Comment;
-use App\Entity\Blog\Category;
 use App\DataFixtures\FakerTrait;
-use App\Repository\UserRepository;
-use Doctrine\Persistence\ObjectManager;
+use App\Entity\Blog\Article;
+use App\Entity\Blog\Badge;
+use App\Entity\Blog\Category;
+use App\Entity\Blog\Comment;
+use App\Entity\HasRoles;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use App\DataFixtures\AppAdminTeamUserFixtures;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppArticleFixtures extends Fixture
@@ -59,7 +56,7 @@ class AppArticleFixtures extends Fixture
         $customer = new User();
         $customer
             ->setLastname('John')
-            ->setFirstname('Doe')            
+            ->setFirstname('Doe')
             ->setNickname('john-customer')
             ->setSlug('john-customer')
             ->setEmail('john-customer@yourdomain.com')
@@ -77,7 +74,7 @@ class AppArticleFixtures extends Fixture
         for ($i = 0; $i < 10; ++$i) {
             $badge = new Badge();
             $badge
-                ->setName($this->faker()->unique()->word(1, true).' '.$i)
+                ->setName($this->faker()->unique()->name().' '.$i)
                 ->setDescription(
                     1 === mt_rand(0, 1) ? $this->faker()->realText(254) : null
                 )
@@ -91,7 +88,7 @@ class AppArticleFixtures extends Fixture
         for ($i = 0; $i < 10; ++$i) {
             $category = new Category();
             $category
-                ->setName($this->faker()->unique()->word(1, true).' '.$i)
+                ->setName($this->faker()->unique()->name().' '.$i)
                 ->setDescription(
                     1 === mt_rand(0, 1) ? $this->faker()->realText(254) : null
                 )

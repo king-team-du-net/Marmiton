@@ -185,42 +185,16 @@ class SettingService
         }
     }
 
-    /*
-    // Redirects to the referer page when available, if not, redirects to the dashboard index
-    public function redirectToReferer($alt = null): RedirectResponse
-    {
-        if ($this->requestStack->getCurrentRequest()->headers->get('referer')) {
-            return new RedirectResponse($this->requestStack->getCurrentRequest()->headers->get('referer'));
-        }
-        if ($alt) {
-            if ($this->authChecker->isGranted(HasRoles::ADMINISTRATOR)) {
-                return new RedirectResponse($this->router->generate('dashboard_administrator_'.$alt));
-            } elseif ($this->authChecker->isGranted(HasRoles::ADMIN)) {
-                return new RedirectResponse($this->router->generate('dashboard_admin_'.$alt));
-            } elseif ($this->authChecker->isGranted(HasRoles::PRODUCT)) {
-                return new RedirectResponse($this->router->generate('dashboard_product_admin_'.$alt));
-            } elseif ($this->authChecker->isGranted(HasRoles::EDITOR)) {
-                return new RedirectResponse($this->router->generate('dashboard_editor_'.$alt));
-            } elseif ($this->authChecker->isGranted(HasRoles::DEFAULT)) {
-                return new RedirectResponse($this->router->generate('dashboard_account_'.$alt));
-            }
-
-            return new RedirectResponse($this->router->generate($alt));
-        }
-
-        return new RedirectResponse($this->router->generate('dashboard_index'));
-    }
-    */
-
-    // Shows the soft deleted entities for ROLE_ADMINISTRATOR
+    // Shows the soft deleted entities for ROLE_SUPER_ADMIN
     public function disableSofDeleteFilterForAdmin(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker): void
     {
         $em->getFilters()->enable('softdeleteable');
-        if ($authChecker->isGranted(HasRoles::ADMINISTRATOR)) {
+        if ($authChecker->isGranted(HasRoles::SUPERADMIN)) {
             $em->getFilters()->disable('softdeleteable');
         }
     }
 
+    /*
     // Returns the pages after applying the specified search criterias
     public function getPages($criterias)
     {
@@ -322,7 +296,7 @@ class SettingService
         return $this->em->getRepository("App\Entity\Help\HelpCenterArticle")->getHelpCenterArticles($selecttags, $isHidden, $isFeatured, $keyword, $slug, $category, $limit, $sort, $order, $otherthan);
     }
 
-    /*
+
     // Returns the currencies
     public function getCurrencies(mixed $criterias): QueryBuilder
     {

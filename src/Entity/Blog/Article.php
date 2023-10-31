@@ -339,9 +339,7 @@ class Article
     }
 
     /**
-     * Get the number of likes 
-     *
-     * @return integer
+     * Get the number of likes.
      */
     public function howManyLikes(): int
     {

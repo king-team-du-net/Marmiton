@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+        <title>{{ setting.getSettings("website_name") }} {{ 'blog'|trans }}</title>
+        <description>{{ 'Most recent articles published on the '|trans }} {{ setting.getSettings("website_name") }}</description>
+        <pubDate>{{ 'now' | date('r', timezone='GMT') }}</pubDate>
+        <lastBuildDate>{{ (pagination | last).publishedAt | default('now') | date('r', timezone='GMT') }}</lastBuildDate>
+        <link>{{ url('blog') }}</link>
+        <language>{{ app.request.locale }}</language>
+
+        {% for article in pagination %}
+            <item>
+                <title>{{ article.title }}</title>
+                <description>{{ article.content | html_markdown | striptags | html_excerpt(130) }}</description>
+                <link>{{ url('blog_show', {'slug': article.slug}) }}</link>
+                <guid>{{ url('blog_show', {'slug': article.slug}) }}</guid>
+                <pubDate>{{ article.publishedAt | formater_datetime('medium', 'short') }}</pubDate>
+                <author>{{ article.author.email }}</author>
+                {% for tag in article.tags %}
+                    <category>{{ tag.name }}</category>
+                {% endfor %}
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

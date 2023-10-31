@@ -67,7 +67,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->andwhere('u.team = :team')
             // ->setParameter('is_verified', true)
             ->setParameter('team', true)
-            //->setParameter('roles', '%"ROLE_MODERATOR"%')
+            // ->setParameter('roles', '%"ROLE_MODERATOR"%')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()

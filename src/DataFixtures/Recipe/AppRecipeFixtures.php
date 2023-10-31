@@ -2,21 +2,21 @@
 
 namespace App\DataFixtures\Recipe;
 
-use App\Entity\User;
-use App\Entity\Review;
+use App\DataFixtures\AppAdminTeamUserFixtures;
+use App\DataFixtures\FakerTrait;
 use App\Entity\HasRoles;
-use App\Entity\Testimonial;
 use App\Entity\Recipe\Recipe;
 use App\Entity\Recipe\Status;
-use App\DataFixtures\FakerTrait;
 use App\Entity\Recipe\UserRecipe;
-use App\Repository\UserRepository;
-use Doctrine\Persistence\ObjectManager;
-use App\Repository\Recipe\TagRepository;
+use App\Entity\Review;
+use App\Entity\Testimonial;
+use App\Entity\User;
 use App\Repository\Recipe\StepRepository;
+use App\Repository\Recipe\TagRepository;
+use App\Repository\UserRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use App\DataFixtures\AppAdminTeamUserFixtures;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppRecipeFixtures extends Fixture implements DependentFixtureInterface

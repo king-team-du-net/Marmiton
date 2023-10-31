@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title pagetitle %}
+
+{% block body %}
+
+	<div class="container mx-auto">
+		<h1 class="text-5xl text-center mt-24 mb-8">
+			{{ pagetitle }}
+        </h1>
+		<div class="grid grid-cols-4 gap-4 content-start">
+			<div class="col-span-3">
+				<div class="grid gap-4 md:grid-cols-3 sm:grid-cols-2">
+					{% if pagination.getTotalItemCount > 0 %}
+						{% for article in pagination %}
+							{% include "global/article-card.html.twig" with {article: article, thumbnailsize: [768, 432], showdate: 1} only %}
+						{% endfor %}
+					{% else %}
+						{% include "global/message.html.twig" with { type: "info", message: ('Article no found'|trans), icon: "fas fa-exclamation-circle" } %}
+					{% endif %}
+				</div>
+				<div class="navigation flex justify-center mb-8">
+					{{ knp_pagination_render(pagination) }}
+				</div>
+			</div>
+			<div>
+				<div class="sticky top-24">
+					{% include "global/article-search-data.html.twig" with {
+						form: form ?? null
+					} only %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

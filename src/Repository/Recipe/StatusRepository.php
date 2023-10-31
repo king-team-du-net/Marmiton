@@ -3,8 +3,8 @@
 namespace App\Repository\Recipe;
 
 use App\Entity\Recipe\Status;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Status>

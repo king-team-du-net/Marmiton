@@ -1,0 +1,154 @@
+{% extends "base.html.twig" %}
+
+{% set article = entity %}
+{% set pagetitle = article.title %}
+{% block title pagetitle %}
+
+{% block meta_dynamic_seo %}
+	<meta name="description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+	{% if article.tags %}
+		<meta name="keywords" content="{{ article.title }}, {% for tag in article.tags %} {{ tag }} {{ not loop.last ? ', ' : '' }}{% endfor %}"/>
+	{% else %}
+		<meta name="keywords" content="{{ settings['website_keywords_' ~ app.request.locale] }}"/>
+	{% endif %}
+	<meta property="og:title" content="{{ article.title }}"/>
+	{#<meta property="og:image" content="{{ app.request.getUriForPath() }}"/>#}
+	<meta property="og:description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+	<meta property="og:created_time" content="{{ article.createdAt | date('c') }}"/>
+	<meta name="twitter:title" content="{{ article.title }}"/>
+	{#<meta name="twitter:image" content="{{ app.request.getUriForPath() }}" />#}
+	<meta name="twitter:image:alt" content="{{ article.title }}"/>
+	<meta name="twitter:description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+{% endblock %}
+
+{% block breadcrumb %}
+	{% set breadcrumb = [{ "blog": ('Blog'|trans), "current":(pagetitle) }] %}
+	{% include "global/breadcrumb.html.twig" with breadcrumb %}
+{% endblock %}
+
+{% block share %}
+    {% include "global/share.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+    <div>
+        <div class="bg-white py-16 px-6 sm:py-24 sm:px-8">
+            <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+                <a href="{{ path('blog') }}" class="btn btn-link">
+                    <i class="fas fa-arrow-left w-5 h-5 -ml-1 mr-2"></i>
+                    {{ 'Back to blog'|trans }}
+                </a>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                    {{ article.title }}
+                </h1>
+                <div class="mt-5 flex items-center gap-x-4 text-xs">
+                    <time
+                        datetime="{{ article.publishedAt | ago }}"
+                        class="text-slate-500"
+                    >
+                        <i class="fas fa-clock"></i>
+                        {{ article.publishedAt | formater_datetime('medium', 'short') }}
+                    </time>
+                    {% if article.readtime %}
+                        <span class="text-slate-500">
+                            <i class="fas fa-book-reader"></i> 
+                            {{ article.readtime }} {{ "min read"|trans }}
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="mt-6 relative w-full">
+                    <img
+                        src="{{ article.imageName ? asset(article.getImagePath) : article.getImagePlaceholder }}"
+                        alt="{{ article.title }}"
+                        class="aspect-[16/9] w-full rounded-2xl bg-slate-100 object-cover"
+                    >
+                </div>
+                <div class="mt-6 prose prose-slate max-w-none dark:prose-dark">
+                    {{ article.content | html_markdown }}
+                </div>
+                <div class="mt-3 py-10">
+                    {% if is_granted('ROLE_USER') %}
+                        {{ render(controller('App\\Controller\\Blog\\BlogCommentController::form', {'id': article.id})) }}
+                    {% else %}
+                        <div class="items-center text-sm font-medium">
+                            <a class="text-sky-600 hover:text-sky-500" href="{{ path('login', {'redirect_to': app.request.pathInfo}) }}">
+                                <i class="fa fa-sign-in w-5 h-5 -ml-1 mr-2"></i>
+                                {{ 'Sign in'|trans }}
+                            </a>
+                            <span class="text-slate-500">{{ 'to publish a comment'|trans }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mt-3">
+                    <h3 class="font-medium text-slate-900">
+                        <i class="fas fa-comments w-5 h-5 -ml-1 mr-2"></i>
+                        {{ article.comments | length }} {{ article.comments | length  > 1 ? "comments"|trans : "comment"|trans }}
+                    </h3>
+                    {% for comment in article.comments %}
+                        {#{% if comment.isApproved %}#}
+                            <div class="flex space-x-4 text-sm text-slate-500">
+                                <a name="comment_{{ comment.id }}"></a>
+                                <div class="flex-none py-10">
+                                    {% set runtimeConfig = {"thumbnail": {"size": [80, 80] } } %}
+                                    <img 
+                                        src="{{ comment.author.avatarName ? asset(comment.author.getAvatarPath | imagine_filter('thumbnail', runtimeConfig)) : comment.author.getAvatarPlaceholder }}" 
+                                        alt="{{ comment.author.fullName }}" 
+                                        class="h-10 w-10 rounded-full bg-slate-100"
+                                    >
+                                </div>
+                                <div class="flex-1 py-10">
+                                    <h3 class="font-medium text-slate-900">
+                                        {{ comment.author.fullName }}
+                                    </h3>
+                                    <p>
+                                        <time datetime="{{ comment.publishedAt | ago }}">
+                                            {{ comment.publishedAt | formater_datetime('medium', 'short', '') }}
+                                        </time>
+                                    </p>
+                                    <h3 class="mt-4 font-medium text-slate-900"></h3>
+                                    <div class="prose prose-sm prose-slate mt-1 max-w-none">
+                                        {{ comment.content | html_markdown }}
+                                    </div>
+                                    <div class="mt-4 flex justify-between items-center">
+                                        <div>
+                                            <a href="#" class="text-gray-500 hover:text-gray-700 mr-4">
+                                                <i class="fas fa-thumbs-up w-5 h-5"></i> 
+                                                Like
+                                            </a>
+                                            <a href="#" class="text-gray-500 hover:text-gray-700">
+                                                <i class="fas fa-reply w-5 h-5"></i> 
+                                                Reply
+                                            </a>
+                                        </div>
+                                        {% if app.user == comment.author %}
+                                            <div class="flex items-center">
+                                                <a href="#" class="text-gray-500 hover:text-gray-700 mr-4">
+                                                    <i class="fas fa-flag w-5 h-5"></i> 
+                                                    Report
+                                                </a>
+                                                <form name="comment_delete" method="POST" action="{{ path('blog_comment_delete', {'id': comment.id}) }}">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                                                    <button type="submit" class="text-red-500 hover:text-red-700">
+                                                        <i class="fas fa-trash w-5 h-5"></i> 
+                                                        {{ 'Delete'|trans }}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {#{% endif %}#}
+                    {% else %}
+                        <div class="prose prose-sm prose-slate max-w-none">
+                            <p>{{ 'Be the first to comment on this article.'|trans }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

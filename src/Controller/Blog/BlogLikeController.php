@@ -4,16 +4,13 @@ namespace App\Controller\Blog;
 
 use App\Entity\Blog\Article;
 use App\Entity\HasRoles;
-use App\Entity\User\Customer;
-use App\Entity\User\Editor;
-use App\Entity\User\Leader;
-use App\Entity\User\Writer;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route(path: '/blog')]
@@ -23,7 +20,7 @@ class BlogLikeController extends AbstractController
     #[IsGranted(HasRoles::DEFAULT)]
     public function like(Article $article, EntityManagerInterface $em, TranslatorInterface $translator): Response
     {
-        /** @var Leader|Editor|Writer|Customer|User $user */
+        /** @var User $user */
         $user = $this->getUser();
 
         if ($article->isLikedByUser($user)) {

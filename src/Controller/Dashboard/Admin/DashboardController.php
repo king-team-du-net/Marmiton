@@ -4,35 +4,35 @@ declare(strict_types=1);
 
 namespace App\Controller\Dashboard\Admin;
 
-use App\Entity\User;
-use App\Entity\Review;
 use App\Entity\HasRoles;
+use App\Entity\Pages\Contact;
 use App\Entity\Pages\Faq;
 use App\Entity\Pages\Page;
-use App\Entity\Recipe\Tag;
-use App\Entity\Recipe\Unit;
-use App\Entity\Testimonial;
-use App\Entity\Pages\Contact;
+use App\Entity\Recipe\Ingredient;
+use App\Entity\Recipe\IngredientGroup;
 use App\Entity\Recipe\Recipe;
 use App\Entity\Recipe\Source;
 use App\Entity\Recipe\Status;
-use App\Entity\Setting\Setting;
-use App\Entity\Setting\Currency;
-use App\Entity\Recipe\Ingredient;
+use App\Entity\Recipe\Tag;
+use App\Entity\Recipe\Unit;
 use App\Entity\Recipe\UserRecipe;
-use App\Entity\Recipe\IngredientGroup;
+use App\Entity\Review;
 use App\Entity\Setting\AppLayoutSetting;
+use App\Entity\Setting\Currency;
 use App\Entity\Setting\HomepageHeroSetting;
-use function Symfony\Component\Translation\t;
-
+use App\Entity\Setting\Setting;
+use App\Entity\Testimonial;
+use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+
+use function Symfony\Component\Translation\t;
 
 /**
  * @method User getUser().

@@ -4,30 +4,31 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
-use App\Entity\Recipe\Recipe;
-use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
-use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Blog\Article;
+use App\Entity\Recipe\Recipe;
 use App\Entity\Recipe\UserRecipe;
+use App\Entity\Setting\HomepageHeroSetting;
+use App\Entity\Traits\HasAvatarVichTrait;
 use App\Entity\Traits\HasIdTrait;
 use App\Repository\UserRepository;
-use ApiPlatform\Metadata\ApiResource;
-use Gedmo\Mapping\Annotation as Gedmo;
-use ApiPlatform\Metadata\GetCollection;
-use function Symfony\Component\String\u;
-use App\Entity\Traits\HasAvatarVichTrait;
-use App\Entity\Setting\HomepageHeroSetting;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+use function Symfony\Component\String\u;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -120,7 +121,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     private ?HomepageHeroSetting $isuseronhomepageslider = null;
 
     /**
-     * @var Collection<int, Recipe>.
+     * @var collection<int, Recipe>
      */
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Recipe::class, cascade: ['persist', 'remove'])]
     #[Groups(['User:item:get'])]
@@ -151,6 +152,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'addedtofavoritesby', fetch: 'LAZY', cascade: ['remove'])]
     private Collection $favorites;
 
+    /**
+     * @var Collection<int, Article>
+     */
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class, orphanRemoval: true)]
+    private Collection $articles;
+
     public function __toString(): string
     {
         return $this->nickname ?? $this->email;
@@ -163,6 +170,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         $this->reviews = new ArrayCollection();
         $this->testimonials = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function isSuspended(): bool
@@ -351,40 +359,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     public static function createFromPayload($username, array $payload): self
     {
         return (new self())
-            ->setId($username)
+            // ->setId($username)
             ->setRoles($payload['roles'])
             ->setEmail($payload['email'])
         ;
     }
-    /*
-        public function __serialize(): array
-        {
-            return [
+
+    public function __serialize(): array
+    {
+        return [
+            $this->id,
+            $this->firstname,
+            $this->lastname,
+            $this->nickname,
+            $this->email,
+            $this->password,
+            $this->suspended,
+        ];
+    }
+
+    public function __unserialize(array $data): void
+    {
+        if (7 === count($data)) {
+            [
                 $this->id,
                 $this->firstname,
                 $this->lastname,
                 $this->nickname,
                 $this->email,
                 $this->password,
-                $this->is_verified,
-            ];
+                $this->suspended,
+            ] = $data;
         }
-
-        public function __unserialize(array $data): void
-        {
-            if (7 === count($data)) {
-                [
-                    $this->id,
-                    $this->firstname,
-                    $this->lastname,
-                    $this->nickname,
-                    $this->email,
-                    $this->password,
-                    $this->is_verified,
-                ] = $data;
-            }
-        }
-    */
+    }
 
     public function getIsuseronhomepageslider(): ?HomepageHeroSetting
     {
@@ -399,7 +406,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     }
 
     /**
-     * @return Collection<int, Recipe>.
+     * @return collection<int, Recipe>
      */
     public function getRecipes(): Collection
     {
@@ -540,6 +547,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     {
         if ($this->favorites->removeElement($favorite)) {
             $favorite->removeAddedtofavoritesby($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): static
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getAuthor() === $this) {
+                $article->setAuthor(null);
+            }
         }
 
         return $this;

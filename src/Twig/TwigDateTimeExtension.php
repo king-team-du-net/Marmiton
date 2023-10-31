@@ -2,11 +2,11 @@
 
 namespace App\Twig;
 
-use Twig\TwigFilter;
-use Twig\Environment;
 use App\Helper\DateTimeHelper;
-use Twig\Extra\Intl\IntlExtension;
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
+use Twig\Extra\Intl\IntlExtension;
+use Twig\TwigFilter;
 
 class TwigDateTimeExtension extends AbstractExtension
 {

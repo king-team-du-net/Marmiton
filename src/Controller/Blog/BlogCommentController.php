@@ -6,14 +6,9 @@ use App\Entity\Blog\Article;
 use App\Entity\Blog\Comment;
 use App\Entity\HasRoles;
 use App\Entity\User;
-use App\Entity\User\Customer;
-use App\Entity\User\Editor;
-use App\Entity\User\Leader;
-use App\Entity\User\Writer;
 use App\Events\Article\CommentCreatedEvent;
 use App\Form\Blog\ArticleCommentType;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -44,7 +39,7 @@ class BlogCommentController extends AbstractController
         // Find recent comments approved
         // $comments = $article->getIsApprovedComments();
 
-        /** @var Leader|Editor|Writer|Customer|User $user */
+        /** @var User $user */
         $user = $this->getUser();
 
         // Create a new comment
@@ -89,7 +84,7 @@ class BlogCommentController extends AbstractController
     }
 
     #[Route(path: '/comment/{id}', name: 'blog_comment_delete', methods: [Request::METHOD_POST])]
-    #[Security("is_granted('ROLE_USER') and user === comment.getAuthor()")]
+    // #[Security("is_granted('ROLE_USER') and user === comment.getAuthor()")]
     public function delete(Request $request, Comment $comment, EntityManagerInterface $em, TranslatorInterface $translator): Response
     {
         $params = ['slug' => $comment->getArticle()->getSlug()];

@@ -1,0 +1,9 @@
+{% include "blog.html.twig" with {
+    pagetitle: 'Category : '|trans({}, 'messages') ~ category.name | capitalize,
+    pagination: pagination
+} %}
+
+{% block breadcrumb %}
+	{% set breadcrumb = [{ "blog": ('Blog'|trans), "current":(pagetitle) }] %}
+	{% include "global/breadcrumb.html.twig" with breadcrumb %}
+{% endblock %}

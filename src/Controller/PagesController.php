@@ -2,26 +2,22 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\HasRoles;
-use App\Entity\Pages\Page;
-use App\Entity\User\Editor;
-use App\Entity\User\Leader;
-use App\Entity\User\Writer;
 use App\Entity\Pages\Contact;
-use App\Entity\User\Customer;
+use App\Entity\Pages\Page;
 use App\Entity\Setting\Setting;
+use App\Entity\User;
 use App\Form\Pages\ContactType;
-use App\Service\ContactService;
-use App\Service\SettingService;
-use App\Repository\UserRepository;
 use App\Repository\Pages\FaqRepository;
 use App\Repository\TestimonialRepository;
+use App\Repository\UserRepository;
+use App\Service\ContactService;
+use App\Service\SettingService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route(path: '/page')]
 class PagesController extends AbstractController

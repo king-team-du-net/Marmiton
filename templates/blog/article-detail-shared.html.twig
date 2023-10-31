@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+
+{% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
+
+{% set pagetitle = 'Shared a article'|trans({}, 'messages') %}
+{% block title pagetitle %}
+
+{% block meta_dynamic_seo %}
+	<meta name="description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+	{% if article.tags %}
+		<meta name="keywords" content="{{ article.title }}, {% for tag in article.tags %} {{ tag }} {{ not loop.last ? ', ' : '' }}{% endfor %}"/>
+	{% else %}
+		<meta name="keywords" content="{{ settings['website_keywords_' ~ app.request.locale] }}"/>
+	{% endif %}
+	<meta property="og:title" content="{{ article.title }}"/>
+	{#<meta property="og:image" content="{{ app.request.getUriForPath() }}"/>#}
+	<meta property="og:description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+	<meta property="og:created_time" content="{{ article.createdAt | date('c') }}"/>
+	<meta name="twitter:title" content="{{ article.title }}"/>
+	{#<meta name="twitter:image" content="{{ app.request.getUriForPath() }}" />#}
+	<meta name="twitter:image:alt" content="{{ article.title }}"/>
+	<meta name="twitter:description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+{% endblock %}
+
+{% block breadcrumb %}
+    {% set breadcrumb = [{ "blog": ('Blog'|trans), (path("blog_show", { slug: article.slug })): article.title | raw | striptags | slice(0, 10) | raw, "current":(pagetitle) }] %}
+    {% include "global/breadcrumb.html.twig" with breadcrumb %}
+{% endblock %}
+
+{% block body %}
+
+    <div>
+        <div class="bg-white max-w-7xl mx-auto py-16 px-6 sm:py-24 sm:px-8">
+            <div class="gap-12 justify-between lg:flex">
+                <div class="max-w-lg space-y-3">
+                    <a href="{{ path('blog_show', { slug: article.slug }) }}" class="btn btn-link">
+                        <i class="fas fa-arrow-left w-5 h-5 -ml-1 mr-2"></i>
+                        {{ 'Back to '|trans }} {{ article.title }}
+                    </a>
+                    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                        {{ 'Share'|trans }} "{{ article.title }}" {{ 'via e-mail'|trans }}
+                    </h1>
+                    <p></p>
+                    <div>
+                        <div class="mt-6 prose prose-slate max-w-none dark:prose-dark">
+                            {{ article.content | html_markdown_excerpt(600) | nl2br }}
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 sm:max-w-lg lg:max-w-md">
+                    {% include "global/form-errors.html.twig" with errors %}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'space-y-5'} }) }}
+                        {{ form_widget(form._token) }}
+                        <div>
+                            {{ form_row(form.sender_name) }}
+                        </div>
+                        <div>
+                            {{ form_row(form.sender_email) }}
+                        </div>
+                        <div>
+                            {{ form_row(form.receiver_email) }}
+                        </div>
+                        <div>
+                            {{ form_row(form.sender_comments) }}
+                        </div>
+
+                        {% if settings['google_recaptcha_enabled'] == "1" %}
+                            <div>
+                                {{ form_widget(form.recaptcha) }}
+                                {{ form_errors(form.recaptcha) }}
+                            </div>
+                        {% endif %}
+
+                        <div>
+                            <button type="submit" class="btn btn-primary w-full">
+                                {{ 'Shared article'|trans }}
+                            </button>
+                        </div>
+                    {{ form_end(form, {'render_rest': false}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

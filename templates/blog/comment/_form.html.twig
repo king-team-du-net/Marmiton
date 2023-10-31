@@ -1,0 +1,18 @@
+{{ form_start(form, {method: 'POST', action: path('blog_comment_add', {'slug': article.slug}), attr: {class: 'space-y-5'}}) }}
+    <h3 class="font-medium text-slate-900">
+        <i class="fas fa-comments w-5 h-5 -ml-1 mr-2"></i>
+        {{'Leave a comment'|trans}}
+    </h3>
+    {{ form_errors(form) }}
+    <div>
+        {{ form_row(form.content) }}
+    </div>
+    <div>
+        {{ form_row(form.isRGPD) }}
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">
+            {{ 'Publish comment'|trans }}
+        </button>
+    </div>
+{{ form_end(form) }}

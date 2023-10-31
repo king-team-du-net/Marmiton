@@ -2,7 +2,7 @@
 
 namespace App\Controller\Blog;
 
-use App\Entity\Blog\Tag;
+use App\Entity\Blog\Badge as Tag;
 use App\Entity\Data\SearchData;
 use App\Form\Data\SearchDataType;
 use App\Repository\Blog\ArticleRepository;

@@ -2,23 +2,23 @@
 
 namespace App\Entity\Recipe;
 
-use App\Entity\User;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Post;
-use Doctrine\DBAL\Types\Types;
-use ApiPlatform\Metadata\Delete;
-use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\HasIdTrait;
 use ApiPlatform\Metadata\ApiResource;
-use App\Entity\Traits\HasContentTrait;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use App\Entity\Traits\HasContentTrait;
+use App\Entity\Traits\HasIdTrait;
 use App\Entity\Traits\HasPriorityTrait;
 use App\Entity\Traits\HasTimestampTrait;
+use App\Entity\User;
 use App\Repository\Recipe\ThumbnailRepository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ThumbnailRepository::class)]
 #[ApiResource(
@@ -157,6 +157,7 @@ class Thumbnail
         if ($this->getStep()) {
             return $this->getStep()->getRecipe()->getUser()->getId() === $user->getId();
         }
+
         return false;
     }
 }

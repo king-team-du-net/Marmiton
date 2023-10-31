@@ -41,10 +41,10 @@ class CommentCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-            ->add('publishedAt', t('Published the'))
-            ->add('article', t('Article'))
-            ->add('author', t('Author'))
-            ->add('isApproved', t('Approved'))
+            ->add('publishedAt')
+            ->add('article')
+            ->add('author')
+            ->add('isApproved')
         ;
     }
 

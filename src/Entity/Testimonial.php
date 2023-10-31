@@ -2,19 +2,19 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\HasIdTrait;
-use App\Entity\Traits\HasRatingTrait;
-use App\Entity\Traits\HasIsOnlineTrait;
 use App\Entity\Traits\HasDeletedAtTrait;
+use App\Entity\Traits\HasIdTrait;
+use App\Entity\Traits\HasIsOnlineTrait;
+use App\Entity\Traits\HasRatingTrait;
 use App\Entity\Traits\HasTimestampTrait;
 use App\Repository\TestimonialRepository;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: TestimonialRepository::class)]
 #[Gedmo\SoftDeleteable(fieldName: 'deletedAt', timeAware: false, hardDelete: true)]

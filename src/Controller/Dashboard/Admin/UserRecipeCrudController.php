@@ -2,18 +2,18 @@
 
 namespace App\Controller\Dashboard\Admin;
 
+use App\Controller\Dashboard\Admin\Field\StatusField;
+use App\Controller\Dashboard\Admin\Traits\ReadOnlyTrait;
 use App\Entity\HasRoles;
 use App\Entity\Recipe\UserRecipe;
-use function Symfony\Component\Translation\t;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use App\Controller\Dashboard\Admin\Field\StatusField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-
-use App\Controller\Dashboard\Admin\Traits\ReadOnlyTrait;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+
+use function Symfony\Component\Translation\t;
 
 /**
  * @method User getUser()

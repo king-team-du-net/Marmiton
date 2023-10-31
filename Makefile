@@ -114,6 +114,18 @@ sf-mc: ## Make symfony controller
 	$(SYMFONY_CONSOLE) make:controller
 .PHONY: sf-mc
 
+sf-hash: ## Symfony Password Hash Utility
+	$(SYMFONY_CONSOLE) security:hash-password
+.PHONY: sf-hash
+
+sf-auth: ## Authenticator
+	$(SYMFONY_CONSOLE) make:auth
+.PHONY: sf-auth
+
+sf-jwt: ## Generate the SSL keys
+	$(SYMFONY_CONSOLE) lexik:jwt:generate-keypair
+.PHONY: sf-jwt
+
 sf-ad: ## Make admin dashboards
 	$(SYMFONY_CONSOLE) make:admin:dashboard
 .PHONY: sf-ad

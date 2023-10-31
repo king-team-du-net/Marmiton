@@ -8,6 +8,12 @@ services:
             - "3306:3306"
 ###< doctrine/doctrine-bundle ###
 
+###> phpmyadmin/phpmyadmin ###
+    phpmyadmin:
+        ports:
+            - "8080:80"
+###< phpmyadmin/phpmyadmin ###
+
 ###> symfony/mailer ###
     mailer:
         image: schickling/mailcatcher

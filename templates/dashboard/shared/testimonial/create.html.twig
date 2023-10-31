@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% set pagetitle = 'Create new testimonial'|trans %}
+{% block title pagetitle %}
+
+{% block breadcrumb %}
+    {% set breadcrumb = [{ "dashboard_account_index": ('My account'|trans), (path("dashboard_testimonial_list")): 'Testimonial management'|trans, "current":(pagetitle) }] %}
+    {% include "global/breadcrumb.html.twig" with breadcrumb %}
+{% endblock %}
+
+{% block body %}
+
+    <section class="my-lg-14 my-8">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-2 col-lg-8 col-12">
+                    <div class="mb-8">
+                        <h1 class="h3">{{ 'New testimonial'|trans }}</h1>
+                        <p class="lead mb-0">
+                        
+                        </p>
+                    </div>
+
+                    {{ form_start(form, {'attr': {'class': 'row'}}) }}
+                        {{ include("dashboard/shared/testimonial/_form.html.twig", {form: form}) }}
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">
+                                {{ 'Create'|trans }}
+                            </button>
+                        </div>
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

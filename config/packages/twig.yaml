@@ -3,13 +3,13 @@ twig:
 
     globals:
         # Setting
-
+        setting: '@App\Service\SettingService'
 
         # Language
         locales: "%app_locales%"
 
         # Google
-        # google_maps_api_key: "%google_maps_api_key%"
+        google_maps_api_key: "%google_maps_api_key%"
 
         # Date and time
         date_format: "%date_format%"

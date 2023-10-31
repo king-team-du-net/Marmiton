@@ -39,23 +39,18 @@ parameters:
     container.dumper.inline_class_loader: true
 
     # Google Map & Google Recaptcha
-    # google_maps_api_key: '%env(GOOGLE_MAPS_API_KEY)%'
-    # google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
+    google_maps_api_key: '%env(GOOGLE_MAPS_API_KEY)%'
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
     # Resize Picture
     # resize_picture_key: '%env(RESIZE_PICTURE_KEY)%'
 
     # Vich
-    attachments:                     /uploads/attachments
-    categories:                      /uploads/categories
     homepage_hero_custom_background: /uploads/home/hero
     app_layout:                      /uploads/layout
     article_image:                   /uploads/article
     thumbnails:                      /uploads/thumbnails
     user_avatar:                     /uploads/user
-    payment_gateway:                 /uploads/payment/gateways
-    product_image:                   /uploads/product
-    badges:                          /uploads/badges
     photo_testimonial:               /uploads/testimonial
 
 services:
@@ -82,3 +77,32 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Slug
+    stof_doctrine_extensions.listener.sluggable:
+        class: "%stof_doctrine_extensions.listener.sluggable.class%"
+        public: false
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [setAnnotationReader, ['@annotation_reader']]
+            - [setTransliterator, [[App\Service\Slugger, transliterate]]]
+            - [setUrlizer, [[App\Service\Slugger, urlize]]]
+
+    # Auth
+    Symfony\Component\Security\Http\Logout\LogoutUrlGenerator: '@security.logout_url_generator'
+
+    # Setting
+    app.setting:
+        alias: App\Service\SettingService
+
+    # Vich
+    App\Infrastructural\Vich\Namer\PropertyGroupedDirectoryNamer:
+        public: true
+
+    App\Infrastructural\Vich\Namer\ThumbnailDirectoryNamer:
+        public: true
+
+    # IntlExtension
+    Twig\Extra\Intl\IntlExtension:
+        alias: twig.extension.intl

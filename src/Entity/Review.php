@@ -36,8 +36,8 @@ class Review
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     private ?Recipe $recipe = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'reviews')]
-    // private ?User $user = null;
+    #[ORM\ManyToOne(inversedBy: 'reviews')]
+    private ?User $user = null;
 
     public function __toString(): string
     {
@@ -106,17 +106,16 @@ class Review
 
         return $this;
     }
-    /*
-        public function getUser(): ?User
-        {
-            return $this->user;
-        }
 
-        public function setUser(?User $user): static
-        {
-            $this->user = $user;
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 
-            return $this;
-        }
-    */
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }

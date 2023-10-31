@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% set page = entity %}
+{% set pagetitle = page.title %}
+{% block title pagetitle %}
+
+{% block breadcrumb %}
+    {% set breadcrumb = [{ "current":(pagetitle) }] %}
+    {% include "global/breadcrumb.html.twig" with breadcrumb %}
+{% endblock %}
+
+{% block body %}
+
+    <section class="my-lg-14 my-8">
+        <div class="container">
+			<div class="row">
+				<div class="offset-lg-2 col-lg-8 col-12">
+                    <div class="mb-8">
+                        <h1 class="h3">{{ pagetitle }}</h1>
+                        <p class="lead mb-0"></p>
+                    </div>
+                    <div>
+						<div class="mb-4 lead">
+                            {{ page.content | html_markdown }}
+						</div>
+                    </div>
+				</div>
+			</div>
+        </div>
+    </section>
+
+{% endblock %}

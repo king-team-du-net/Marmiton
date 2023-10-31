@@ -2,19 +2,22 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\HasIdTrait;
-use App\Entity\Traits\HasIsOnlineTrait;
-use App\Entity\Traits\HasRatingTrait;
-use App\Entity\Traits\HasTimestampTrait;
-use App\Repository\TestimonialRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\HasIdTrait;
+use App\Entity\Traits\HasRatingTrait;
+use App\Entity\Traits\HasIsOnlineTrait;
+use App\Entity\Traits\HasDeletedAtTrait;
+use App\Entity\Traits\HasTimestampTrait;
+use App\Repository\TestimonialRepository;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: TestimonialRepository::class)]
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt', timeAware: false, hardDelete: true)]
 // #[Vich\Uploadable]
 class Testimonial
 {
@@ -22,9 +25,10 @@ class Testimonial
     use HasRatingTrait;
     use HasIsOnlineTrait;
     use HasTimestampTrait;
+    use HasDeletedAtTrait;
 
-    // #[ORM\ManyToOne(inversedBy: 'testimonials')]
-    // private ?User $user = null;
+    #[ORM\ManyToOne(inversedBy: 'testimonials')]
+    private ?User $user = null;
 
     /*
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -45,10 +49,9 @@ class Testimonial
     #[Assert\Length(min: 2000)]
     private string $comment = '';
 
-    /*
     public function __toString(): string
     {
-        return (string) $this->user->getFullName();
+        return (string) $this->user->getNickname();
     }
 
     public function getUser(): ?User
@@ -62,7 +65,6 @@ class Testimonial
 
         return $this;
     }
-    */
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance

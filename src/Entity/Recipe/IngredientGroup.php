@@ -31,6 +31,9 @@ class IngredientGroup
     use HasIdNameSlugAssertTrait;
     use HasPriorityTrait;
 
+    /**
+     * @var Collection<int, RecipeHasIngredient>
+     */
     #[ORM\OneToMany(mappedBy: 'ingredientGroup', targetEntity: RecipeHasIngredient::class)]
     private Collection $recipeHasIngredients;
 

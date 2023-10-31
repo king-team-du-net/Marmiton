@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
+
+{% set pagetitle = 'Contact us'|trans({}, 'messages')%}
+{% block title pagetitle %}
+
+{% block body %}
+
+    <section class="my-lg-14 my-8">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-2 col-lg-8 col-12">
+                    <div class="mb-8">
+                        <h1 class="h3">{{ 'Let us know how we can help'|trans  }}</h1>
+                        <p class="lead mb-0">
+                            {{ "We’re here to help and answer any question you might have, We look forward to hearing from you! Please fill out the form, or use the contact information bellow."|trans  }}
+                        </p>
+                    </div>
+
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'row'}}) }}
+						{{ form_errors(form) }}
+						{{ form_widget(form._token) }}
+                        <div class="col-md-12 mb-3">
+                            {{ form_row(form.fullname) }}
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            {{ form_row(form.company) }}
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            {{ form_row(form.subject) }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(form.email) }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form_row(form.phone) }}
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            {{ form_row(form.message) }}
+                        </div>
+                        {% if settings['google_recaptcha_enabled'] == "1" %}
+                            <div class="col-lg-12">
+                                {{ form_widget(form.recaptcha) }}
+                                {{ form_errors(form.recaptcha) }}
+                            </div>
+                        {% endif %}
+                        <div class="col-md-12">
+                            {{ form_row(form.save) }}
+                        </div>
+                    {{ form_end(form, {'render_rest': false}) }}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

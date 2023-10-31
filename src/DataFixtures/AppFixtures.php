@@ -7,6 +7,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+    use FakerTrait;
+
     public function load(ObjectManager $manager): void
     {
         // $product = new Product();

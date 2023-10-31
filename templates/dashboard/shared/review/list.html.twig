@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% if is_granted('ROLE_USER') %}
+    {% set pagetitle = 'My reviews' | trans %}
+{% elseif is_granted('ROLE_ADMIN') %}
+    {% set pagetitle = 'Manage reviews' | trans %}
+{% endif %}
+
+{% block title pagetitle %}
+
+{% block breadcrumb %}
+	{% set breadcrumb = [{ "current":(pagetitle) }] %}
+	{% include "global/breadcrumb.html.twig" with breadcrumb %}
+{% endblock %}
+
+{% block body %}
+
+    {# Code #}
+
+{% endblock %}

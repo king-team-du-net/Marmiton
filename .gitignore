@@ -36,6 +36,14 @@
 .code/
 
 # Images
-public/images/*
-!public/images/.gitignore
-!/var/images
+public/uploads/thumbnails/*
+!public/uploads/thumbnails/.gitignore
+!/var/uploads/thumbnails
+
+# User
+public/uploads/user/*
+!public/uploads/user/.gitignore
+
+# Testimonial
+public/uploads/testimonial/*
+!public/uploads/testimonial/.gitignore

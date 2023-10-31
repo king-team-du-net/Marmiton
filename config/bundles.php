@@ -21,4 +21,5 @@ return [
     Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
     Knp\Bundle\TimeBundle\KnpTimeBundle::class => ['all' => true],
+    EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle::class => ['all' => true],
 ];

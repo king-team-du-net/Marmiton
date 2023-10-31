@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% set runtimeConfig = {"thumbnail": {"size": [80, 80] } } %}
+
+{% set pagetitle = 'Testimonials'|trans %}
+{% block title pagetitle %}
+
+{% block breadcrumb %}
+	{% set breadcrumb = [{ "current":(pagetitle) }] %}
+	{% include "global/breadcrumb.html.twig" with breadcrumb %}
+{% endblock %}
+
+{% block body %}
+
+    {# Code #}
+
+{% endblock %}

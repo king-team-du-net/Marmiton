@@ -1,0 +1,51 @@
+{% if pageCount > 1 %}
+    <nav class="mt-2 mt-md-0" aria-label="navigation">
+        {% set classAlign = (align is not defined) ? '' : align=='center' ? ' justify-content-center' : (align=='right' ? ' justify-content-end' : '') %}
+        {% set classSize = (size is not defined) ? '' : size=='large' ? ' pagination-lg' : (size=='small' ? ' pagination-sm' : '') %}
+        <ul class="pagination d-inline-block d-md-flex{{ classAlign }}{{ classSize }}">
+            {% if previous is defined %}
+                <li class="page-item">
+                    <a class="page-link" rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
+                        {% if app.request.locale == 'ar' %}
+                            {{ 'Previous'|trans }}
+                        {% else %}
+                            {{ 'Previous'|trans }}
+                        {% endif %}
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        {% if app.request.locale == 'ar' %}
+                            {{ 'Previous'|trans }}
+                        {% else %}
+                            {{ 'Previous'|trans }}
+                        {% endif %}
+                    </span>
+                </li>
+            {% endif %}
+
+            {% if next is defined %}
+                <li class="page-item">
+                    <a class="page-link" rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+                        {% if app.request.locale == 'ar' %}
+                            {{ 'Next'|trans }}
+                        {% else %}
+                            {{ 'Next'|trans }}
+                        {% endif %}
+                    </a>
+                </li>
+            {% else %}
+                <li  class="page-item disabled">
+                    <span class="page-link">
+                        {% if app.request.locale == 'ar' %}
+                            {{ 'Next'|trans }}
+                        {% else %}
+                            {{ 'Next'|trans }}
+                        {% endif %}
+                    </span>
+                </li>
+            {% endif %}
+        </ul>
+	</nav>
+{% endif %}

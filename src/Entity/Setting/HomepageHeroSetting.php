@@ -49,18 +49,22 @@ class HomepageHeroSetting
     #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
     private ?bool $show_search_box = null;
 
-    #[ORM\OneToMany(mappedBy: 'isonhomepageslider', targetEntity: Recipe::class, cascade: ['persist'])]
+    /**
+     * @var Collection<int, Recipe>
+     */
+    #[ORM\OneToMany(mappedBy: 'isonhomepageslider', targetEntity: Recipe::class, cascade: ['persist', 'remove'])]
     private Collection $recipes;
 
-    /*
+    /**
+     * @var Collection<int, User>
+     */
     #[ORM\OneToMany(mappedBy: 'isuseronhomepageslider', targetEntity: User::class)]
     private Collection $users;
-    */
 
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
-        // $this->users = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function clearRecipes(): void
@@ -191,10 +195,9 @@ class HomepageHeroSetting
         return $this;
     }
 
-    /*
-     * //@return Collection<int, User>
+    /**
+     * @return Collection<int, User>
      */
-    /*
     public function getUsers(): Collection
     {
         return $this->users;
@@ -221,5 +224,4 @@ class HomepageHeroSetting
 
         return $this;
     }
-    */
 }

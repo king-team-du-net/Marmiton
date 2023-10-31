@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% set bodyClass = 'h-full' %}
+
+{% block header '' %}
+{% block footer '' %}
+
+{% block body %}
+
+    <div class="min-h-full pt-16 pb-12 flex flex-col bg-white">
+        <main class="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex-shrink-0 flex justify-center">
+                <a href="{{ path('home') }}">
+                    <span class="sr-only">{{ setting.getSettings('website_name') }}</span>
+                    <img src="{{ asset(setting.getAppLayoutSettings.getLogoPath) }}" alt="{{ setting.getSettings('website_name') }}" class="h-24 w-auto">
+                </a>
+            </div>
+            <div class="mt-1 py-16">
+                <div class="text-center">
+                    <p class="text-sm font-semibold text-sky-600 uppercase tracking-wide">{% block code  '' %}</p>
+                    <h1 class="mt-2 text-4xl font-bold text-slate-900 tracking-tight sm:text-5xl">{% block title  '' %}</h1>
+                    <p class="mt-2 text-base text-slate-500">{% block description  '' %}</p>
+                    <div class="mt-6">
+                        <a href="{{ path('home') }}" class="text-base font-medium text-sky-600 hover:text-sky-500">
+                            {{ 'Go back home'|trans  }}<span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+{% endblock %}

@@ -39,6 +39,9 @@ class Tag
     #[Assert\NotNull]
     private bool $menu = false;
 
+    /**
+     * @var Collection<int, Recipe>
+     */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'tags')]
     private Collection $recipes;
 
@@ -46,6 +49,9 @@ class Tag
     #[Groups(['get'])]
     private ?self $parent = null;
 
+    /**
+     * @var Collection<int, Tag>
+     */
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     #[Groups(['get'])]
     private Collection $children;

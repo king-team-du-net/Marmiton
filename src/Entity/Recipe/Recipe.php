@@ -2,23 +2,24 @@
 
 namespace App\Entity\Recipe;
 
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Post;
+use App\Entity\User;
 use App\Entity\Review;
-use App\Entity\Setting\HomepageHeroSetting;
-use App\Entity\Traits\HasContentTrait;
-use App\Entity\Traits\HasIdNameSlugAssertTrait;
-use App\Entity\Traits\HasTimestampTrait;
-use App\Entity\Traits\HasViewsTrait;
-use App\Repository\Recipe\RecipeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\HasViewsTrait;
+use ApiPlatform\Metadata\ApiResource;
+use App\Entity\Traits\HasContentTrait;
+use ApiPlatform\Metadata\GetCollection;
+use App\Entity\Traits\HasTimestampTrait;
+use App\Entity\Setting\HomepageHeroSetting;
+use App\Repository\Recipe\RecipeRepository;
+use Doctrine\Common\Collections\Collection;
+use App\Entity\Traits\HasIdNameSlugAssertTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -66,36 +67,65 @@ class Recipe
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
     private ?HomepageHeroSetting $isonhomepageslider = null;
 
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    private ?User $user = null;
+
+    /**
+     * @var Collection<int, UserRecipe>
+     */
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: UserRecipe::class)]
+    #[Groups(['get'])]
+    private Collection $userRecipes;
+
+    /**
+     * @var Collection<int, Step>
+     */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     #[Groups(['get'])]
     private Collection $steps;
 
+    /**
+     * @var Collection<int, Tag>
+     */
     #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'recipes')]
     #[Groups(['get'])]
     private Collection $tags;
 
+    /**
+     * @var Collection<int, Thumbnail>
+     */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Thumbnail::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     #[Groups(['get'])]
     private Collection $thumbnails;
 
+    /**
+     * @var Collection<int, RecipeHasSource>
+     */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeHasSource::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     #[Groups(['get'])]
     private Collection $recipeHasSources;
 
+    /**
+     * @var Collection<int, RecipeHasIngredient>
+     */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeHasIngredient::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     #[Groups(['get'])]
     private Collection $recipeHasIngredients;
 
+    /**
+     * @var Collection<int, Review>
+     */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Review::class, cascade: ['persist', 'remove'])]
     private Collection $reviews;
 
-    /*
+    /**
+     * @var Collection<int, User>.
+     */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'favorites', cascade: ['persist', 'merge'])]
     #[ORM\JoinTable(name: 'favorites')]
     #[ORM\JoinColumn(name: 'recipe_id', referencedColumnName: 'id')]
     #[ORM\InverseJoinColumn(name: 'user_id', referencedColumnName: 'id')]
     private Collection $addedtofavoritesby;
-    */
 
     public function __toString(): string
     {
@@ -104,13 +134,14 @@ class Recipe
 
     public function __construct()
     {
+        $this->userRecipes = new ArrayCollection();
         $this->steps = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->thumbnails = new ArrayCollection();
         $this->recipeHasSources = new ArrayCollection();
         $this->recipeHasIngredients = new ArrayCollection();
         $this->reviews = new ArrayCollection();
-        // $this->addedtofavoritesby = new ArrayCollection();
+        $this->addedtofavoritesby = new ArrayCollection();
     }
 
     public function getPreparation(): ?int
@@ -186,6 +217,48 @@ class Recipe
     public function setIsonhomepageslider(?HomepageHeroSetting $isonhomepageslider): static
     {
         $this->isonhomepageslider = $isonhomepageslider;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserRecipe>
+     */
+    public function getUserRecipes(): Collection
+    {
+        return $this->userRecipes;
+    }
+
+    public function addUserRecipe(UserRecipe $userRecipe): static
+    {
+        if (!$this->userRecipes->contains($userRecipe)) {
+            $this->userRecipes->add($userRecipe);
+            $userRecipe->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRecipe(UserRecipe $userRecipe): static
+    {
+        if ($this->userRecipes->removeElement($userRecipe)) {
+            // set the owning side to null (unless already changed)
+            if ($userRecipe->getRecipe() === $this) {
+                $userRecipe->setRecipe(null);
+            }
+        }
 
         return $this;
     }
@@ -367,18 +440,17 @@ class Recipe
         return $this;
     }
 
-    /*
-        public function isRatedBy(User $user): Review
-        {
-            foreach ($this->reviews as $review) {
-                if ($review->getUser() === $user) {
-                    return $review;
-                }
+    public function isRatedBy(User $user): Review
+    {
+        foreach ($this->reviews as $review) {
+            if ($review->getUser() === $user) {
+                return $review;
             }
-
-            return false;
         }
-    */
+
+        return false;
+    }
+
     public function getRatingsPercentageForRating($rating): int|float
     {
         if (!$this->countVisibleReviews()) {
@@ -451,10 +523,9 @@ class Recipe
         return $count;
     }
 
-    /*
-     * //@return Collection<int, User>
+    /**
+     * @return Collection<int, User>
      */
-    /*
     public function getAddedtofavoritesby(): Collection
     {
         return $this->addedtofavoritesby;
@@ -480,5 +551,4 @@ class Recipe
     {
         return $this->addedtofavoritesby->contains($user);
     }
-    */
 }

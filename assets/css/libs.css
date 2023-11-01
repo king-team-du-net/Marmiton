@@ -1,0 +1,17 @@
+/*
+ * App Marmiton Recipe | Bootstrap 5
+ * Copyright 2020-2023 rdequidt
+ * Theme libs
+*/
+
+/** Mode Modules */
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "~@fortawesome/fontawesome-free/css/v4-shims.css";
+@import "~fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css";
+@import "~select2-theme-bootstrap5/dist/select2-bootstrap.min.css";
+@import "~summernote/dist/summernote-bs5.min.css";
+
+
+/** Libs */
+

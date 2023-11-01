@@ -1,0 +1,16 @@
+/*
+ * App Marmiton Recipe | Bootstrap 5
+ * Copyright 2020-2023 rdequidt
+ * Theme app
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Rubik:wght@400;500;700&display=swap");
+
+/** Theme CSS */
+@import "style.css";
+
+/** Libs CSS */
+@import "libs.css";
+
+/** Custom CSS */
+@import "custom.css";

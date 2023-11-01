@@ -5,6 +5,20 @@
 
 {% block body %}
 
-    {# Code #}
+	<div class="bg-dark text-secondary px-4 py-5 text-center">
+		<div class="py-5">
+			<h1 class="display-5 fw-bold text-white">Recipe</h1>
+			<div class="col-lg-6 mx-auto">
+				<p class="fs-5 mb-4"></p>
+				<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+					{% if app.user %}
+						<a href="{{ path('dashboard_index') }}" type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">{{ 'Dashboard'|trans }}</a>
+					{% else %}
+						<a href="{{ path('login') }}" type="button" class="btn btn-outline-light btn-lg px-4">{{ 'Sign in'|trans }}</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

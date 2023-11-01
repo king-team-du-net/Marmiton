@@ -1,0 +1,42 @@
+{
+    "name": "marmiton-recipe",
+    "version": "1.0.0",
+    "description": "App Marmiton Recipe | Bootstrap 5",
+    "author": "rdequidt",
+    "devDependencies": {
+        "@babel/core": "^7.23.2",
+        "@babel/preset-env": "^7.23.2",
+        "@fortawesome/fontawesome-free": "^6.4.2",
+        "@hotwired/stimulus": "^3.2.2",
+        "@popperjs/core": "^2.11.8",
+        "@symfony/stimulus-bridge": "^3.2.2",
+        "@symfony/webpack-encore": "^4.5.0",
+        "autoprefixer": "^10.4.16",
+        "bootstrap": "^5.3.2",
+        "bootstrap-icons": "^1.11.1",
+        "bootstrap5-tagsinput": "^5.0.1",
+        "core-js": "^3.33.2",
+        "css-loader": "^6.8.1",
+        "file-loader": "^6.2.0",
+        "fontawesome-iconpicker": "^3.2.0",
+        "jquery": "^3.7.1",
+        "postcss-loader": "^7.3.3",
+        "regenerator-runtime": "^0.14.0",
+        "sass": "^1.69.5",
+        "sass-loader": "^13.3.2",
+        "select2-theme-bootstrap5": "^0.1.1",
+        "style-loader": "^3.3.3",
+        "summernote": "^0.8.20",
+        "webpack": "^5.89.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-notifier": "^1.15.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    }
+}

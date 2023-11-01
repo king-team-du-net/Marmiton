@@ -1,0 +1,1476 @@
+/*
+ * App Marmiton Recipe | Bootstrap 5
+ * Copyright 2020-2023 rdequidt
+ * Theme custom
+*/
+
+.flag {
+    width: 1.4666666667rem;
+    height: 1.15rem;
+    display: inline-block;
+    background: no-repeat center/100% 100%;
+    vertical-align: bottom;
+    font-style: normal;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
+}
+
+.flag-ad {
+    background-image: url('../images/icons/flags/ad.svg');
+}
+
+.flag-ae {
+    background-image: url('../images/icons/flags/ae.svg');
+}
+
+.flag-af {
+    background-image: url('../images/icons/flags/af.svg');
+}
+
+.flag-ag {
+    background-image: url('../images/icons/flags/ag.svg');
+}
+
+.flag-ai {
+    background-image: url('../images/icons/flags/ai.svg');
+}
+
+.flag-al {
+    background-image: url('../images/icons/flags/al.svg');
+}
+
+.flag-am {
+    background-image: url('../images/icons/flags/am.svg');
+}
+
+.flag-ao {
+    background-image: url('../images/icons/flags/ao.svg');
+}
+
+.flag-aq {
+    background-image: url('../images/icons/flags/aq.svg');
+}
+
+.flag-ar {
+    background-image: url('../images/icons/flags/ar.svg');
+}
+
+.flag-as {
+    background-image: url('../images/icons/flags/as.svg');
+}
+
+.flag-at {
+    background-image: url('../images/icons/flags/at.svg');
+}
+
+.flag-au {
+    background-image: url('../images/icons/flags/au.svg');
+}
+
+.flag-aw {
+    background-image: url('../images/icons/flags/aw.svg');
+}
+
+.flag-ax {
+    background-image: url('../images/icons/flags/ax.svg');
+}
+
+.flag-az {
+    background-image: url('../images/icons/flags/az.svg');
+}
+
+.flag-ba {
+    background-image: url('../images/icons/flags/ba.svg');
+}
+
+.flag-bb {
+    background-image: url('../images/icons/flags/bb.svg');
+}
+
+.flag-bd {
+    background-image: url('../images/icons/flags/bd.svg');
+}
+
+.flag-be {
+    background-image: url('../images/icons/flags/be.svg');
+}
+
+.flag-bf {
+    background-image: url('../images/icons/flags/bf.svg');
+}
+
+.flag-bg {
+    background-image: url('../images/icons/flags/bg.svg');
+}
+
+.flag-bh {
+    background-image: url('../images/icons/flags/bh.svg');
+}
+
+.flag-bi {
+    background-image: url('../images/icons/flags/bi.svg');
+}
+
+.flag-bj {
+    background-image: url('../images/icons/flags/bj.svg');
+}
+
+.flag-bl {
+    background-image: url('../images/icons/flags/bl.svg');
+}
+
+.flag-bm {
+    background-image: url('../images/icons/flags/bm.svg');
+}
+
+.flag-bn {
+    background-image: url('../images/icons/flags/bn.svg');
+}
+
+.flag-bo {
+    background-image: url('../images/icons/flags/bo.svg');
+}
+
+.flag-bq {
+    background-image: url('../images/icons/flags/bq.svg');
+}
+
+.flag-br {
+    background-image: url('../images/icons/flags/br.svg');
+}
+
+.flag-bs {
+    background-image: url('../images/icons/flags/bs.svg');
+}
+
+.flag-bt {
+    background-image: url('../images/icons/flags/bt.svg');
+}
+
+.flag-bv {
+    background-image: url('../images/icons/flags/bv.svg');
+}
+
+.flag-bw {
+    background-image: url('../images/icons/flags/bw.svg');
+}
+
+.flag-by {
+    background-image: url('../images/icons/flags/by.svg');
+}
+
+.flag-bz {
+    background-image: url('../images/icons/flags/bz.svg');
+}
+
+.flag-ca {
+    background-image: url('../images/icons/flags/ca.svg');
+}
+
+.flag-cc {
+    background-image: url('../images/icons/flags/cc.svg');
+}
+
+.flag-cd {
+    background-image: url('../images/icons/flags/cd.svg');
+}
+
+.flag-cf {
+    background-image: url('../images/icons/flags/cf.svg');
+}
+
+.flag-cg {
+    background-image: url('../images/icons/flags/cg.svg');
+}
+
+.flag-ch {
+    background-image: url('../images/icons/flags/ch.svg');
+}
+
+.flag-ci {
+    background-image: url('../images/icons/flags/ci.svg');
+}
+
+.flag-ck {
+    background-image: url('../images/icons/flags/ck.svg');
+}
+
+.flag-cl {
+    background-image: url('../images/icons/flags/cl.svg');
+}
+
+.flag-cm {
+    background-image: url('../images/icons/flags/cm.svg');
+}
+
+.flag-cn {
+    background-image: url('../images/icons/flags/cn.svg');
+}
+
+.flag-co {
+    background-image: url('../images/icons/flags/co.svg');
+}
+
+.flag-cr {
+    background-image: url('../images/icons/flags/cr.svg');
+}
+
+.flag-cu {
+    background-image: url('../images/icons/flags/cu.svg');
+}
+
+.flag-cv {
+    background-image: url('../images/icons/flags/cv.svg');
+}
+
+.flag-cw {
+    background-image: url('../images/icons/flags/cw.svg');
+}
+
+.flag-cx {
+    background-image: url('../images/icons/flags/cx.svg');
+}
+
+.flag-cy {
+    background-image: url('../images/icons/flags/cy.svg');
+}
+
+.flag-cz {
+    background-image: url('../images/icons/flags/cz.svg');
+}
+
+.flag-de {
+    background-image: url('../images/icons/flags/de.svg');
+}
+
+.flag-dj {
+    background-image: url('../images/icons/flags/dj.svg');
+}
+
+.flag-dk {
+    background-image: url('../images/icons/flags/dk.svg');
+}
+
+.flag-dm {
+    background-image: url('../images/icons/flags/dm.svg');
+}
+
+.flag-do {
+    background-image: url('../images/icons/flags/do.svg');
+}
+
+.flag-dz {
+    background-image: url('../images/icons/flags/dz.svg');
+}
+
+.flag-ec {
+    background-image: url('../images/icons/flags/ec.svg');
+}
+
+.flag-ee {
+    background-image: url('../images/icons/flags/ee.svg');
+}
+
+.flag-eg {
+    background-image: url('../images/icons/flags/eg.svg');
+}
+
+.flag-eh {
+    background-image: url('../images/icons/flags/eh.svg');
+}
+
+.flag-er {
+    background-image: url('../images/icons/flags/er.svg');
+}
+
+.flag-es {
+    background-image: url('../images/icons/flags/es.svg');
+}
+
+.flag-et {
+    background-image: url('../images/icons/flags/et.svg');
+}
+
+.flag-eu {
+    background-image: url('../images/icons/flags/eu.svg');
+}
+
+.flag-fi {
+    background-image: url('../images/icons/flags/fi.svg');
+}
+
+.flag-fj {
+    background-image: url('../images/icons/flags/fj.svg');
+}
+
+.flag-fk {
+    background-image: url('../images/icons/flags/fk.svg');
+}
+
+.flag-fm {
+    background-image: url('../images/icons/flags/fm.svg');
+}
+
+.flag-fo {
+    background-image: url('../images/icons/flags/fo.svg');
+}
+
+.flag-fr {
+    background-image: url('../images/icons/flags/fr.svg');
+}
+
+.flag-ga {
+    background-image: url('../images/icons/flags/ga.svg');
+}
+
+.flag-gb-eng {
+    background-image: url('../images/icons/flags/gb-eng.svg');
+}
+
+.flag-gb-nir {
+    background-image: url('../images/icons/flags/gb-nir.svg');
+}
+
+.flag-gb-sct {
+    background-image: url('../images/icons/flags/gb-sct.svg');
+}
+
+.flag-gb-wls {
+    background-image: url('../images/icons/flags/gb-wls.svg');
+}
+
+.flag-gb {
+    background-image: url('../images/icons/flags/gb.svg');
+}
+
+.flag-gd {
+    background-image: url('../images/icons/flags/gd.svg');
+}
+
+.flag-ge {
+    background-image: url('../images/icons/flags/ge.svg');
+}
+
+.flag-gf {
+    background-image: url('../images/icons/flags/gf.svg');
+}
+
+.flag-gg {
+    background-image: url('../images/icons/flags/gg.svg');
+}
+
+.flag-gh {
+    background-image: url('../images/icons/flags/gh.svg');
+}
+
+.flag-gi {
+    background-image: url('../images/icons/flags/gi.svg');
+}
+
+.flag-gl {
+    background-image: url('../images/icons/flags/gl.svg');
+}
+
+.flag-gm {
+    background-image: url('../images/icons/flags/gm.svg');
+}
+
+.flag-gn {
+    background-image: url('../images/icons/flags/gn.svg');
+}
+
+.flag-gp {
+    background-image: url('../images/icons/flags/gp.svg');
+}
+
+.flag-gq {
+    background-image: url('../images/icons/flags/gq.svg');
+}
+
+.flag-gr {
+    background-image: url('../images/icons/flags/gr.svg');
+}
+
+.flag-gs {
+    background-image: url('../images/icons/flags/gs.svg');
+}
+
+.flag-gt {
+    background-image: url('../images/icons/flags/gt.svg');
+}
+
+.flag-gu {
+    background-image: url('../images/icons/flags/gu.svg');
+}
+
+.flag-gw {
+    background-image: url('../images/icons/flags/gw.svg');
+}
+
+.flag-gy {
+    background-image: url('../images/icons/flags/gy.svg');
+}
+
+.flag-hk {
+    background-image: url('../images/icons/flags/hk.svg');
+}
+
+.flag-hm {
+    background-image: url('../images/icons/flags/hm.svg');
+}
+
+.flag-hn {
+    background-image: url('../images/icons/flags/hn.svg');
+}
+
+.flag-hr {
+    background-image: url('../images/icons/flags/hr.svg');
+}
+
+.flag-ht {
+    background-image: url('../images/icons/flags/ht.svg');
+}
+
+.flag-hu {
+    background-image: url('../images/icons/flags/hu.svg');
+}
+
+.flag-id {
+    background-image: url('../images/icons/flags/id.svg');
+}
+
+.flag-ie {
+    background-image: url('../images/icons/flags/ie.svg');
+}
+
+.flag-il {
+    background-image: url('../images/icons/flags/il.svg');
+}
+
+.flag-im {
+    background-image: url('../images/icons/flags/im.svg');
+}
+
+.flag-in {
+    background-image: url('../images/icons/flags/in.svg');
+}
+
+.flag-io {
+    background-image: url('../images/icons/flags/io.svg');
+}
+
+.flag-iq {
+    background-image: url('../images/icons/flags/iq.svg');
+}
+
+.flag-ir {
+    background-image: url('../images/icons/flags/ir.svg');
+}
+
+.flag-is {
+    background-image: url('../images/icons/flags/is.svg');
+}
+
+.flag-it {
+    background-image: url('../images/icons/flags/it.svg');
+}
+
+.flag-je {
+    background-image: url('../images/icons/flags/je.svg');
+}
+
+.flag-jm {
+    background-image: url('../images/icons/flags/jm.svg');
+}
+
+.flag-jo {
+    background-image: url('../images/icons/flags/jo.svg');
+}
+
+.flag-jp {
+    background-image: url('../images/icons/flags/jp.svg');
+}
+
+.flag-ke {
+    background-image: url('../images/icons/flags/ke.svg');
+}
+
+.flag-kg {
+    background-image: url('../images/icons/flags/kg.svg');
+}
+
+.flag-kh {
+    background-image: url('../images/icons/flags/kh.svg');
+}
+
+.flag-ki {
+    background-image: url('../images/icons/flags/ki.svg');
+}
+
+.flag-km {
+    background-image: url('../images/icons/flags/km.svg');
+}
+
+.flag-kn {
+    background-image: url('../images/icons/flags/kn.svg');
+}
+
+.flag-kp {
+    background-image: url('../images/icons/flags/kp.svg');
+}
+
+.flag-kr {
+    background-image: url('../images/icons/flags/kr.svg');
+}
+
+.flag-kw {
+    background-image: url('../images/icons/flags/kw.svg');
+}
+
+.flag-ky {
+    background-image: url('../images/icons/flags/ky.svg');
+}
+
+.flag-kz {
+    background-image: url('../images/icons/flags/kz.svg');
+}
+
+.flag-la {
+    background-image: url('../images/icons/flags/la.svg');
+}
+
+.flag-lb {
+    background-image: url('../images/icons/flags/lb.svg');
+}
+
+.flag-lc {
+    background-image: url('../images/icons/flags/lc.svg');
+}
+
+.flag-li {
+    background-image: url('../images/icons/flags/li.svg');
+}
+
+.flag-lk {
+    background-image: url('../images/icons/flags/lk.svg');
+}
+
+.flag-lr {
+    background-image: url('../images/icons/flags/lr.svg');
+}
+
+.flag-ls {
+    background-image: url('../images/icons/flags/ls.svg');
+}
+
+.flag-lt {
+    background-image: url('../images/icons/flags/lt.svg');
+}
+
+.flag-lu {
+    background-image: url('../images/icons/flags/lu.svg');
+}
+
+.flag-lv {
+    background-image: url('../images/icons/flags/lv.svg');
+}
+
+.flag-ly {
+    background-image: url('../images/icons/flags/ly.svg');
+}
+
+.flag-ma {
+    background-image: url('../images/icons/flags/ma.svg');
+}
+
+.flag-mc {
+    background-image: url('../images/icons/flags/mc.svg');
+}
+
+.flag-md {
+    background-image: url('../images/icons/flags/md.svg');
+}
+
+.flag-me {
+    background-image: url('../images/icons/flags/me.svg');
+}
+
+.flag-mf {
+    background-image: url('../images/icons/flags/mf.svg');
+}
+
+.flag-mg {
+    background-image: url('../images/icons/flags/mg.svg');
+}
+
+.flag-mh {
+    background-image: url('../images/icons/flags/mh.svg');
+}
+
+.flag-mk {
+    background-image: url('../images/icons/flags/mk.svg');
+}
+
+.flag-ml {
+    background-image: url('../images/icons/flags/ml.svg');
+}
+
+.flag-mm {
+    background-image: url('../images/icons/flags/mm.svg');
+}
+
+.flag-mn {
+    background-image: url('../images/icons/flags/mn.svg');
+}
+
+.flag-mo {
+    background-image: url('../images/icons/flags/mo.svg');
+}
+
+.flag-mp {
+    background-image: url('../images/icons/flags/mp.svg');
+}
+
+.flag-mq {
+    background-image: url('../images/icons/flags/mq.svg');
+}
+
+.flag-mr {
+    background-image: url('../images/icons/flags/mr.svg');
+}
+
+.flag-ms {
+    background-image: url('../images/icons/flags/ms.svg');
+}
+
+.flag-mt {
+    background-image: url('../images/icons/flags/mt.svg');
+}
+
+.flag-mu {
+    background-image: url('../images/icons/flags/mu.svg');
+}
+
+.flag-mv {
+    background-image: url('../images/icons/flags/mv.svg');
+}
+
+.flag-mw {
+    background-image: url('../images/icons/flags/mw.svg');
+}
+
+.flag-mx {
+    background-image: url('../images/icons/flags/mx.svg');
+}
+
+.flag-my {
+    background-image: url('../images/icons/flags/my.svg');
+}
+
+.flag-mz {
+    background-image: url('../images/icons/flags/mz.svg');
+}
+
+.flag-na {
+    background-image: url('../images/icons/flags/na.svg');
+}
+
+.flag-nc {
+    background-image: url('../images/icons/flags/nc.svg');
+}
+
+.flag-ne {
+    background-image: url('../images/icons/flags/ne.svg');
+}
+
+.flag-nf {
+    background-image: url('../images/icons/flags/nf.svg');
+}
+
+.flag-ng {
+    background-image: url('../images/icons/flags/ng.svg');
+}
+
+.flag-ni {
+    background-image: url('../images/icons/flags/ni.svg');
+}
+
+.flag-nl {
+    background-image: url('../images/icons/flags/nl.svg');
+}
+
+.flag-no {
+    background-image: url('../images/icons/flags/no.svg');
+}
+
+.flag-np {
+    background-image: url('../images/icons/flags/np.svg');
+}
+
+.flag-nr {
+    background-image: url('../images/icons/flags/nr.svg');
+}
+
+.flag-nu {
+    background-image: url('../images/icons/flags/nu.svg');
+}
+
+.flag-nz {
+    background-image: url('../images/icons/flags/nz.svg');
+}
+
+.flag-om {
+    background-image: url('../images/icons/flags/om.svg');
+}
+
+.flag-pa {
+    background-image: url('../images/icons/flags/pa.svg');
+}
+
+.flag-pe {
+    background-image: url('../images/icons/flags/pe.svg');
+}
+
+.flag-pf {
+    background-image: url('../images/icons/flags/pf.svg');
+}
+
+.flag-pg {
+    background-image: url('../images/icons/flags/pg.svg');
+}
+
+.flag-ph {
+    background-image: url('../images/icons/flags/ph.svg');
+}
+
+.flag-pk {
+    background-image: url('../images/icons/flags/pk.svg');
+}
+
+.flag-pl {
+    background-image: url('../images/icons/flags/pl.svg');
+}
+
+.flag-pm {
+    background-image: url('../images/icons/flags/pm.svg');
+}
+
+.flag-pn {
+    background-image: url('../images/icons/flags/pn.svg');
+}
+
+.flag-pr {
+    background-image: url('../images/icons/flags/pr.svg');
+}
+
+.flag-ps {
+    background-image: url('../images/icons/flags/ps.svg');
+}
+
+.flag-pt {
+    background-image: url('../images/icons/flags/pt.svg');
+}
+
+.flag-pw {
+    background-image: url('../images/icons/flags/pw.svg');
+}
+
+.flag-py {
+    background-image: url('../images/icons/flags/py.svg');
+}
+
+.flag-qa {
+    background-image: url('../images/icons/flags/qa.svg');
+}
+
+.flag-re {
+    background-image: url('../images/icons/flags/re.svg');
+}
+
+.flag-ro {
+    background-image: url('../images/icons/flags/ro.svg');
+}
+
+.flag-rs {
+    background-image: url('../images/icons/flags/rs.svg');
+}
+
+.flag-ru {
+    background-image: url('../images/icons/flags/ru.svg');
+}
+
+.flag-rw {
+    background-image: url('../images/icons/flags/rw.svg');
+}
+
+.flag-sa {
+    background-image: url('../images/icons/flags/sa.svg');
+}
+
+.flag-sb {
+    background-image: url('../images/icons/flags/sb.svg');
+}
+
+.flag-sc {
+    background-image: url('../images/icons/flags/sc.svg');
+}
+
+.flag-sd {
+    background-image: url('../images/icons/flags/sd.svg');
+}
+
+.flag-se {
+    background-image: url('../images/icons/flags/se.svg');
+}
+
+.flag-sg {
+    background-image: url('../images/icons/flags/sg.svg');
+}
+
+.flag-sh {
+    background-image: url('../images/icons/flags/sh.svg');
+}
+
+.flag-si {
+    background-image: url('../images/icons/flags/si.svg');
+}
+
+.flag-sj {
+    background-image: url('../images/icons/flags/sj.svg');
+}
+
+.flag-sk {
+    background-image: url('../images/icons/flags/sk.svg');
+}
+
+.flag-sl {
+    background-image: url('../images/icons/flags/sl.svg');
+}
+
+.flag-sm {
+    background-image: url('../images/icons/flags/sm.svg');
+}
+
+.flag-sn {
+    background-image: url('../images/icons/flags/sn.svg');
+}
+
+.flag-so {
+    background-image: url('../images/icons/flags/so.svg');
+}
+
+.flag-sr {
+    background-image: url('../images/icons/flags/sr.svg');
+}
+
+.flag-ss {
+    background-image: url('../images/icons/flags/ss.svg');
+}
+
+.flag-st {
+    background-image: url('../images/icons/flags/st.svg');
+}
+
+.flag-sv {
+    background-image: url('../images/icons/flags/sv.svg');
+}
+
+.flag-sx {
+    background-image: url('../images/icons/flags/sx.svg');
+}
+
+.flag-sy {
+    background-image: url('../images/icons/flags/sy.svg');
+}
+
+.flag-sz {
+    background-image: url('../images/icons/flags/sz.svg');
+}
+
+.flag-tc {
+    background-image: url('../images/icons/flags/tc.svg');
+}
+
+.flag-td {
+    background-image: url('../images/icons/flags/td.svg');
+}
+
+.flag-tf {
+    background-image: url('../images/icons/flags/tf.svg');
+}
+
+.flag-tg {
+    background-image: url('../images/icons/flags/tg.svg');
+}
+
+.flag-th {
+    background-image: url('../images/icons/flags/th.svg');
+}
+
+.flag-tj {
+    background-image: url('../images/icons/flags/tj.svg');
+}
+
+.flag-tk {
+    background-image: url('../images/icons/flags/tk.svg');
+}
+
+.flag-tl {
+    background-image: url('../images/icons/flags/tl.svg');
+}
+
+.flag-tm {
+    background-image: url('../images/icons/flags/tm.svg');
+}
+
+.flag-tn {
+    background-image: url('../images/icons/flags/tn.svg');
+}
+
+.flag-to {
+    background-image: url('../images/icons/flags/to.svg');
+}
+
+.flag-tr {
+    background-image: url('../images/icons/flags/tr.svg');
+}
+
+.flag-tt {
+    background-image: url('../images/icons/flags/tt.svg');
+}
+
+.flag-tv {
+    background-image: url('../images/icons/flags/tv.svg');
+}
+
+.flag-tw {
+    background-image: url('../images/icons/flags/tw.svg');
+}
+
+.flag-tz {
+    background-image: url('../images/icons/flags/tz.svg');
+}
+
+.flag-ua {
+    background-image: url('../images/icons/flags/ua.svg');
+}
+
+.flag-ug {
+    background-image: url('../images/icons/flags/ug.svg');
+}
+
+.flag-um {
+    background-image: url('../images/icons/flags/um.svg');
+}
+
+.flag-un {
+    background-image: url('../images/icons/flags/un.svg');
+}
+
+.flag-us {
+    background-image: url('../images/icons/flags/us.svg');
+}
+
+.flag-uy {
+    background-image: url('../images/icons/flags/uy.svg');
+}
+
+.flag-uz {
+    background-image: url('../images/icons/flags/uz.svg');
+}
+
+.flag-va {
+    background-image: url('../images/icons/flags/va.svg');
+}
+
+.flag-vc {
+    background-image: url('../images/icons/flags/vc.svg');
+}
+
+.flag-ve {
+    background-image: url('../images/icons/flags/ve.svg');
+}
+
+.flag-vg {
+    background-image: url('../images/icons/flags/vg.svg');
+}
+
+.flag-vi {
+    background-image: url('../images/icons/flags/vi.svg');
+}
+
+.flag-vn {
+    background-image: url('../images/icons/flags/vn.svg');
+}
+
+.flag-vu {
+    background-image: url('../images/icons/flags/vu.svg');
+}
+
+.flag-wf {
+    background-image: url('../images/icons/flags/wf.svg');
+}
+
+.flag-ws {
+    background-image: url('../images/icons/flags/ws.svg');
+}
+
+.flag-ye {
+    background-image: url('../images/icons/flags/ye.svg');
+}
+
+.flag-yt {
+    background-image: url('../images/icons/flags/yt.svg');
+}
+
+.flag-za {
+    background-image: url('../images/icons/flags/za.svg');
+}
+
+.flag-zm {
+    background-image: url('../images/icons/flags/zm.svg');
+}
+
+.flag-zw {
+    background-image: url('../images/icons/flags/zw.svg');
+}
+
+.images-200-200 {
+    max-height: 200px;
+    max-width: 200px
+}
+
+.images-100-100 {
+    max-height: 100px;
+    max-width: 100px
+}
+
+.images-80-80 {
+    max-height: 80px;
+    max-width: 80px
+}
+
+.images-50-50 {
+    max-height: 50px;
+    max-width: 50px
+}
+
+.images-30-30 {
+    max-height: 30px;
+    max-width: 30px
+}
+
+.images-15-15 {
+    max-height: 15px;
+    max-width: 15px
+}
+
+.box {
+    padding: 1rem 1.2rem;
+    display: block;
+    background: #fff;
+    border-radius: .2rem;
+    box-shadow: 0 1px 3px rgba(51, 51, 51, .1)
+}
+
+.icon-wrap {
+    text-align: center
+}
+
+.itembox .icon-wrap {
+    margin-bottom: 15px;
+    margin-top: 7px;
+}
+
+.itembox images {
+    max-width: 100%
+}
+
+.itemside {
+    position: relative;
+    display: inline-flex;
+    width: 100%
+}
+
+.itemside .text-wrap {
+    padding-left: 15px;
+    padding-right: 7px
+}
+
+.itemside .images-wrap {
+    position: relative;
+    border-radius: .25rem 0 0 .25rem
+}
+
+.itemside images {
+    -o-object-fit: contain;
+    object-fit: contain
+}
+
+.itemside .title,
+.itemside p {
+    margin-bottom: .5rem
+}
+
+.itemside .images-bg {
+    -o-object-fit: contain;
+    object-fit: contain;
+    position: absolute;
+    right: 0;
+    max-height: 100px;
+    bottom: 0;
+    z-index: 0
+}
+
+.itemside .card-body {
+    position: relative;
+    z-index: 3
+}
+
+.items-bordered-wrap .itemside:not(:last-child) {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 10px
+}
+
+.itemlist {
+    padding: 20px;
+    border-bottom: 1px solid #eee
+}
+
+.icon-lg,
+.icon-md,
+.icon-sm,
+.icon-xs {
+    display: inline-block;
+    text-align: center
+}
+
+.icon-xs {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 16px;
+}
+
+.icon-sm {
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 22px;
+}
+
+.icon-md {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 32px;
+}
+
+.icon-lg {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 42px;
+}
+
+.images-xs,
+.images-sm,
+.images-md,
+.images-lg,
+.images-xxs {
+    object-fit: cover;
+}
+
+.images-xxs {
+    width: 25px;
+    height: 25px;
+}
+
+.images-xs {
+    width: 40px;
+    height: 40px;
+}
+
+.images-sm {
+    width: 80px;
+    height: 80px;
+}
+
+.images-md {
+    width: 160px;
+    height: 160px;
+}
+
+.images-lg {
+    width: 400px;
+    height: 300px;
+}
+
+.dropzone-container {
+    border: 1px solid var(--bs-gray-300) !important;
+    border-radius: 0.375rem !important;
+    height: 100%;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.dropzone-container .dropzone-preview {
+    height: 100%;
+    width: 100%;
+}
+
+.dropzone-container .dropzone-preview .dropzone-preview-image {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    object-fit: cover;
+    max-width: unset;
+    flex-basis: unset;
+}
+
+.dropzone-container .dropzone-preview .dropzone-preview-filename {
+    display: none;
+}
+
+#locale-selector-modal {
+    background: var(--bs-primary);
+}
+
+@media (min-width: 768px) {
+    #locale-selector-modal .modal-dialog {
+        max-width: 800px;
+        width: 96%;
+    }
+}
+
+#locale-selector-modal .modal-content {
+    border: 0;
+}
+
+#locale-selector-modal .modal-header {
+    background: var(--bs-primary);
+    border-bottom: 0;
+    color: var(--white);
+}
+
+#locale-selector-modal .modal-header .close {
+    color: var(--white);
+    opacity: 1;
+}
+
+#locale-selector-modal .modal-body {
+    background: var(--bs-primary);
+}
+
+#locale-selector-modal .modal-body .locales {
+    list-style: none;
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    #locale-selector-modal .modal-body .locales {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px 20px;
+    }
+}
+
+#locale-selector-modal .modal-body .locales li {
+    border-radius: 4px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    #locale-selector-modal .modal-body .locales li {
+        margin: 0;
+    }
+}
+
+#locale-selector-modal .modal-body .locales li.rtl a {
+    direction: rtl;
+}
+
+#locale-selector-modal .modal-body .locales li a {
+    align-items: center;
+    background: #fff;
+    border-radius: 4px;
+    color: #212529;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+#locale-selector-modal .modal-body .locales li a small,
+#locale-selector-modal .modal-body .locales li a .small {
+    border-radius: 4px;
+    border: 2px solid #dee2e6;
+    color: #343a40;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.1;
+    margin-inline-start: 10px;
+    min-width: 26px;
+    padding: 2px 6px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#locale-selector-modal .modal-body .locales li:hover a {
+    outline: 3px solid var(--bs-primary);
+    outline-offset: -5px;
+}
+
+#locale-selector-modal .modal-body .locales li:hover a small,
+#locale-selector-modal .modal-body .locales li:hover a .small {
+    background: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: #fff;
+}
+
+#locale-selector-modal .modal-body .locales li.active a,
+#locale-selector-modal .modal-body .locales li:hover.active a {
+    background: var(--bs-primary);
+    color: #fff;
+    outline: none;
+}
+
+#locale-selector-modal .modal-body .locales li.active a small,
+#locale-selector-modal .modal-body .locales li.active a .small,
+#locale-selector-modal .modal-body .locales li:hover.active a small {
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+}
+
+.ratio-1x1 {
+    aspect-ratio: 1/1;
+}
+
+.ratio-16x9 {
+    aspect-ratio: 16/9;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+images.ratio-1x1 {
+    object-fit: cover;
+}
+
+.overflow-x-scroll {
+    overflow-x: scroll;
+}
+
+.media {
+    margin-bottom: 1rem;
+}
+
+textarea {
+    resize: none;
+}
+
+span.rating i {
+    color: #f67611;
+}
+
+.label-rating {
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle
+}
+
+.stars-simple {
+    margin-bottom: 7px
+}
+
+.stars-simple i {
+    color: #f67611
+}
+
+.stars-simple small {
+    color: #999;
+    margin-left: 5px
+}
+
+.rating-stars {
+    display: inline-block;
+    vertical-align: middle;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    line-height: 1;
+    white-space: nowrap;
+    clear: both
+}
+
+.rating-stars i {
+    font-size: 14px;
+    color: #ccc;
+    display: inline
+}
+
+.rating-stars li {
+    display: block;
+    text-overflow: clip;
+    white-space: nowrap;
+    z-index: 1
+}
+
+.rating-stars li.stars-active {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden
+}
+
+.rating-stars li.stars-active i {
+    color: #f67611
+}
+
+.padding-y {
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+
+.padding-top {
+    padding-top: 32px;
+}
+
+.padding-bottom {
+    padding-bottom: 32px;
+}
+
+.padding-y-lg {
+    padding-top: 60px;
+    padding-bottom: 50px;
+}
+
+.padding-x-md {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.padding-top-lg {
+    padding-top: 60px;
+}
+
+.padding-bottom-lg {
+    padding-bottom: 60px;
+}
+
+.padding-y-sm {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.padding-top-sm {
+    padding-top: 16px;
+}
+
+.padding-bottom-sm {
+    padding-bottom: 16px;
+}

@@ -1,0 +1,115 @@
+{% extends "base.html.twig" %}
+
+{% set article = entity %}
+{% set pagetitle = article.title %}
+{% block title pagetitle %}
+
+{% block meta_dynamic_seo %}
+	<meta name="description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+	{% if article.tags %}
+		<meta name="keywords" content="{{ article.title }}, {% for tag in article.tags %} {{ tag }} {{ not loop.last ? ', ' : '' }}{% endfor %}"/>
+	{% else %}
+		<meta name="keywords" content="{{ settings['website_keywords_' ~ app.request.locale] }}"/>
+	{% endif %}
+	<meta
+	property="og:title" content="{{ article.title }}"/>
+	{#<meta property="og:image" content="{{ app.request.getUriForPath() }}"/>#}
+	<meta property="og:description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+	<meta property="og:created_time" content="{{ article.createdAt | date('c') }}"/>
+	<meta
+	name="twitter:title" content="{{ article.title }}"/>
+	{#<meta name="twitter:image" content="{{ app.request.getUriForPath() }}" />#}
+	<meta name="twitter:image:alt" content="{{ article.title }}"/>
+	<meta name="twitter:description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+{% endblock %}
+
+{% block breadcrumb %}
+    {% set breadcrumb = [{ "blog": ('Blog'|trans), "current":(pagetitle) }] %}
+    {% include "global/breadcrumb.html.twig" with breadcrumb %}
+{% endblock %}
+
+{% block body %}
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-8 col-lg-10 mx-auto">
+					<p class="py-3 mb-5 text-muted text-center fw-light">
+						<a href="#">
+							{% set runtimeConfig = {"thumbnail": {"size": [48, 48] } } %}
+							<img 
+								class="avatar p-1 me-2" 
+								src="{{ article.author.avatarName ? asset(article.author.getAvatarPath | imagine_filter('thumbnail', runtimeConfig)) : article.author.getAvatarPlaceholder }}"
+								alt="{{ article.author.fullName }}"
+							>
+                        </a>
+						{{ 'Written by'|trans }}
+						<a class="fw-bold" href="#">{{ article.author.fullName }}</a>
+                        <span class="mx-1">|</span>
+						{{ article.publishedAt | ago() }}
+						<a class="fw-bold" href="#">Living</a>
+						<span class="mx-1">|</span>
+						<a class="text-muted" href="#">
+                            {{ article.comments | length }} {{ article.comments | length  > 1 ? "comments"|trans : "comment"|trans }}
+						</a>
+						{% if article.readtime %}
+							<span class="mx-1">|</span>
+							{{ article.readtime }} {{ "min read"|trans }}
+						{% endif %}
+					</p>
+					<p class="lead mb-5">
+						{{ article.content | html_markdown_excerpt(160) }}
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-10 mx-auto">
+                    <img
+                        src="{{ article.imageName ? asset(article.getImagePath) : article.getImagePlaceholder }}"
+                        alt="{{ article.title }}"
+                        class="img-fluid mb-5"
+                    >
+                </div>
+			</div>
+			<div class="row">
+				<div class="col-xl-8 col-lg-10 mx-auto">
+					<div class="text-content">
+						<p>{{ article.content | html_markdown }}</p>
+						<hr>
+					</div>
+					<div class="mt-5">
+						<h6 class="text-uppercase text-muted mb-4">
+							{{ article.comments | length }} {{ article.comments | length  > 1 ? "comments"|trans : "comment"|trans }}
+						</h6>
+						{% for comment in article.comments %}
+							{% include 'blog/comment/_comment.html.twig' %}
+						{% else %}
+							<p>{{ 'Be the first to comment on this article.'|trans }}</p>
+						{% endfor %}
+					</div>
+					<div class="mb-5">
+						<button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#leaveComment" aria-expanded="false" aria-controls="leaveComment">
+							{{ 'Leave a comment'|trans }}
+						</button>
+						<div class="collapse" id="leaveComment">
+							<div class="mt-4">
+								{% if is_granted('ROLE_USER') %}
+									{{ render(controller('App\\Controller\\Blog\\BlogCommentController::form', {'id': article.id})) }}
+								{% else %}
+									<div>
+										<a class="" href="{{ path('security_login', {'redirect_to': app.request.pathInfo}) }}">
+											<i class="fa fa-sign-in -ml-1 mr-2"></i>
+											{{ 'Sign in'|trans }}
+										</a>
+										<span class="">{{ 'to publish a comment'|trans }}</span>
+									</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

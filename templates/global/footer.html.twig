@@ -1,0 +1,131 @@
+<footer class="position-relative z-index-10 d-print-none">
+	<div class="py-6 bg-gray-200 text-muted">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 mb-5 mb-lg-0">
+					<div class="fw-bold text-uppercase text-dark mb-3">{{ setting.getSettings('website_name') }}</div>
+					<p>{{ setting.getSettings("website_about")|raw|nl2br }}</p>
+                    {% if settings["facebook_url"] != "" or settings["instagram_url"] != "" or settings["youtube_url"] != "" or settings["twitter_url"] != "" %}
+                        <ul class="list-inline">
+                            {% if settings["twitter_url"] != "" %}
+                                <li class="list-inline-item">
+                                    <a class="text-muted text-primary-hover" href="{{ settings["twitter_url"] }}" target="_blank" title="twitter">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if settings["facebook_url"] != "" %}
+                                <li class="list-inline-item">
+                                    <a class="text-muted text-primary-hover" href="{{ settings["facebook_url"] }}" target="_blank" title="facebook">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if settings["instagram_url"] != "" %}
+                                <li class="list-inline-item">
+                                    <a class="text-muted text-primary-hover" href="{{ settings["instagram_url"] }}" target="_blank" title="instagram">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="list-inline-item">
+                                <a class="text-muted text-primary-hover" href="#" target="_blank" title="pinterest">
+                                    <i class="fab fa-pinterest"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted text-primary-hover" href="#" target="_blank" title="vimeo">
+                                    <i class="fab fa-vimeo"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+				</div>
+				<div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
+					<h6 class="text-uppercase text-dark mb-3">{{ 'Pages'|trans }}</h6>
+					<ul class="list-unstyled">
+						<li>
+							<a class="text-muted" href="{{ path('home') }}">{{ 'Home'|trans }}</a>
+						</li>
+						<li>
+							<a class="text-muted" href="{{ path('faq') }}">{{ 'FAQ'|trans }}</a>
+						</li>
+						<li>
+							<a class="text-muted" href="{{ path('blog') }}">{{ 'Blog'|trans }}</a>
+						</li>
+						<li>
+							<a class="text-muted" href="{{ path('team') }}">{{ 'Team'|trans }}</a>
+						</li>
+						<li>
+							<a class="text-muted" href="{{ path('contact') }}">{{ 'Contact'|trans }}</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
+					<h6 class="text-uppercase text-dark mb-3">{{ 'About us'|trans }}</h6>
+					<ul class="list-unstyled">
+                        {% if '1' == settings['show_terms_of_service_page'] %}
+                            <li>
+                                <a class="text-muted" href="{{ path('page', { slug : settings['terms_of_service_page_slug'] }) }}">
+                                    {{ 'Terms'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if '1' == settings['show_privacy_policy_page'] %}
+                            <li>
+                                <a class="text-muted" href="{{ path('page', { slug : settings['privacy_policy_page_slug'] }) }}">
+                                    {{ 'Privacy'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if '1' == settings['show_cookie_policy_page'] %}
+                            <li>
+                                <a class="text-muted" href="{{ path('page', { slug : settings['cookie_policy_page_slug'] }) }}">
+                                    {{ 'Cookie'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if '1' == settings['show_gdpr_compliance_page'] %}
+                            <li>
+                                <a class="text-muted" href="{{ path('page', { slug : settings['gdpr_compliance_page_slug'] }) }}">
+                                    {{ 'GDPR'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+					</ul>
+				</div>
+				<div class="col-lg-4">
+					<h6 class="text-uppercase text-dark mb-3">{{"Subscribe to our newsletter"|trans}}</h6>
+					<p class="mb-3">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.
+					</p>
+					<form action="#" id="newsletter-form">
+						<div class="input-group mb-3">
+							<input id="newsletter-email" class="form-control bg-transparent border-dark border-end-0 newsletter-email" type="email" placeholder="{{ "Email address"|trans }}" aria-label="{{ "Email address"|trans }}">
+							<button id="newsletter-subscribe" class="btn btn-outline-dark border-start-0" type="submit">
+								<i class="fa fa-paper-plane text-lg"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="py-4 fw-light bg-gray-800 text-gray-300">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6 text-center text-md-start">
+					<p class="text-sm mb-md-0">© 2022 - {{ "now"|date('Y') }}, {{ setting.getSettings('website_name') }}. {{ 'All rights reserved. Powered by'|trans }}.</p>
+				</div>
+				<div class="col-md-6">
+					<ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-end">
+						<li class="list-inline-item"><img class="w-2rem" src="{{ asset('build/images/visa.svg') }}" alt="..."></li>
+						<li class="list-inline-item"><img class="w-2rem" src="{{ asset('build/images/mastercard.svg') }}" alt="..."></li>
+						<li class="list-inline-item"><img class="w-2rem" src="{{ asset('build/images/paypal.svg') }}" alt="..."></li>
+						<li class="list-inline-item"><img class="w-2rem" src="{{ asset('build/images/western-union.svg') }}" alt="..."></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

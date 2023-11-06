@@ -70,7 +70,7 @@ class PagesController extends AbstractController
     }
 
     #[Route(path: '/team', name: 'team', methods: [Request::METHOD_GET])]
-    public function about(UserRepository $userRepository): Response
+    public function team(UserRepository $userRepository): Response
     {
         $teams = $userRepository->findTeam(6);
 

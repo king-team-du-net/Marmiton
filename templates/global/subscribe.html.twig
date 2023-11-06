@@ -1,0 +1,7 @@
+{{ form_start(form, {'action': path('subscribe'), 'method': 'POST'}) }}
+    {{ form_row(form.email) }}
+    <button type="submit" class="btn btn-primary">{{ 'Send'|trans }}</button>
+{{ form_end(form) }}
+
+{{- renderSubscribeForm() -}}
+

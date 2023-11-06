@@ -1,13 +1,5 @@
 <?php
 
-/*
- * @package Symfony Framework
- *
- * @author App Freshcart E-commerce <robertdequidt@gmail.com>
- *
- * @copyright 2020-2023
- */
-
 namespace App\Twig;
 
 use Symfony\Component\Intl\Locales;

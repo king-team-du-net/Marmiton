@@ -18,13 +18,10 @@ class SearchDataType extends AbstractType
     {
         $builder
             ->add('keywords', TextType::class, [
-                // 'label' => false,
                 'attr' => [
-                    // 'class' => 'form-search',
-                    'placeholder' => 'Search via keyword...',
+                    'placeholder' => 'Keywords',
                     'aria-label' => 'Search',
                 ],
-                // 'label_attr' => ['class' => 'form-label sr-only'],
                 'empty_data' => '',
                 'required' => false,
             ])
@@ -32,6 +29,8 @@ class SearchDataType extends AbstractType
                 'class' => Category::class,
                 'expanded' => true,
                 'multiple' => true,
+                'choice_label' => 'name',
+                'label' => false,
             ])
         ;
     }

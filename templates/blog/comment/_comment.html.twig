@@ -1,0 +1,41 @@
+{% if comment.isApproved %}
+    <div class="d-flex mb-4">
+        {% set runtimeConfig = {"thumbnail": {"size": [80, 80] } } %}
+        <img 
+            src="{{ comment.author.avatarName ? asset(comment.author.getAvatarPath | imagine_filter('thumbnail', runtimeConfig)) : comment.author.getAvatarPlaceholder }}" 
+            alt="{{ comment.author.fullName }}" 
+            class="avatar avatar-lg p-1 flex-shrink-0 me-4"
+        >
+        <div>
+            <h5>
+                <a name="comment_{{ comment.id }}"></a>
+                {{ comment.author.fullName }}
+            </h5>
+            <p class="text-uppercase text-sm text-muted">
+                <i class="far fa-clock"></i>
+                {{ comment.publishedAt | ago }}
+            </p>
+            <p class="text-muted">{{ comment.content | html_markdown }}</p>
+            <div class="d-flex justify-content-between mb-4">
+                <div>
+                    <a class="btn btn-link text-primary" href="#">
+                        <i class="fa fa-reply"></i>
+                        {{ 'Reply'|trans }}
+                    </a>
+                </div>
+                {% if app.user == comment.author %}
+                    <div>
+                        <form name="comment_delete" method="POST" action="{{ path('blog_comment_delete', {'id': comment.id}) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                            <button type="submit" class="btn btn-link text-danger">
+                                <i class="fa fa-trash"></i> 
+                                {{ 'Delete'|trans }}
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

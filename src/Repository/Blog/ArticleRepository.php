@@ -47,6 +47,21 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Article[] Returns an array of Article objects
+     */
+    public function findLastRecent(int $maxResults): array // (HomeController)
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.publishedAt', 'DESC')
+            ->setParameter('now', new \DateTime())
+            ->where('a.publishedAt <= :now')
+            ->setMaxResults($maxResults)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
      * Get published articles.
      *
      * @param ?Category $category

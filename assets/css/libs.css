@@ -5,13 +5,32 @@
 */
 
 /** Mode Modules */
-@import '~bootstrap-icons/font/bootstrap-icons.css';
-@import "~@fortawesome/fontawesome-free/css/all.css";
-@import "~@fortawesome/fontawesome-free/css/v4-shims.css";
-@import "~fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css";
-@import "~select2-theme-bootstrap5/dist/select2-bootstrap.min.css";
+
+/** Summernote */
 @import "~summernote/dist/summernote-bs5.min.css";
 
+/** Fontawesome Icon picker */
+@import "~fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "~@fortawesome/fontawesome-free/css/v4-shims.css";
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+/** Magnific Popup - Lightbox for the gallery */
+@import '~magnific-popup/dist/magnific-popup.css';
+
+/** Bootstrap  Select2 */
+/* @import "~select2-theme-bootstrap5/dist/select2-bootstrap.min.css"; */
+/* @import '~bootstrap-select/dist/css/bootstrap-select.min.css'; */
+
+/** Swiper Carousel */
+/* @import '~swiper/swiper-bundle.min.css'; */
+@import '../vendor/swiper/swiper-bundle.min.css';
+
+/** Slider */
+@import '~nouislider/dist/nouislider.min.css';
+
+/** Cookie */
+@import "../vendor/jquery.cookieBar/jquery.cookieBar.min.css";
 
 /** Libs */
 

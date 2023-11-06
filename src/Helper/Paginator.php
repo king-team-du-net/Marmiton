@@ -1,13 +1,5 @@
 <?php
 
-/*
- * @package Symfony Framework
- *
- * @author App Freshcart E-commerce <robertdequidt@gmail.com>
- *
- * @copyright 2020-2023
- */
-
 namespace App\Helper;
 
 use Doctrine\ORM\QueryBuilder as DoctrineQueryBuilder;

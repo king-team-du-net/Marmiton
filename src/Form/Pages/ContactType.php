@@ -24,43 +24,32 @@ final class ContactType extends AbstractType
                 'label' => 'Full name :',
                 'required' => true,
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input'],
             ])
             ->add('company', TextType::class, [
                 'label' => 'Company :',
                 'required' => true,
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input'],
             ])
             ->add('subject', TextType::class, [
                 'label' => 'Subject :',
                 'required' => true,
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input'],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'E-mail address :',
                 'required' => true,
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input'],
             ])
             ->add('phone', TelType::class, [
                 'label' => 'Phone :',
                 'required' => false,
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input'],
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Comments :',
                 'required' => true,
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input', 'rows' => 6],
+                'attr' => ['rows' => 6],
             ])
             ->add('recaptcha', EWZRecaptchaType::class, [
                 'attr' => [

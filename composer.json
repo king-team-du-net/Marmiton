@@ -21,6 +21,7 @@
         "easycorp/easyadmin-bundle": "^4.8",
         "erusev/parsedown": "^1.7",
         "excelwebzone/recaptcha-bundle": "^1.5",
+        "exercise/htmlpurifier-bundle": "^4.1",
         "knplabs/knp-paginator-bundle": "^6.2",
         "knplabs/knp-time-bundle": "^2.1",
         "lexik/jwt-authentication-bundle": "^2.19",

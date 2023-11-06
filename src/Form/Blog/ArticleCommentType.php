@@ -20,8 +20,7 @@ final class ArticleCommentType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => 'Comment *',
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input', 'rows' => 6],
+                'attr' => ['rows' => 6],
                 'help' => 'Comments not complying with our Code of Conduct will be moderated.',
             ])
             ->add('isRGPD', CheckboxType::class, [

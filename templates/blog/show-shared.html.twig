@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %}
+
+{% form_theme form '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
+
+{% set pagetitle = 'Shared a article'|trans({}, 'messages') %}
+{% block title pagetitle %}
+
+{% block meta_dynamic_seo %}
+	<meta name="description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+	{% if article.tags %}
+		<meta name="keywords" content="{{ article.title }}, {% for tag in article.tags %} {{ tag }} {{ not loop.last ? ', ' : '' }}{% endfor %}"/>
+	{% else %}
+		<meta name="keywords" content="{{ settings['website_keywords_' ~ app.request.locale] }}"/>
+	{% endif %}
+	<meta property="og:title" content="{{ article.title }}"/>
+	{#<meta property="og:image" content="{{ app.request.getUriForPath() }}"/>#}
+	<meta property="og:description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+	<meta property="og:created_time" content="{{ article.createdAt | date('c') }}"/>
+	<meta name="twitter:title" content="{{ article.title }}"/>
+	{#<meta name="twitter:image" content="{{ app.request.getUriForPath() }}" />#}
+	<meta name="twitter:image:alt" content="{{ article.title }}"/>
+	<meta name="twitter:description" content="{{ article.content | raw | nl2br | striptags | slice(0, 200) | raw }}..."/>
+{% endblock %}
+
+{% block breadcrumb %}
+    {% set breadcrumb = [{ "blog": ('Blog'|trans), (path("blog_show", { slug: article.slug })): article.title | raw | striptags | slice(0, 10) | raw, "current":(pagetitle) }] %}
+    {% include "global/breadcrumb.html.twig" with breadcrumb %}
+{% endblock %}
+
+{% block body %}
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-8 col-lg-10 mx-auto">
+					<div class="mb-5">
+						<div class="mt-4">
+							<h5 class="mb-4">{{ 'Share'|trans }} "{{ article.title }}" {{ 'via e-mail'|trans }}</h5>
+							{% include "global/form-errors.html.twig" with errors %}
+							{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form'} }) }}
+								{{ form_widget(form._token) }}
+								<div class="row">
+									<div class="col-md-4">
+										<div class="mb-4">
+											{{ form_row(form.sender_name) }}
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="mb-4">
+											{{ form_row(form.sender_email) }}
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="mb-4">
+											{{ form_row(form.receiver_email) }}
+										</div>
+									</div>
+								</div>
+								<div class="mb-4">
+									{{ form_row(form.sender_comments) }}
+								</div>
+								{% if settings['google_recaptcha_enabled'] == "1" %}
+									<div>
+										{{ form_widget(form.recaptcha) }}
+										{{ form_errors(form.recaptcha) }}
+									</div>
+								{% endif %}
+								<button class="btn btn-primary" type="submit">
+									<i class="fas fa-envelope"></i>
+									{{ 'Shared article'|trans }}
+								</button>
+							{{ form_end(form, {'render_rest': false}) }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

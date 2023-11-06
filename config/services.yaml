@@ -113,3 +113,5 @@ services:
     # Notification Comment
     App\EventSubscriber\Article\NotificationCommentsSubscriber:
         $sender: '%website_no_reply_email%'
+
+    # MailChimp

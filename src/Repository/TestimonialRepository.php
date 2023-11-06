@@ -24,7 +24,7 @@ class TestimonialRepository extends ServiceEntityRepository
     /**
      * @return Testimonial[] Returns an array of Testimonial objects
      */
-    public function findLastRecent(int $maxResults): array // (PageController)
+    public function findLastRecent(int $maxResults): array // (PageController, HomeController)
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.id', 'DESC')

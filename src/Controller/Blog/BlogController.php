@@ -28,12 +28,12 @@ class BlogController extends AbstractController
             $searchData->page = $request->query->getInt('page', 1);
             $pagination = $articleRepository->findBySearch($searchData);
 
-            return $this->render('blog/article-list.'.$_format.'.twig', compact('form', 'pagination'));
+            return $this->render('blog/list.'.$_format.'.twig', compact('form', 'pagination'));
         }
 
         $pagination = $articleRepository->findPublished($request->query->getInt('page', 1));
 
-        return $this->render('blog/article-list.'.$_format.'.twig', compact('form', 'pagination'));
+        return $this->render('blog/list.'.$_format.'.twig', compact('form', 'pagination'));
     }
 
     #[Route(path: '/{slug}', name: 'blog_show', methods: [Request::METHOD_GET])]
@@ -48,7 +48,7 @@ class BlogController extends AbstractController
         $em->persist($article);
         $em->flush();
 
-        return $this->render('blog/article-detail.html.twig', [
+        return $this->render('blog/show.html.twig', [
             'entity' => $article,
         ]);
     }

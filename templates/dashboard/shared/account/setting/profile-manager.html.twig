@@ -1,10 +1,127 @@
 {% extends "base.html.twig" %}
 
-{% set pagetitle = 'Account settings'|trans %}
+{% set pagetitle = 'Personal info'|trans %}
 {% block title pagetitle %}
 
 {% block body %}
 
-    {# Code #}
+	<section class="py-5">
+		<div class="container">
+			<ol class="breadcrumb ps-0 justify-content-start">
+				<li class="breadcrumb-item">
+					<a href="{{ path('home') }}">{{'Home'|trans}}</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="{{ path('dashboard_account_index') }}">{{ 'My account'|trans }}</a>
+				</li>
+				<li class="breadcrumb-item active">{{pagetitle}}</li>
+			</ol>
+			<h1 class="hero-heading mb-0">{{pagetitle}}</h1>
+			<p class="text-muted mb-5">{{ 'Manage your Personal info and settings here'|trans }}.</p>
+			<div class="row">
+				<div class="col-lg-7 mb-5 mb-lg-0">
+					<div class="text-block">
+						<div class="row mb-3">
+							<div class="col-sm-9">
+								<h5>{{ 'Personal Details'|trans }}</h5>
+							</div>
+							<div class="col-sm-3 text-end">
+								<button class="btn btn-link ps-0 text-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#personalDetails" aria-expanded="false" aria-controls="personalDetails">{{ 'Update'|trans }}</button>
+							</div>
+						</div>
+						<p class="text-sm text-muted">
+							<i class="fa fa-id-card fa-fw me-2"></i>{{ user.nickname }}<br>
+							<i class="fa fa-birthday-cake fa-fw me-2"></i>{{ user.createdAt | ago() }}<br>
+							<i class="fa fa-envelope-open fa-fw me-2"></i>{{ user.email }}
+							<span class="mx-2">
+								|
+							</span>
+							<i class="fa fa-phone fa-fw me-2"></i>
+						</p>
+						<div class="collapse" id="personalDetails">
+							{{ form_start(formUpdateSettings, {attr: {novalidate: 'novalidate'}}) }}
+								{{ form_widget(formUpdateSettings._token) }}
+								{{ form_errors(formUpdateSettings) }}
+								<div class="row pt-4">
+									{{ include("dashboard/shared/partials/_personal-information.html.twig", {formUpdateSettings: formUpdateSettings}) }}
+								</div>
+								<button type="submit" name="action" value="settings" class="btn btn-outline-primary mb-4">{{ 'Save'|trans }}</button>
+							{{ form_end(formUpdateSettings, {'render_rest': false}) }}
+						</div>
+					</div>
+					<div class="text-block">
+						<div class="row mb-3">
+							<div class="col-sm-9">
+								<h5>{{ 'Social'|trans }}</h5>
+							</div>
+							<div class="col-sm-3 text-end">
+								<button class="btn btn-link ps-0 text-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#social" aria-expanded="false" aria-controls="social">{{ 'Update'|trans }}</button>
+							</div>
+						</div>
+						<div class="d-flex text-sm text-muted">
+							<i class="fas fa-link fa-fw flex-shrink-0 me-2"></i>
+							<div class="mt-n1">{{ user.externallink }}</div>
+						</div>
+						<div class="collapse" id="social">
+							{{ form_start(formUpdateSocial, {attr: {novalidate: 'novalidate'}}) }}
+								{{ form_widget(formUpdateSocial._token) }}
+								{{ form_errors(formUpdateSocial) }}
+								<div class="row pt-4">
+									{{ include("dashboard/shared/partials/_social.html.twig", {formUpdateSocial: formUpdateSocial}) }}
+								</div>
+								<button type="submit" name="action" value="social" class="btn btn-outline-primary">{{ 'Save'|trans }}</button>
+							{{ form_end(formUpdateSocial, {'render_rest': false}) }}
+						</div>
+					</div>
+					<div class="text-block">
+						<div class="row mb-3">
+							<div class="col-sm-9">
+								<h5>{{ 'Change password'|trans }}</h5>
+							</div>
+							<div class="col-sm-3 text-end">
+								<button class="btn btn-link ps-0 text-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#password" aria-expanded="false" aria-controls="password">{{ 'Update'|trans }}</button>
+							</div>
+						</div>
+						<div class="collapse" id="password">
+							{#
+							{{ form_start(formUpdatePassword, {attr: {novalidate: 'novalidate'}}) }}
+								{{ form_widget(formUpdatePassword._token) }}
+								{{ form_errors(formUpdatePassword) }}
+								<div class="row pt-4">
+									{{ include("dashboard/shared/partials/_change-password.html.twig", {formUpdatePassword: formUpdatePassword}) }}
+								</div>
+								<button type="submit" name="action" value="plainPassword" class="btn btn-outline-primary">{{ 'Save'|trans }}</button>
+							{{ form_end(formUpdatePassword, {'render_rest': false}) }}
+							#}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8 col-lg-4 ms-lg-auto">
+					<div class="card border-0 shadow">
+						<div class="card-header bg-primary-light py-4 border-0">
+							<div class="d-flex align-items-center">
+								<div>
+									<h4 class="h6 subtitle text-sm text-primary">Lorem ipsum dolor sit amet?</h4>
+								</div>
+								<svg class="svg-icon svg-icon svg-icon-light w-3rem h-3rem ms-3 text-primary flex-shrink-0">
+									<use xlink:href="#identity-1"></use>
+								</svg>
+							</div>
+						</div>
+						<div class="card-body p-4">
+							<p class="text-muted text-sm card-text">
+								consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+								<strong>Ut enim ad minim veniam</strong>, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+							</p>
+							<p class="text-muted text-sm card-text">
+								consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+								<strong>Ut enim ad minim veniam</strong>, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 {% endblock %}

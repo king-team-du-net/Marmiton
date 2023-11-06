@@ -25,8 +25,6 @@ final class ArticleSharedType extends AbstractType
                 'label' => 'Full name :',
                 'required' => true,
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input'],
                 'constraints' => [
                     new NotBlank(),
                 ],
@@ -35,8 +33,6 @@ final class ArticleSharedType extends AbstractType
                 'label' => 'E-mail address :',
                 'required' => true,
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input'],
                 'constraints' => [
                     new NotBlank(),
                     new Email(),
@@ -47,8 +43,6 @@ final class ArticleSharedType extends AbstractType
                 'label' => "Friend's email :",
                 'required' => true,
                 'empty_data' => '',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input'],
                 'constraints' => [
                     new NotBlank(),
                     new Email(),
@@ -57,8 +51,7 @@ final class ArticleSharedType extends AbstractType
             ])
             ->add('sender_comments', TextareaType::class, [
                 'label' => 'Comments :',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-input', 'rows' => 6],
+                'attr' => ['rows' => 6],
                 'help' => 'Leave it blank if you want (optional).',
             ])
             ->add('recaptcha', EWZRecaptchaType::class, [

@@ -11,8 +11,8 @@ use Twig\TwigFilter;
 class TwigDateTimeExtension extends AbstractExtension
 {
     public function __construct(
-        protected IntlExtension $intlExtension,
-        protected Environment $environment
+        protected readonly IntlExtension $intlExtension,
+        protected readonly Environment $environment
     ) {
         // code...
     }

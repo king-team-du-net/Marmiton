@@ -1,35 +1,29 @@
 {% set runtimeConfig = {"thumbnail": {"size": thumbnailsize } } %}
-<div class="card max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 my-8 mr-4" data-type="post">
-	{% if article.thumbnail %}
+<div class="col-lg-4 col-sm-6 mb-4 hover-animate">
+	<div class="card shadow border-0 h-100">
 		<a href="{{ path('blog_show', { slug : article.slug }) }}">
 			<img 
-                src="{{ vich_uploader_asset(article.thumbnail, 'thumbnailFile') | imagine_filter('thumbnail', runtimeConfig) }}"
-                {# src="{{ article.thumbnailName ? asset(article.getThumbnailPath | imagine_filter('thumbnail', runtimeConfig)) : article.getThumbnailPlaceholder }}" #}
-                alt="{{ article.title }}" 
-                class="rounded-t-lg"
-            >
+				class="img-fluid card-img-top" 
+				src="{{ article.imageName ? asset(article.getImagePath | imagine_filter('thumbnail', runtimeConfig)) : article.getImagePlaceholder }}" 
+				alt="{{ article.title }}"
+			>
 		</a>
-	{% endif %}
-
-    {% include "global/article-like.html.twig" %}
-
-	<div class="p-5">
-		<a href="{{ path('blog_show', { slug : article.slug }) }}">
-			<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ article.title }}</h5>
-		</a>
-
-		{% include "global/article-categories.html.twig" with {
-			categories: article.categories
-		} only %}
-
-		<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            {{ article.content | html_markdown_excerpt(160) }}
-        </p>
-		<a href="{{ path('blog_show', { slug : article.slug }) }}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-sky-700 rounded-lg hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">
-			{{ 'Read more'|trans }}
-			<svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-				<path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-			</svg>
-		</a>
+		<div class="card-body">
+			{% include "global/article-categories.html.twig" with {
+				categories: article.categories
+			} only %}
+			<h5 class="my-2">
+				<a class="text-dark" href="{{ path('blog_show', { slug : article.slug }) }}">
+					{{ article.title }}
+				</a>
+			</h5>
+			<p class="text-gray-500 text-sm my-3">
+				<i class="far fa-clock me-2"></i>{{ article.publishedAt | ago() }}
+			</p>
+			<p class="my-2 text-muted text-sm">{{ article.content | html_markdown_excerpt(160) }}</p>
+			<a class="btn btn-link ps-0" href="{{ path('blog_show', { slug : article.slug }) }}">
+				{{ 'Read more'|trans }}<i class="fa fa-long-arrow-alt-right ms-2"></i>
+			</a>
+		</div>
 	</div>
 </div>

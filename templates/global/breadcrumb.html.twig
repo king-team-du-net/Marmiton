@@ -1,28 +1,31 @@
-<div class="mt-4">
-    <div class="container">
-        <div class="row ">
-            <div class="col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0">
+<section class="hero py-5 py-lg-7">
+	<div class="container position-relative">
+		<ol class="breadcrumb ps-0 justify-content-center">
+			<li class="breadcrumb-item">
+				<a href="{{ path('home') }}">{{'Home'|trans}}</a>
+			</li>
+            {% for li in breadcrumb%}
+                {% for routename, pagetitle in li %}
+                    {% if routename != "current" %}
+                        {% if '/' in routename %}
+                            {% set href = routename %}
+                        {% else %}
+                            {% set href = path(routename) %}
+                        {% endif %}
                         <li class="breadcrumb-item">
-                            <a href="{{ path('home') }}">{{'Home'|trans}}</a>
+                            <a href="{{ href }}" class="">{{pagetitle}}</a>
                         </li>
-                        {% for li in breadcrumb%}
-                            {% for routename, pagetitle in li %}
-                                {% if routename != "current" %}
-                                    {% if '/' in routename %}
-                                        {% set href = routename %}
-                                    {% else %}
-                                        {% set href = path(routename) %}
-                                    {% endif %}
-                                    <li class="breadcrumb-item"><a href="{{ href }}" class="">{{pagetitle}}</a></li>
-                                {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                        <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb|last['current'] }}</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb|last['current'] }}</li>
+		</ol>
+		<h1 class="hero-heading">{{ breadcrumb|last['current'] }}</h1>
+		<div class="row">
+			<div class="col-xl-8 mx-auto">
+				<p class="text-muted">
+				</p>
+			</div>
+		</div>
+	</div>
+</section>

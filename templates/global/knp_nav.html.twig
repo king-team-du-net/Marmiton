@@ -7,9 +7,9 @@
                 <li class="page-item">
                     <a class="page-link" rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
                         {% if app.request.locale == 'ar' %}
-                            {{ 'Previous'|trans }}
+                            <i class="fa fa-angle-left"></i>
                         {% else %}
-                            {{ 'Previous'|trans }}
+                            <i class="fa fa-angle-left"></i>
                         {% endif %}
                     </a>
                 </li>
@@ -17,9 +17,9 @@
                 <li class="page-item disabled">
                     <span class="page-link">
                         {% if app.request.locale == 'ar' %}
-                            {{ 'Previous'|trans }}
+                            <i class="fa fa-angle-left"></i>
                         {% else %}
-                            {{ 'Previous'|trans }}
+                            <i class="fa fa-angle-left"></i>
                         {% endif %}
                     </span>
                 </li>
@@ -29,9 +29,9 @@
                 <li class="page-item">
                     <a class="page-link" rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
                         {% if app.request.locale == 'ar' %}
-                            {{ 'Next'|trans }}
+                            <i class="fa fa-angle-right"></i>
                         {% else %}
-                            {{ 'Next'|trans }}
+                            <i class="fa fa-angle-right"></i>
                         {% endif %}
                     </a>
                 </li>
@@ -39,9 +39,9 @@
                 <li  class="page-item disabled">
                     <span class="page-link">
                         {% if app.request.locale == 'ar' %}
-                            {{ 'Next'|trans }}
+                            <i class="fa fa-angle-right"></i>
                         {% else %}
-                            {{ 'Next'|trans }}
+                            <i class="fa fa-angle-right"></i>
                         {% endif %}
                     </span>
                 </li>

@@ -1,0 +1,10 @@
+{% extends 'email.html.twig' %}
+
+{% block body %}
+    <p>{{ 'Deleting your site account.'|trans }}</p>
+    <p>
+        {{ 'You have just requested the deletion of your site account.'|trans }}
+        {{ 'This deletion will be effective in'|trans }} **{{ days }} {{ 'days'|trans }}**. {{ 'If you are the originator of this request you can ignore this email.'|trans }}
+    </p>
+    <p><a href="{{ absolute_url(path('dashboard_account_index')) }}">{{ 'Undelete'|trans }}</a></p>
+{% endblock %}

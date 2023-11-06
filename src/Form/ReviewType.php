@@ -32,7 +32,7 @@ class ReviewType extends AbstractType
             ])
             ->add('details', TextareaType::class, [
                 'purify_html' => true,
-                'label' => 'Let the other attendee know more details about your experience',
+                'label' => 'Let the other user know more details about your experience',
                 'attr' => ['rows' => 10],
             ])
         ;

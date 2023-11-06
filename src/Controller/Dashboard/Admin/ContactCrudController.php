@@ -3,6 +3,7 @@
 namespace App\Controller\Dashboard\Admin;
 
 use App\Controller\Dashboard\Admin\Traits\ReadOnlyTrait;
+use App\Entity\HasRoles;
 use App\Entity\Pages\Contact;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -33,7 +34,7 @@ class ContactCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            // ->setEntityPermission(HasRoles::ADMINISTRATOR)
+            ->setEntityPermission(HasRoles::SUPERADMIN)
             ->setSearchFields(null)
             ->setEntityLabelInSingular(t('Contact'))
             ->setEntityLabelInPlural(t('Contacts'))

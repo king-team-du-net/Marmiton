@@ -27,11 +27,11 @@ class BlogTagController extends AbstractController
             $searchData->page = $request->query->getInt('page', 1);
             $pagination = $articleRepository->findBySearch($searchData);
 
-            return $this->render('blog/article-list.'.$_format.'.twig', compact('form', 'pagination', 'tag'));
+            return $this->render('blog/list.'.$_format.'.twig', compact('form', 'pagination', 'tag'));
         }
 
         $pagination = $articleRepository->findPublished($request->query->getInt('page', 1), null, $tag);
 
-        return $this->render('blog/article-tag.html.twig', compact('form', 'pagination', 'tag'));
+        return $this->render('blog/tag.html.twig', compact('form', 'pagination', 'tag'));
     }
 }

@@ -1,9 +1,7 @@
 {% if categories %}
-	<div class="badges flex justify-start my-1 flex-wrap">
-		{% for category in categories %}
-			<span class="text-xs inline-block mr-2 mb-2 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-sky-600 text-white rounded-full">
-				<a href="{{ path('blog_category', {slug: category.slug}) }}">{{ category.name }}</a>
-			</span>
-		{% endfor %}
-	</div>
+	{% for category in categories %}
+		<a class="text-uppercase text-muted text-sm letter-spacing-2" href="{{ path('blog_category', {slug: category.slug}) }}">
+			{{ category.name }}
+		</a>
+	{% endfor %}
 {% endif %}

@@ -52,9 +52,6 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
-    // #[ORM\Column(type: Types::STRING, length: 255)]
-    // private string $state = Article::STATES[0];
-
     /**
      * @var Collection<int, Badge>
      */
@@ -189,20 +186,6 @@ class Article
 
         return $this;
     }
-
-    /*
-    public function getState(): string
-    {
-        return $this->state;
-    }
-
-    public function setState(string $state): static
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-    */
 
     /**
      * @return Collection<int, Badge>

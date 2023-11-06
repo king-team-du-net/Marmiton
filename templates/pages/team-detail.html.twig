@@ -2,7 +2,7 @@
 
 {% set runtimeConfig = {"thumbnail": {"size": [80, 80] } } %}
 
-{% set pagetitle = 'Meet the team'|trans %}
+{% set pagetitle = 'Meet our team'|trans %}
 {% block title pagetitle %}
 
 {% block breadcrumb %}
@@ -12,6 +12,36 @@
 
 {% block body %}
 
-    {# Code #}
+	<section class="pt-6 pb-4">
+		<div class="container">
+			<h6 class="subtitle text-center text-primary mb-5">{{ 'Our founders'|trans }}</h6>
+			<div class="row mb-7">
+				{% if teams | length > 0 %}
+					{% for team in teams %}
+						<div class="mb-3 mb-lg-0 col-sm-4">
+							<div class="card border-0 hover-animate bg-transparent">
+								<a class="position-relative" href="#">
+									<img 
+										class="card-img-top team-img" 
+										src="{{ team.avatarName ? asset(team.getAvatarPath | imagine_filter('thumbnail', runtimeConfig)) : team.getAvatarPlaceholder }}" 
+										alt="{{ team.getFullName | lower | capitalize }}"
+									>
+									<div class="team-circle"></div>
+								</a>
+								<div class="card-body team-body text-center">
+									<h6 class="card-title">{{ team.getFullName | lower | capitalize }}</h6>
+									{% if team.designation %}
+										<p class="card-subtitle text-muted text-xs text-uppercase">{{ team.designation | lower | raw | capitalize }}</p>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				{% else %}
+					{% include "global/message.html.twig" with { type: "info", message: ('No teams found'|trans), icon: "fas fa-exclamation-circle" } %}
+				{% endif %}
+			</div>
+		</div>
+	</section>
 
 {% endblock %}

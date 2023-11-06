@@ -1,24 +1,119 @@
 {% extends 'base.html.twig' %}
 
-{% block header '' %}
-{% block footer '' %}
+{% block title %}
+	{{ setting.getSettings("website_description_" ~ (app.request.get('_locale') ? app.request.get('_locale') : app.request.defaultLocale)) }}
+{% endblock %}
 
 {% block body %}
 
-	<div class="bg-dark text-secondary px-4 py-5 text-center">
-		<div class="py-5">
-			<h1 class="display-5 fw-bold text-white">Recipe</h1>
-			<div class="col-lg-6 mx-auto">
-				<p class="fs-5 mb-4"></p>
-				<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-					{% if app.user %}
-						<a href="{{ path('dashboard_index') }}" type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">{{ 'Dashboard'|trans }}</a>
-					{% else %}
-						<a href="{{ path('login') }}" type="button" class="btn btn-outline-light btn-lg px-4">{{ 'Sign in'|trans }}</a>
-					{% endif %}
+	{% if herosettings.content == "custom" %}
+		<section class="d-flex align-items-center dark-overlay bg-cover" {% if herosettings.customBackgroundName %} style="background-image: url({{ herosettings.getCustomBackgroundPath }});" {% endif %}>
+			<div class="container py-6 py-lg-7 text-white overlay-content text-center">
+				<div class="row">
+					<div class="col-xl-10 mx-auto">
+						{% if herosettings.title %}
+							<h1 class="display-3 fw-bold text-shadow">{{ herosettings.title }}</h1>
+						{% endif %}
+						{% if herosettings.paragraph %}
+							<p class="text-lg text-shadow">{{ herosettings.paragraph | html_markdown_excerpt(52) }}</p>
+						{% endif %}
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</section>
+		{% if herosettings.showSearchBox %}
+			<div class="container">
+				<div class="search-bar rounded p-3 p-lg-4 position-relative mt-n5 z-index-20">
+
+				</div>
+			</div>
+		{% endif %}
+	{% endif %}
+
+	{% if '1' == settings["homepage_show_search_box"] %}
+		{# Code #}
+	{% endif %}
+
+	{% if setting.getSettings('homepage_recipes_number') > 0 %}
+		{% if lastRecipes | length %}
+			<section class="py-6 bg-gray-100">
+				<div class="container">
+					<div class="row mb-5">
+						<div class="col-md-8">
+							<p class="subtitle text-secondary">{{ 'Lastest recipes'|trans }}.</p>
+							<h2>{{ 'Last minute deals'|trans }}</h2>
+						</div>
+						<div class="col-md-4 d-lg-flex align-items-center justify-content-end">
+							<a class="text-muted text-sm" href="#">
+								{{ 'See all recipes'|trans }}<i class="fas fa-angle-double-right ms-2"></i>
+							</a>
+						</div>
+					</div>
+					{# Code #}
+				</div>
+			</section>
+		{% endif %}
+	{% endif %}
+
+	{% if '1' == settings["homepage_show_call_to_action"] %}
+		<section class="py-6 bg-gray-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
+						<p class="subtitle text-secondary">{{ 'Start using Recipe today'|trans }}</p>
+						<p class="text-lg">{{ "Recipe is the best way to find &amp; discover great local businesses"|trans }}</p>
+						<p class="text-muted mb-0">{{ 'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed in'|trans }}</p>
+					</div>
+					<div class="col-lg-6 d-flex align-items-center justify-content-center">
+						<div class="text-center">
+							<p class="mb-2">
+								<a class="btn btn-lg btn-primary" href="#">{{ 'Create Your Account'|trans }}</a>
+							</p>
+							<p class="text-muted text-small">{{ "It's free!"|trans }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	{% if setting.getSettings('homepage_testimonials_number') > 0 %}
+		{% if lastTestimonials | length %}
+			<section class="py-7">
+				<div class="container">
+					<div class="text-center">
+						<p class="subtitle text-primary">{{ 'Testimonials'|trans }}</p>
+						<h2 class="mb-5">{{ 'Our dear customers said about us'|trans }}</h2>
+					</div>
+					{# Code #}
+				</div>
+			</section>
+		{% endif %}
+	{% endif %}
+
+	{% if setting.getSettings('homepage_articles_number') > 0 %}
+		{% if lastArticles | length %}
+			<section class="py-6 bg-gray-100">
+				<div class="container">
+					<div class="row mb-5">
+						<div class="col-md-8">
+							<p class="subtitle text-secondary">{{ 'Lastest articles'|trans }}</p>
+							<h2>{{ 'Check out most lastest articles of all time'|trans }}</h2>
+						</div>
+						<div class="col-md-4 d-md-flex align-items-center justify-content-end">
+							<a class="text-muted text-sm" href="{{ path('blog') }}">
+								{{ 'See all articles'|trans }}<i class="fas fa-angle-double-right ms-2"></i>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						{% for article in lastArticles %}
+							{% include "global/article-card.html.twig" with {article: article, thumbnailsize: [768, 432], showdate: 1} only %}
+						{% endfor %}
+					</div>
+				</div>
+			</section>
+		{% endif %}
+	{% endif %}
 
 {% endblock %}

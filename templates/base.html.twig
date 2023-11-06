@@ -1,18 +1,49 @@
+{% set settings = setting.findAll %}
+
+{% set ea_edit_current_entity = null %}
+
+{% if entity is defined %}
+    {% set label_edit_current_entity = entity_label(entity) %}
+    {% set ea_edit_current_entity = ea_administrator_edit_url(entity) %}
+{% endif %}
+
+{% set routename = app.request.get('_route') %}
+{% set routeparams = app.request.get('_route_params') %}
+
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+        <title>{% block title '' %} | {{ settings["website_name"] }}</title>
+        {% include "global/head.html.twig" %}
+    </head>
+	<body style="padding-top: 72px;" id="main" class="{{ bodyClass is defined ? bodyClass : '' }}"
+		data-timezone="{{ date_timezone }}" 
+		data-currency-ccy="{{ settings['currency_ccy'] }}" data-currency-symbol="{{ settings['currency_symbol'] }}" data-currency-position="{{ settings['currency_position'] }}" 
+		{% if settings['show_cookie_policy_bar'] == "1" %} data-cookie-bar-page-link="{{ path('page', { slug : settings['cookie_policy_page_slug'] }) }}"{% endif %}
+		{% if setting.getEnv('DEMO_MODE') == "1" %}data-demo-mode="1"{% endif %}
+	>
+        {% include "global/svg.html.twig" %}
+
+        {% block share %}{% endblock %}
+
+        {% block header %}
+            {% include "global/header.html.twig" %}
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
+        {% block hero %}{% endblock %}
+
+        {% block breadcrumb %}{% endblock %}
+
+        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+            {% include "global/message.html.twig" with { type: 'info', icon: 'fas fa-exclamation-circle', message: ('You are connected as "%nickname%'|trans({'%nickname%' : app.user.nickname})~ '", <a href="'~ path('dashboard_index', {'_switch_user': '_exit'}) ~'">' ~ 'Click here'|trans ~ '</a> ' ~ 'to return to your dashboard'|trans) } %}
+        {% endif %}
+
         {% block body %}{% endblock %}
+
+        {% block footer %}
+            {% include "global/footer.html.twig" %}
+        {% endblock %}
+
+        {% block javascripts_footer '' %}
     </body>
 </html>

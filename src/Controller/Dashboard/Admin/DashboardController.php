@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Dashboard\Admin;
 
+use App\Entity\Blog\Article;
+use App\Entity\Blog\Badge;
+use App\Entity\Blog\Category;
+use App\Entity\Blog\Comment;
 use App\Entity\HasRoles;
 use App\Entity\Pages\Contact;
 use App\Entity\Pages\Faq;
@@ -69,10 +73,8 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToExitImpersonation(t('Stop impersonation'), 'fas fa-door-open'),
             ]);
 
-            /*
             yield MenuItem::section(t('Comment Settings'));
             yield MenuItem::linkToCrud(t('Comments'), 'fas fa-comment', Comment::class);
-            */
 
             yield MenuItem::section(t('FAQ Settings'));
             yield MenuItem::subMenu(t('FAQ'), 'fa fa-question-circle')->setSubItems([
@@ -121,16 +123,15 @@ class DashboardController extends AbstractDashboardController
             ]);
         }
 
-        /*
         if ($this->isGranted(HasRoles::MODERATOR)) {
             yield MenuItem::section(t('Blog Settings'));
-            yield MenuItem::subMenu(t('Post Settings'), 'fas fa-newspaper')->setSubItems([
-                MenuItem::linkToCrud(t('Post'), 'fas fa-newspaper', Article::class),
+            yield MenuItem::subMenu(t('Article Settings'), 'fas fa-newspaper')->setSubItems([
+                MenuItem::linkToCrud(t('Article'), 'fas fa-newspaper', Article::class),
                 MenuItem::linkToCrud(t('Add'), 'fas fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
                 MenuItem::linkToCrud(t('Tag'), 'fab fa-delicious', Badge::class),
                 MenuItem::linkToCrud(t('Category'), 'fab fa-list', Category::class),
             ]);
-        }*/
+        }
 
         yield MenuItem::section();
         yield MenuItem::linkToLogout(t('Sign Out'), 'fa fa-sign-out');

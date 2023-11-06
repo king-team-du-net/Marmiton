@@ -1,0 +1,64 @@
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="">
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta property="og:site_name" content="{{ settings['website_name'] }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@{{ settings['website_slug'] }}" />
+
+    <meta name="apple-mobile-web-app-title" content="{{ settings['website_name'] }}" />
+    <meta name="twitter:site" content="@{{ settings['website_name'] }}" />
+    <meta name="application-name" content="{{ settings['website_name'] }}" />
+    <meta name="msapplication-tooltip" content="{{ settings['website_description_' ~ app.request.locale] }}" />
+
+    {% block meta_dynamic_seo %}
+        <meta name="description" content="{{ settings['website_description_' ~ app.request.locale] }}" />
+        <meta name="keywords" content="{{ settings['website_keywords_' ~ app.request.locale] }}" />
+        <meta property="og:title" content="{{ settings['website_name'] }}" />
+        <meta property="og:image" content="{{ absolute_url(asset(setting.getAppLayoutSettings.getOgImagePath)) }}" />
+        <meta property="og:description" content="{{ settings['website_description_' ~ app.request.locale] }}" />
+        <meta name="twitter:title" content="{{ settings['website_name'] }}" />
+        <meta name="twitter:image" content="{{ absolute_url(asset(setting.getAppLayoutSettings.getOgImagePath)) }}" />
+        <meta name="twitter:image:alt" content="{{ settings['website_description_' ~ app.request.locale] }}" />
+        <meta name="twitter:description" content="{{ settings['website_description_' ~ app.request.locale] }}" />
+    {% endblock %}
+
+    <link rel="shortcut icon" href="{{ absolute_url(asset(setting.getAppLayoutSettings.getFaviconPath)) }}" />
+    <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}" />
+
+    {# Google analytics code added in the app parameters #}
+    {% if settings['google_analytics_code'] != "" and settings['google_analytics_code'] is not null %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ settings['google_analytics_code'] }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', '{{ settings['google_analytics_code'] }}');
+        </script>
+    {% endif %}
+
+    {{ encore_entry_link_tags('app') }}
+    
+    {# Application theme green, pink, red, sea, purple, blue #}
+    {{ encore_entry_link_tags('app.'~settings['app_theme']) }}
+
+    {% block stylesheets %}{% endblock %}
+
+    {# Custom css code added in the app parameters #}
+    {% if settings['custom_css'] != "" and settings['custom_css'] is not null %}
+        <style>
+            {{ settings['custom_css'] | raw }}
+        </style>
+    {% endif %}
+
+    {{ encore_entry_script_tags('app') }}
+
+    {% block javascripts %}{% endblock %}

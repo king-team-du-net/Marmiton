@@ -23,8 +23,11 @@ Encore
     .addEntry('app', './assets/js/app.js')
 
     // Themes
-    // .addEntry('app.orange', './assets/js/themes/app.orange.js')
-    // .addEntry('app.green', './assets/js/themes/app.green.js')
+    .addEntry('app.green', './assets/js/themes/app.green.js')
+    .addEntry('app.pink', './assets/js/themes/app.pink.js')
+    .addEntry('app.red', './assets/js/themes/app.red.js')
+    .addEntry('app.cyan', './assets/js/themes/app.cyan.js')
+    .addEntry('app.purple', './assets/js/themes/app.purple.js')
 
     // Ajax Comment
     

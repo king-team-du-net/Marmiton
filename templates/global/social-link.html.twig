@@ -1,0 +1,35 @@
+{% if settings["facebook_url"] != "" or settings["instagram_url"] != "" or settings["youtube_url"] != "" or settings["twitter_url"] != "" %}
+	<ul class="list-inline">
+		{% if settings["twitter_url"] != "" %}
+			<li class="list-inline-item">
+				<a class="text-muted text-primary-hover" href="{{ settings["twitter_url"] }}" target="_blank" title="twitter">
+					<i class="fab fa-twitter"></i>
+				</a>
+			</li>
+		{% endif %}
+		{% if settings["facebook_url"] != "" %}
+			<li class="list-inline-item">
+				<a class="text-muted text-primary-hover" href="{{ settings["facebook_url"] }}" target="_blank" title="facebook">
+					<i class="fab fa-facebook"></i>
+				</a>
+			</li>
+		{% endif %}
+		{% if settings["instagram_url"] != "" %}
+			<li class="list-inline-item">
+				<a class="text-muted text-primary-hover" href="{{ settings["instagram_url"] }}" target="_blank" title="instagram">
+					<i class="fab fa-instagram"></i>
+				</a>
+			</li>
+		{% endif %}
+		<li class="list-inline-item">
+			<a class="text-muted text-primary-hover" href="#" target="_blank" title="pinterest">
+				<i class="fab fa-pinterest"></i>
+			</a>
+		</li>
+		<li class="list-inline-item">
+			<a class="text-muted text-primary-hover" href="#" target="_blank" title="vimeo">
+				<i class="fab fa-vimeo"></i>
+			</a>
+		</li>
+	</ul>
+{% endif %}

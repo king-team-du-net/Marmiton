@@ -19,15 +19,19 @@ class Setting
     public const MAINTENANCE_MODE_CUSTOM_MESSAGE = 'maintenance_mode_custom_message';
 
     // Limit
-    public const WEBSITE_POSTS_SEARCH_LIMIT = 'website_posts_search_limit'; // 10
-    public const WEBSITE_BLOG_POSTS_LIMIT = 'website_blog_posts_limit'; // 9
+    public const WEBSITE_ARTICLES_SEARCH_LIMIT = 'website_articles_search_limit'; // 10
+    public const WEBSITE_ARTICLES_LIMIT = 'website_articles_limit'; // 9
     public const WEBSITE_COMMENTS_LIMIT = 'website_comments_limit'; // 4
     public const WEBSITE_RECIPES_LIMIT = 'website_recipes_limit'; // 5
 
     // Limit Homepage
-    public const HOMEPAGE_BLOG_POSTS_NUMBER = 'homepage_blogposts_number'; // 5
+    public const HOMEPAGE_ARTICLES_NUMBER = 'homepage_articles_number'; // 5
+    public const HOMEPAGE_TESTIMONIALS_NUMBER = 'homepage_testimonials_number'; // 5
     public const HOMEPAGE_CATEGORIES_NUMBER = 'homepage_categories_number'; // 12
     public const HOMEPAGE_RECIPES_NUMBER = 'homepage_recipes_number'; // 12
+
+    // Newsletter
+    public const MAILCHIMP_LIST_ID = 'mailchimp_list_id';
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     private $label;

@@ -1,0 +1,9 @@
+{% extends 'email.html.twig' %}
+
+{% block body %}
+    {{ 'Nickname'|trans }} : {{ nickname }}
+    <br/>
+    {{ 'Password'|trans }} : {{ password }}
+    <br/>
+    <a href="{{ absolute_url(path("security_login")) }}">{{ 'Click here'|trans }}</a>
+{% endblock %}

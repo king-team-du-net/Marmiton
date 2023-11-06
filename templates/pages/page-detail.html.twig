@@ -5,28 +5,22 @@
 {% block title pagetitle %}
 
 {% block breadcrumb %}
-    {% set breadcrumb = [{ "current":(pagetitle) }] %}
-    {% include "global/breadcrumb.html.twig" with breadcrumb %}
+	{% set breadcrumb = [{ "current":(pagetitle) }] %}
+	{% include "global/breadcrumb.html.twig" with breadcrumb %}
 {% endblock %}
 
 {% block body %}
 
-    <section class="my-lg-14 my-8">
-        <div class="container">
+	<section class="py-6">
+		<div class="container">
 			<div class="row">
-				<div class="offset-lg-2 col-lg-8 col-12">
-                    <div class="mb-8">
-                        <h1 class="h3">{{ pagetitle }}</h1>
-                        <p class="lead mb-0"></p>
-                    </div>
-                    <div>
-						<div class="mb-4 lead">
-                            {{ page.content | html_markdown }}
-						</div>
-                    </div>
+				<div class="col-xl-8 col-lg-10 mx-auto">
+					<div class="text-content">
+                        {{ page.content | html_markdown }}
+					</div>
 				</div>
 			</div>
-        </div>
-    </section>
+		</div>
+	</section>
 
 {% endblock %}

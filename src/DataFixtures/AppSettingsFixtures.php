@@ -52,23 +52,24 @@ class AppSettingsFixtures extends Fixture
 
         $settings[] = new Setting('Copyright', 'website_copyright', '© 2020 '.$this->params->get('website_name').', Inc. All rights reserved.', TextType::class);
         $settings[] = new Setting('Everyone can sign up', 'users_can_register', true, CheckboxType::class);
-        $settings[] = new Setting('About', 'website_about', 'Modernize Your Home, Simplify Your Day with Our Appliances and Gadgets.', TextareaType::class);
-        $settings[] = new Setting('Primary color', 'primary_color', '#f67611', TextType::class);
+        $settings[] = new Setting('About', 'website_about', 'Lorem ipsum dolor sit amet, consectetur adipisicing.', TextareaType::class);
+        $settings[] = new Setting('Primary color', 'primary_color', '#9a6ee2', TextType::class);
         $settings[] = new Setting('Back to top', 'show_back_to_top_button', true, CheckboxType::class);
         $settings[] = new Setting('Custom CSS', 'custom_css', '', TextareaType::class);
         $settings[] = new Setting('Google Analytics', 'google_analytics_code', '', TextareaType::class);
         $settings[] = new Setting('App Env', 'app_environment', 'dev', TextType::class);
-        $settings[] = new Setting('App Theme', 'app_theme', 'orange', TextType::class);
+        $settings[] = new Setting('App Theme', 'app_theme', 'violet', TextType::class);
         $settings[] = new Setting('App Layout', 'app_layout', 'container', TextType::class);
         $settings[] = new Setting('Maintenance mode', 'maintenance_mode', $this->params->get('maintenance_mode'), CheckboxType::class);
         $settings[] = new Setting('Custom maintenance mode message', 'maintenance_mode_custom_message', '', TextareaType::class);
 
         // Number
-        $settings[] = new Setting('Number of articles search per page', 'website_posts_search_limit', 10, NumberType::class);
+        $settings[] = new Setting('Number of articles search per page', 'website_articles_search_limit', 10, NumberType::class);
         $settings[] = new Setting('Number of recipes per page', 'website_recipes_limit', 5, NumberType::class);
-        $settings[] = new Setting('Number of articles per page', 'website_blog_posts_limit', 9, NumberType::class);
+        $settings[] = new Setting('Number of articles per page', 'website_articles_limit', 9, NumberType::class);
         $settings[] = new Setting('Number of comments per page', 'website_comments_limit', 4, NumberType::class);
-        $settings[] = new Setting('Number of blog posts on the homepage', 'homepage_blogposts_number', 5, NumberType::class);
+        $settings[] = new Setting('Number of articles on the homepage', 'homepage_articles_number', 3, NumberType::class);
+        $settings[] = new Setting('Number of testimonials on the homepage', 'homepage_testimonials_number', 5, NumberType::class);
         $settings[] = new Setting('Number of categories on the homepage', 'homepage_categories_number', 12, NumberType::class);
         $settings[] = new Setting('Number of recipes on the homepage', 'homepage_recipes_number', 12, NumberType::class);
 
@@ -152,10 +153,10 @@ class AppSettingsFixtures extends Fixture
         // Hero Setting
         $homepages = [
             1 => [
-                'title' => "Check what's in your local store",
-                'paragraph' => 'See delivery and collection options',
+                'title' => "Discover Recipe",
+                'paragraph' => 'Uncover the best recipes',
                 'content' => 'custom',
-                'custom_background_name' => '5d99d60e41207545475471.jpg',
+                'custom_background_name' => 'homepage.jpg',
                 'show_search_box' => 1,
             ],
         ];

@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% set pagetitle = 'Frequently Asked Question'|trans %}
+{% set pagetitle = 'Frequently asked questions'|trans %}
 {% block title pagetitle %}
 
 {% block breadcrumb %}
@@ -10,34 +10,24 @@
 
 {% block body %}
 
-	<section class="mb-lg-14 mb-8 mt-8">
+	<section class="py-6">
 		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div>
-						<div class="mb-8">
-							<h1 class="fw-bold mb-0">{{ pagetitle }}</h1>
-							<p class="mb-0">{{ 'Already have an account? Click here to'|trans }}
-								<a href="#!">{{ 'Sign in'|trans }}</a>.
-                            </p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="row">
-					<div class="col-lg-7 col-md-12">
+			<div class="py-4">
+				<h2 class="mb-5 text-primary">{{ 'F.A.Q.s'|trans }}</h2>
+				<div class="row mb-7">
+					<div class="col-lg-8 col-md-12 position-relative">
 						{% if faqs | length > 0 %}
-							<div class="accordion accordion-flush" id="accordionFAQ">
+							<div class="accordion" id="accordionFAQ" role="tablist">
 								{% for faq in faqs %}
 									<div class="accordion-item py-4">
 										<div class="d-flex justify-content-between align-items-center">
-											<a href="#" class="fs-5 text-inherit h4 collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-{{ faq.id }}" aria-expanded="false" aria-controls="collapse-{{ faq.id }}">
-												<i class="feather-icon icon-plus me-2 text-muted"></i>{{ faq.question }}
+											<a href="#" class="fs-5 text-dark h4 collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-{{ faq.id }}" aria-expanded="false" aria-controls="collapse-{{ faq.id }}">
+												<i class="feather-icon icon-plus me-2 text-muted"></i>
+												{{ faq.question }}
 											</a>
 										</div>
 										<div id="collapse-{{ faq.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ" style="">
-											<div class="accordion-body fs-sm">{{ faq.answer | raw }}</div>
+											<div class="accordion-body fs-sm">{{ faq.answer | html_markdown }}</div>
 										</div>
 									</div>
 								{% endfor %}

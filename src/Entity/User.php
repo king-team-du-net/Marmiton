@@ -14,6 +14,7 @@ use App\Entity\Recipe\UserRecipe;
 use App\Entity\Setting\HomepageHeroSetting;
 use App\Entity\Traits\HasAvatarVichTrait;
 use App\Entity\Traits\HasIdTrait;
+use App\Entity\Traits\HasSocialMediaTrait;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -53,6 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 {
     use HasIdTrait;
     use HasAvatarVichTrait;
+    use HasSocialMediaTrait;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => 0])]
     private bool $suspended = false;

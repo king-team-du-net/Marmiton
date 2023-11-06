@@ -18,7 +18,7 @@ class BlogSharedController extends AbstractController
 {
     #[Route(
         path: '/blog/{slug}/shared',
-        name: 'blog_article_shared',
+        name: 'blog_show_shared',
         methods: [Request::METHOD_GET, Request::METHOD_POST]
     )]
     public function shared(
@@ -52,7 +52,7 @@ class BlogSharedController extends AbstractController
             $mail->send(
                 $data['receiver_email'],
                 $subject,
-                'article-detail-shared',
+                'show-shared',
                 [
                     'article' => $article,
                     'sender_name' => $data['sender_name'],
@@ -72,7 +72,7 @@ class BlogSharedController extends AbstractController
             }
         }
 
-        return $this->render('blog/article-detail-shared.html.twig', [
+        return $this->render('blog/show-shared.html.twig', [
             'errors' => $appErrors,
             'article' => $article,
             'form' => $form,

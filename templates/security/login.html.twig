@@ -1,30 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block header '' %}
+{% block footer '' %}
+
+{% set pagetitle = 'Sign in'|trans({}, 'messages') %}
+{% block title pagetitle %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('security_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+	<div class="container-fluid px-3">
+		<div class="row min-vh-100">
+			<div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
+				<div class="w-100 py-5 px-md-5 px-xxl-6 position-relative">
+					<div class="mb-5">
+                        <img class="img-fluid mb-3" src="{{ absolute_url(asset(setting.getAppLayoutSettings.getLogoPath)) }}" alt="{{ setting.getSettings('website_name') }}" style="max-width: 4rem;">
+						<h2>{{ 'Welcome back'|trans({}, 'messages') }}</h2>
+					</div>
+					<form method="post" class="form-validate">
+                        {% if error %}
+                            {% include "global/message.html.twig" with { message: (error.messageKey|trans(error.messageData, 'security')), type: "danger", icon: "fas fa-exclamation-circle" } %}
+                        {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+						<div class="mb-4">
+							<label class="form-label" for="loginUsername">
+								{{ 'Email Address'|trans({}, 'messages') }}
+                            </label>
+							<input type="email" value="{{ last_username }}" name="email" id="loginUsername" class="form-control" placeholder="name@address.com" autocomplete="email" required autofocus>
+						</div>
+						<div class="mb-4">
+							<div class="row">
+								<div class="col">
+									<label class="form-label" for="loginPassword">
+										{{ 'Password'|trans({}, 'messages') }}
+                                    </label>
+								</div>
+								<div class="col-auto">
+									<a class="form-text small text-primary" href="#">{{ 'Forgot password?'|trans({}, 'messages') }}</a>
+								</div>
+							</div>
+							<input type="password" name="password" id="loginPassword" class="form-control" placeholder="{{ 'Password'|trans({}, 'messages') }}" autocomplete="current-password" required>
+						</div>
+						<div class="mb-4">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="_remember_me" id="loginRemember" checked>
+								<label class="form-check-label text-muted" for="loginRemember">
+									<span class="text-sm">{{ 'Remember me'|trans({}, 'messages')}}</span>
+								</label>
+							</div>
+						</div>
+						<div class="d-grid">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+							<button type="submit" class="btn btn-lg btn-primary">{{ 'Sign in'|trans }}</button>
+						</div>
+                        {% if '1' == settings['social_login_facebook_enabled'] or '1' == settings['social_login_google_enabled'] %}
+                            {% include "global/social-account.html.twig" %}
+                        {% endif %}
+						<hr class="my-4">
+						<p class="text-center">
+							<small class="text-muted text-center">{{ "Don't have an account yet?"|trans({}, 'messages') }}
+								<a href="#!">
+                                    {{ 'Sign Up'|trans({}, 'messages') }}
+								</a>
+							</small>
+						</p>
+					</form>
+					<a class="close-absolute me-md-5 me-xl-6 pt-5" href="{{ path('home') }}">
+						<svg class="svg-icon w-3rem h-3rem">
+							<use xlink:href="#close-1"></use>
+						</svg>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
+				<div class="bg-cover h-100 me-n3" style="background-image: url({{ asset('build/images/placeholders/placeholder.jpg') }});"></div>
+			</div>
+		</div>
+	</div>
 
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"
-    >
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
 {% endblock %}

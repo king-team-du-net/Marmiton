@@ -3,14 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Setting\Setting;
-use App\Service\SettingService;
-use App\Repository\TestimonialRepository;
 use App\Repository\Blog\ArticleRepository;
 use App\Repository\Recipe\RecipeRepository;
+use App\Repository\Setting\HomepageHeroSettingRepository;
+use App\Repository\TestimonialRepository;
+use App\Service\SettingService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\Setting\HomepageHeroSettingRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {

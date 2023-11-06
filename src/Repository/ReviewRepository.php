@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\User;
-use App\Entity\Review;
 use App\Entity\Recipe\Recipe;
+use App\Entity\Review;
+use App\Entity\User;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Review>
@@ -47,20 +47,18 @@ final class ReviewRepository extends ServiceEntityRepository
     /**
      * Returns the reviews after applying the specified search criterias.
      *
-     * @param string    $keyword
-     * @param string    $slug
-     * @param User|null $user
+     * @param string      $keyword
+     * @param string      $slug
+     * @param User|null   $user
      * @param Recipe|null $recipe
-     * @param bool|null $visible
-     * @param int|null  $rating
-     * @param int       $minrating
-     * @param int       $maxrating
-     * @param int       $limit
-     * @param int       $count
-     * @param string    $sort
-     * @param string    $order
-     * 
-     * @return QueryBuilder
+     * @param bool|null   $visible
+     * @param int|null    $rating
+     * @param int         $minrating
+     * @param int         $maxrating
+     * @param int         $limit
+     * @param int         $count
+     * @param string      $sort
+     * @param string      $order
      */
     public function getReviews($keyword, $slug, $user, $recipe, $visible, $rating, $minrating, $maxrating, $limit, $count, $sort, $order): QueryBuilder
     {
@@ -73,7 +71,7 @@ final class ReviewRepository extends ServiceEntityRepository
         }
 
         if ('all' !== $keyword) {
-            $qb->andWhere('r.headline LIKE :keyword or :keyword LIKE r.headline or r.details LIKE :keyword or :keyword LIKE r.details')->setParameter('keyword', '%' . $keyword . '%');
+            $qb->andWhere('r.headline LIKE :keyword or :keyword LIKE r.headline or r.details LIKE :keyword or :keyword LIKE r.details')->setParameter('keyword', '%'.$keyword.'%');
         }
 
         if ('all' !== $slug) {
@@ -110,7 +108,7 @@ final class ReviewRepository extends ServiceEntityRepository
         }
 
         if ($sort) {
-            $qb->orderBy('r.' . $sort, $order);
+            $qb->orderBy('r.'.$sort, $order);
         }
 
         return $qb;

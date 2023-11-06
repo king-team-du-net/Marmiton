@@ -153,7 +153,7 @@ class AppSettingsFixtures extends Fixture
         // Hero Setting
         $homepages = [
             1 => [
-                'title' => "Discover Recipe",
+                'title' => 'Discover Recipe',
                 'paragraph' => 'Uncover the best recipes',
                 'content' => 'custom',
                 'custom_background_name' => 'homepage.jpg',

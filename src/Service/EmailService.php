@@ -8,6 +8,6 @@ class EmailService
 {
     public function sendNewSubscriber(Subscribe $subscribe): void
     {
-        # code...
+        // code...
     }
 }

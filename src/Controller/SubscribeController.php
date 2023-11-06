@@ -8,10 +8,10 @@ use App\Entity\Subscribe;
 use App\Form\SubscribeType;
 use App\Service\EmailService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SubscribeController extends AbstractController
 {
@@ -21,7 +21,7 @@ class SubscribeController extends AbstractController
         /** @var Subscribe $subscribe */
         $subscribe = new Subscribe();
         $form = $this->createForm(SubscribeType::class, $subscribe);
-        
+
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
@@ -31,6 +31,7 @@ class SubscribeController extends AbstractController
                 $em->flush();
                 $email->sendNewSubscriber($subscribe); // or something you do
                 $referer = $request->headers->get('referer');
+
                 return $this->redirect($referer); // return to previous page
             }
         }

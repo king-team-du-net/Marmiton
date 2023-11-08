@@ -16,37 +16,37 @@ trait HasSocialMediaTrait
 
     #[Assert\Length(max: 255)]
     #[Assert\Url]
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true, options: ['default' => '#'])]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $externallink = null;
 
     #[Assert\Length(max: 255)]
     #[Assert\Url]
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true, options: ['default' => '#'])]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $youtubeurl = null;
 
     #[Assert\Length(max: 255)]
     #[Assert\Url]
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true, options: ['default' => '#'])]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $twitterurl = null;
 
     #[Assert\Length(max: 255)]
     #[Assert\Url]
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true, options: ['default' => '#'])]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $instagramurl = null;
 
     #[Assert\Length(max: 255)]
     #[Assert\Url]
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true, options: ['default' => '#'])]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $facebookurl = null;
 
     #[Assert\Length(max: 255)]
     #[Assert\Url]
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true, options: ['default' => '#'])]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $googleplusurl = null;
 
     #[Assert\Length(max: 255)]
     #[Assert\Url]
-    #[ORM\Column(type: Types::STRING, length: 255, nullable: true, options: ['default' => '#'])]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $linkedinurl = null;
 
     public function hasSocialMedia(): bool

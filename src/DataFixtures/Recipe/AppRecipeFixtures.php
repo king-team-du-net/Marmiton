@@ -57,6 +57,7 @@ class AppRecipeFixtures extends Fixture implements DependentFixtureInterface
             ->setNickname('anne-carlier')
             ->setSlug('anne-carlier')
             ->setEmail('anne-carlier@yourdomain.com')
+            ->setPhone($this->faker()->phoneNumber())
             ->setTeam(true)
             ->setAbout($this->faker()->realText(254))
             ->setDesignation('Admin Staff')

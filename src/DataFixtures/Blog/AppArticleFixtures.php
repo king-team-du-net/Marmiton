@@ -37,6 +37,7 @@ class AppArticleFixtures extends Fixture
             ->setNickname('tom-admin')
             ->setSlug('tom-admin')
             ->setEmail('tom-admin@yourdomain.com')
+            ->setPhone($this->faker()->phoneNumber())
             ->setTeam(true)
             ->setAbout($this->faker()->realText(254))
             ->setDesignation('Admin Staff')
@@ -60,6 +61,7 @@ class AppArticleFixtures extends Fixture
             ->setNickname('john-customer')
             ->setSlug('john-customer')
             ->setEmail('john-customer@yourdomain.com')
+            ->setPhone($this->faker()->phoneNumber())
         ;
 
         $manager->persist(

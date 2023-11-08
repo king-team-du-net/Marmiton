@@ -100,6 +100,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     #[Groups(['get'])]
     private string $email = '';
 
+    #[Assert\Length(max: 20)]
+    #[Assert\Regex(
+        pattern: '/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/',
+        message: 'Invalid phone number.',
+        )
+    ]
+    #[ORM\Column(type: Types::STRING, length: 20, nullable: true)]
+    private ?string $phone = null;
+
     #[ORM\Column(type: Types::JSON)]
     #[Groups(['get'])]
     private array $roles = [HasRoles::DEFAULT];
@@ -289,6 +298,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     public function setEmail(?string $email): static
     {
         $this->email = $email ?: '';
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): static
+    {
+        $this->phone = $phone;
 
         return $this;
     }

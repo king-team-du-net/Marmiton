@@ -89,6 +89,13 @@ class AccountUpdateSettingType extends AbstractType
                 'attr' => ['readonly' => true],
                 'help' => 'Enter the email address to be reached for inquiries',
             ])
+            ->add('phone', TextType::class, [
+                'purify_html' => true,
+                'required' => false,
+                'label' => 'Contact phone number :',
+                'empty_data' => '',
+                'help' => 'Enter the phone number to be called for inquiries',
+            ])
         ;
     }
 

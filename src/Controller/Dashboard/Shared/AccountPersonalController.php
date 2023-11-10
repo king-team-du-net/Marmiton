@@ -106,7 +106,7 @@ class AccountPersonalController extends Controller
         return [$form, null];
     }
 
-    /**
+    /*
      * Edit address form.
      */
     /*

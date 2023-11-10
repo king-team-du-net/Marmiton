@@ -205,6 +205,7 @@ class SettingService
     }
     */
 
+    /*
     // Returns the reviews after applying the specified search criterias
     public function getReviews($criterias)
     {
@@ -233,7 +234,7 @@ class SettingService
         $slug = array_key_exists('slug', $criterias) ? $criterias['slug'] : 'all';
 
         $isDraft = array_key_exists('isDraft', $criterias) ? $criterias['isDraft'] : true;
-        $user = array_key_exists('user', $criterias) ? $criterias['user'] : "all";
+        $user = array_key_exists('user', $criterias) ? $criterias['user'] : 'all';
         $userEnabled = array_key_exists('userEnabled', $criterias) ? $criterias['userEnabled'] : true;
         $addedtofavoritesby = array_key_exists('addedtofavoritesby', $criterias) ? $criterias['addedtofavoritesby'] : 'all';
         $isOnHomepageSlider = array_key_exists('isOnHomepageSlider', $criterias) ? $criterias['isOnHomepageSlider'] : 'all';
@@ -246,6 +247,7 @@ class SettingService
 
         return $this->em->getRepository("App\Entity\Recipe\Recipe")->getRecipes($keyword, $slug, $isDraft, $user, $userEnabled, $addedtofavoritesby, $isOnHomepageSlider, $otherthan, $sort, $order, $limit, $count);
     }
+    */
 
     /*
     // Returns the testimonials after applying the specified search criterias

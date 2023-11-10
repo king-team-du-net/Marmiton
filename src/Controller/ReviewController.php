@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Service\SettingService;
+use App\Entity\Recipe\Recipe;
+use App\Repository\ReviewRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +17,11 @@ class ReviewController extends Controller
         Request $request,
         PaginatorInterface $paginator,
         TranslatorInterface $translator,
-        SettingService $settingService,
-        string $slug
+        ReviewRepository $reviewRepository,
+        Recipe $recipe
     ): Response {
         $keyword = '' == $request->query->get('keyword') ? 'all' : $request->query->get('keyword');
 
-        $recipe = $settingService->getRecipes(['slug' => $slug])->getQuery()->getOneOrNullResult();
         if (!$recipe) {
             $this->addFlash('danger', $translator->trans('The recipe not be found'));
 
@@ -31,7 +31,7 @@ class ReviewController extends Controller
         }
 
         $reviews = $paginator->paginate(
-            $settingService->getReviews(['recipe' => $recipe->getSlug(), 'keyword' => $keyword])->getQuery(),
+            $reviewRepository->findBy(['user' => $this->getUser()]),
             $request->query->getInt('page', 1),
             10,
             ['wrap-queries' => true]

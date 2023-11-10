@@ -2,12 +2,12 @@
 
 namespace App\Repository\Recipe;
 
-use App\Entity\User;
 use App\Entity\Recipe\Recipe;
+use App\Entity\Setting\HomepageHeroSetting;
+use App\Entity\User;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Setting\HomepageHeroSetting;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Recipe>
@@ -42,20 +42,17 @@ class RecipeRepository extends ServiceEntityRepository
     /**
      * Returns the recipes after applying the specified search criterias.
      *
-     * @param HomepageHeroSetting|null  $isOnHomepageSlider
-     * @param                           $addedtofavoritesby
-     * @param bool                      $userEnabled
-     * @param bool                      $isDraft
-     * @param string                    $keyword
-     * @param string                    $slug
-     * @param User|null                 $user
-     * @param int                       $limit
-     * @param string                    $sort
-     * @param string                    $order
-     * @param string                    $otherthan
-     * @param int                       $count
-     *
-     * @return QueryBuilder<Recipe>
+     * @param HomepageHeroSetting|null $isOnHomepageSlider
+     * @param bool                     $userEnabled
+     * @param bool                     $isDraft
+     * @param string                   $keyword
+     * @param string                   $slug
+     * @param User|null                $user
+     * @param int                      $limit
+     * @param string                   $sort
+     * @param string                   $order
+     * @param string                   $otherthan
+     * @param int                      $count
      */
     public function getRecipes($isOnHomepageSlider, $addedtofavoritesby, $userEnabled, $isDraft, $keyword, $slug, $user, $limit, $sort, $order, $otherthan, $count): QueryBuilder
     {
@@ -101,8 +98,8 @@ class RecipeRepository extends ServiceEntityRepository
         }
 
         if ('all' !== $userEnabled) {
-            $qb->leftJoin("user", "user");
-            $qb->andWhere("user.enabled = :userEnabled")->setParameter("userEnabled", $userEnabled);
+            $qb->leftJoin('user', 'user');
+            $qb->andWhere('user.enabled = :userEnabled')->setParameter('userEnabled', $userEnabled);
         }
 
         $qb->orderBy($sort, $order);

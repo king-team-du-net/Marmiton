@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% set pagetitle = 'Reviews for %recipename%'|trans({'%recipename%': recipe.name}) %}
+{% block title pagetitle %}
+
+{% block body %}
+
+    {% if reviews.getTotalItemCount > 0 %}
+        <div class="row">
+            {% for review in reviews %}
+                {% include "global/user-review.html.twig" with {review: review, showuser: 1} %}
+            {% endfor %}
+        </div>
+    {% else %}
+        {% include "global/message.html.twig" with { type: "info", message: ('No review found'|trans), icon: "fas fa-exclamation-circle" } %}
+    {% endif %}
+    {{ knp_pagination_render(reviews, null, {}, {'align': 'center'}) }}
+
+{% endblock %}

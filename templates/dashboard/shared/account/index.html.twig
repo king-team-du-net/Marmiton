@@ -14,7 +14,7 @@
 				<li class="breadcrumb-item active">{{pagetitle}}</li>
 			</ol>
 			<h1 class="hero-heading mb-0">{{pagetitle}}</h1>
-			<p class="text-muted mb-5">{{ 'Manage your account and settings here'|trans }}.</p>
+			<p class="text-muted mb-5">{{ 'Manage your account and settings here.'|trans }}</p>
 			<div class="row">
 				<div class="col-6 col-md-4 mb-30px">
 					<div class="card h-100 border-0 shadow hover-animate">
@@ -25,7 +25,7 @@
 								</svg>
 							</div>
 							<h5 class="card-title mb-3">
-								<a class="text-decoration-none text-dark stretched-link" href="{{ path('dashboard_account_settings') }}">{{'Personal info'|trans}}</a>
+								<a class="text-decoration-none text-dark stretched-link" href="{{ path('dashboard_account_personals') }}">{{'Personal info'|trans}}</a>
 							</h5>
 							<p class="text-muted card-text text-sm">{{'Provide personal details and how we can reach you'|trans}}</p>
 						</div>
@@ -40,7 +40,7 @@
 								</svg>
 							</div>
 							<h5 class="card-title mb-3">
-								<a class="text-decoration-none text-dark stretched-link" href="#">{{'Login & security'|trans}}</a>
+								<a class="text-decoration-none text-dark stretched-link" href="{{ path('dashboard_account_security') }}">{{'Login & security'|trans}}</a>
 							</h5>
 							<p class="text-muted card-text text-sm">{{'Update your password and secure your account'|trans}}</p>
 						</div>

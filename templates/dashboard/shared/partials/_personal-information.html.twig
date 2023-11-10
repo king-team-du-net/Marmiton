@@ -1,23 +1,23 @@
 <div class="mb-4 col-md-6">
-	{{ form_row(formUpdateSettings.firstname) }}
+	{{ form_row(formUpdatePersonals.firstname) }}
 </div>
 <div class="mb-4 col-md-6">
-	{{ form_row(formUpdateSettings.lastname) }}
+	{{ form_row(formUpdatePersonals.lastname) }}
 </div>
 <div class="mb-4 col-md-6">
-	{{ form_row(formUpdateSettings.nickname) }}
+	{{ form_row(formUpdatePersonals.nickname) }}
 </div>
 <div class="mb-4 col-md-6">
-	{{ form_row(formUpdateSettings.email) }}
+	{{ form_row(formUpdatePersonals.email) }}
 </div>
 <div class="mb-4 col-md-6">
-	{{ form_row(formUpdateSettings.phone) }}
+	{{ form_row(formUpdatePersonals.phone) }}
 </div>
 {% if is_granted("ROLE_TEAM") %}
     <div class="mb-4 col-md-6">
-        {{ form_row(formUpdateSettings.designation) }}
+        {{ form_row(formUpdatePersonals.designation) }}
     </div>
     <div class="mb-4 col-md-12">
-        {{ form_row(formUpdateSettings.about) }}
+        {{ form_row(formUpdatePersonals.about) }}
     </div>
 {% endif %}

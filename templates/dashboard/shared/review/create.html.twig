@@ -1,10 +1,10 @@
 {% extends "base.html.twig" %}
 
-{% set pagetitle = 'Create your review for %booktitle%'|trans({'%booktitle%': book.title}) %}
+{% set pagetitle = 'Create your review for %recipename%'|trans({'%recipename%': recipe.name}) %}
 {% block title pagetitle %}
 
 {% block breadcrumb %}
-	{% set breadcrumb = [{ "books": ('Books'|trans), "current":(pagetitle) }] %}
+	{% set breadcrumb = [{ "recipes": ('Recipes'|trans), "current":(pagetitle) }] %}
 	{% include "global/breadcrumb.html.twig" with breadcrumb %}
 {% endblock %}
 
@@ -21,10 +21,11 @@
                         </p>
                     </div>
 
-                    {{ form_start(form, {'attr': {'class': 'row'}}) }}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'row'}}) }}
+                        {{ form_errors(form) }}
                         {{ include("dashboard/shared/review/_form.html.twig", {form: form}) }}
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-outline-primary">
                                 {{ 'Create'|trans }}
                             </button>
                         </div>

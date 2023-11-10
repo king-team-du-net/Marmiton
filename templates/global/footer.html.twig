@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-lg-4 mb-5 mb-lg-0">
 					<div class="fw-bold text-uppercase text-dark mb-3">{{ setting.getSettings('website_name') }}</div>
-					<p>{{ setting.getSettings("website_about")|raw|nl2br }}</p>
+					<p>{{ setting.getSettings("website_about") |raw | nl2br }}</p>
                     {% if settings["facebook_url"] != "" or settings["instagram_url"] != "" or settings["youtube_url"] != "" or settings["twitter_url"] != "" %}
                         <ul class="list-inline">
                             {% if settings["twitter_url"] != "" %}

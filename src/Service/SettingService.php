@@ -203,6 +203,7 @@ class SettingService
 
         return $this->em->getRepository("App\Entity\Pages\Page")->getPages($slug);
     }
+    */
 
     // Returns the reviews after applying the specified search criterias
     public function getReviews($criterias)
@@ -211,7 +212,7 @@ class SettingService
         $keyword = array_key_exists('keyword', $criterias) ? $criterias['keyword'] : 'all';
         $slug = array_key_exists('slug', $criterias) ? $criterias['slug'] : 'all';
         $user = array_key_exists('user', $criterias) ? $criterias['user'] : 'all';
-        $book = array_key_exists('book', $criterias) ? $criterias['book'] : 'all';
+        $recipe = array_key_exists('recipe', $criterias) ? $criterias['recipe'] : 'all';
         $visible = array_key_exists('visible', $criterias) ? $criterias['visible'] : true;
         $rating = array_key_exists('rating', $criterias) ? $criterias['rating'] : 'all';
         $minrating = array_key_exists('minrating', $criterias) ? $criterias['minrating'] : 'all';
@@ -221,9 +222,32 @@ class SettingService
         $sort = array_key_exists('sort', $criterias) ? $criterias['sort'] : 'createdAt';
         $order = array_key_exists('order', $criterias) ? $criterias['order'] : 'DESC';
 
-        return $this->em->getRepository("App\Entity\Review")->getReviews($keyword, $slug, $user, $book, $visible, $rating, $minrating, $maxrating, $limit, $count, $sort, $order);
+        return $this->em->getRepository("App\Entity\Review")->getReviews($keyword, $slug, $user, $recipe, $visible, $rating, $minrating, $maxrating, $limit, $count, $sort, $order);
     }
 
+    // Returns the recips after applying the specified search criterias
+    public function getRecipes($criterias)
+    {
+        $this->disableSofDeleteFilterForAdmin($this->em, $this->authChecker);
+        $keyword = array_key_exists('keyword', $criterias) ? $criterias['keyword'] : 'all';
+        $slug = array_key_exists('slug', $criterias) ? $criterias['slug'] : 'all';
+
+        $isDraft = array_key_exists('isDraft', $criterias) ? $criterias['isDraft'] : true;
+        $user = array_key_exists('user', $criterias) ? $criterias['user'] : "all";
+        $userEnabled = array_key_exists('userEnabled', $criterias) ? $criterias['userEnabled'] : true;
+        $addedtofavoritesby = array_key_exists('addedtofavoritesby', $criterias) ? $criterias['addedtofavoritesby'] : 'all';
+        $isOnHomepageSlider = array_key_exists('isOnHomepageSlider', $criterias) ? $criterias['isOnHomepageSlider'] : 'all';
+        $otherthan = array_key_exists('otherthan', $criterias) ? $criterias['otherthan'] : 'all';
+
+        $sort = array_key_exists('sort', $criterias) ? $criterias['sort'] : 'r.name';
+        $order = array_key_exists('order', $criterias) ? $criterias['order'] : 'ASC';
+        $limit = array_key_exists('limit', $criterias) ? $criterias['limit'] : 'all';
+        $count = array_key_exists('count', $criterias) ? $criterias['count'] : false;
+
+        return $this->em->getRepository("App\Entity\Recipe\Recipe")->getRecipes($keyword, $slug, $isDraft, $user, $userEnabled, $addedtofavoritesby, $isOnHomepageSlider, $otherthan, $sort, $order, $limit, $count);
+    }
+
+    /*
     // Returns the testimonials after applying the specified search criterias
     public function getTestimonials($criterias)
     {
@@ -231,7 +255,7 @@ class SettingService
         $keyword = array_key_exists('keyword', $criterias) ? $criterias['keyword'] : 'all';
         $slug = array_key_exists('slug', $criterias) ? $criterias['slug'] : 'all';
         $user = array_key_exists('user', $criterias) ? $criterias['user'] : 'all';
-        $book = array_key_exists('book', $criterias) ? $criterias['book'] : 'all';
+        $recipe = array_key_exists('recipe', $criterias) ? $criterias['recipe'] : 'all';
         $isIsOnline = array_key_exists('isIsOnline', $criterias) ? $criterias['isIsOnline'] : true;
         $rating = array_key_exists('rating', $criterias) ? $criterias['rating'] : 'all';
         $minrating = array_key_exists('minrating', $criterias) ? $criterias['minrating'] : 'all';
@@ -241,26 +265,7 @@ class SettingService
         $sort = array_key_exists('sort', $criterias) ? $criterias['sort'] : 'createdAt';
         $order = array_key_exists('order', $criterias) ? $criterias['order'] : 'DESC';
 
-        return $this->em->getRepository("App\Entity\Testimonial")->getTestimonials($keyword, $slug, $user, $book, $isIsOnline, $rating, $minrating, $maxrating, $limit, $count, $sort, $order);
-    }
-
-    // Returns the books after applying the specified search criterias
-    public function getBooks($criterias)
-    {
-        $this->disableSofDeleteFilterForAdmin($this->em, $this->authChecker);
-        $keyword = array_key_exists('keyword', $criterias) ? $criterias['keyword'] : 'all';
-        $slug = array_key_exists('slug', $criterias) ? $criterias['slug'] : 'all';
-
-        $addedtofavoritesby = array_key_exists('addedtofavoritesby', $criterias) ? $criterias['addedtofavoritesby'] : 'all';
-        $isOnHomepageSlider = array_key_exists('isOnHomepageSlider', $criterias) ? $criterias['isOnHomepageSlider'] : 'all';
-        $otherthan = array_key_exists('otherthan', $criterias) ? $criterias['otherthan'] : 'all';
-
-        $sort = array_key_exists('sort', $criterias) ? $criterias['sort'] : 'b.title';
-        $order = array_key_exists('order', $criterias) ? $criterias['order'] : 'ASC';
-        $limit = array_key_exists('limit', $criterias) ? $criterias['limit'] : 'all';
-        $count = array_key_exists('count', $criterias) ? $criterias['count'] : false;
-
-        return $this->em->getRepository("App\Entity\Book")->getBooks($keyword, $slug, $addedtofavoritesby, $isOnHomepageSlider, $otherthan, $sort, $order, $limit, $count);
+        return $this->em->getRepository("App\Entity\Testimonial")->getTestimonials($keyword, $slug, $user, $recipe, $isIsOnline, $rating, $minrating, $maxrating, $limit, $count, $sort, $order);
     }
 
     // Returns the help center categories after applying the specified search criterias

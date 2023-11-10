@@ -1,0 +1,180 @@
+{% extends "base.html.twig" %}
+
+{% set pagetitle = 'Profile'|trans %}
+{% block title pagetitle %}
+
+{% block body %}
+
+	<section class="py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 me-lg-auto">
+					<div class="card border-0 shadow mb-6 mb-lg-0">
+						<div class="card-header bg-gray-100 py-4 border-0 text-center">
+							<a class="d-inline-block" href="{{ path('user_profil', {slug: user.slug}) }}">
+								{% set runtimeConfig = {"thumbnail": {"size": [80, 80] } } %}
+								<img 
+									src="{{ user.avatarName ? asset(user.getAvatarPath | imagine_filter('thumbnail', runtimeConfig)) : user.getAvatarPlaceholder }}" 
+									alt="{{ user.fullName }}" 
+									class="d-block avatar avatar-xxl p-2 mb-2"
+								>
+							</a>
+							<h5>{{ user.nickname }}</h5>
+							<p class="text-muted text-sm mb-0">Paris, FR</p>
+						</div>
+						<div class="card-body p-4">
+							<div class="d-flex align-items-center mb-3">
+								<div class="icon-rounded icon-rounded-sm bg-primary-light flex-shrink-0 me-2">
+									<svg class="svg-icon text-primary svg-icon-md">
+										<use xlink:href="#diploma-1"></use>
+									</svg>
+								</div>
+								<div>
+									<p class="mb-0">2877 {{ 'reviews'|trans }}</p>
+								</div>
+							</div>
+							{% if user.suspended %}
+								<div class="d-flex align-items-center mb-3">
+									<div class="icon-rounded icon-rounded-sm bg-primary-light flex-shrink-0 me-2">
+										<svg class="svg-icon text-primary svg-icon-md">
+											<use xlink:href="#delete-circle-1"></use>
+										</svg>
+									</div>
+									<div>
+										<p class="mb-0">{{ 'Suspended'|trans }}</p>
+									</div>
+								</div>
+							{% else %}
+								<div class="d-flex align-items-center mb-3">
+									<div class="icon-rounded icon-rounded-sm bg-primary-light flex-shrink-0 me-2">
+										<svg class="svg-icon text-primary svg-icon-md">
+											<use xlink:href="#checkmark-1"></use>
+										</svg>
+									</div>
+									<div>
+										<p class="mb-0">{{ 'Not Suspended'|trans }}</p>
+									</div>
+								</div>
+							{% endif %}
+							<hr>
+							<h6>{{ user.nickname }} {{ 'provided'|trans }}</h6>
+							<ul class="card-text text-muted">
+								<li></li>
+								<li>{{ user.email }}</li>
+								<li>{{ user.phone }}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-9 ps-lg-5">
+					<h1 class="hero-heading mb-0">{{ "Hello, I'm"|trans }} {{ user.nickname }}!</h1>
+					<div class="text-block">
+						<p>
+							<span class="badge badge-secondary-light">{{ 'Joined in'|trans }} {{ user.createdAt | date('Y') }}</span>
+						</p>
+						{% if user.about %}
+							<p class="text-muted">{{ user.about | html_markdown }}</p>
+						{% endif %}
+					</div>
+					<div class="text-block">
+						<h4 class="mb-5">{{ user.nickname }} {{ 'Listings'|trans }}</h4>
+						<div class="row">
+
+							<div class="col-sm-6 col-lg-4 mb-30px hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
+								<div class="card h-100 border-0 shadow">
+									<div class="card-img-top overflow-hidden gradient-overlay">
+										<img class="img-fluid" src="https://d19m59y37dris4.cloudfront.net/directory/2-0-2/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room">
+										<a class="tile-link" href="detail-rooms.html"></a>
+										<div class="card-img-overlay-bottom z-index-20">
+											<div class="d-flex text-white text-sm align-items-center">
+												<img class="avatar avatar-border-white flex-shrink-0 me-2" src="https://d19m59y37dris4.cloudfront.net/directory/2-0-2/img/avatar/avatar-0.jpg" alt="Pamela">
+												<div>Pamela</div>
+											</div>
+										</div>
+										<div class="card-img-overlay-top text-end">
+											<a class="card-fav-icon position-relative z-index-40" href="javascript: void();">
+												<svg class="svg-icon text-white">
+													<use xlink:href="#heart-1"></use>
+												</svg>
+											</a>
+										</div>
+									</div>
+									<div class="card-body d-flex align-items-center">
+										<div class="w-100">
+											<h6 class="card-title">
+												<a class="text-decoration-none text-dark" href="detail-rooms.html">Modern, Well-Appointed Room</a>
+											</h6>
+											<div class="d-flex card-subtitle mb-3">
+												<p class="flex-grow-1 mb-0 text-muted text-sm">Private room</p>
+												<p class="flex-shrink-1 mb-0 card-stars text-xs text-end">
+													<i class="fa fa-star text-warning"></i>
+													<i class="fa fa-star text-warning"></i>
+													<i class="fa fa-star text-warning"></i>
+													<i class="fa fa-star text-warning"></i>
+													<i class="fa fa-star text-warning"></i>
+												</p>
+											</div>
+											<p class="card-text text-muted">
+												<span class="h4 text-primary">$80</span>
+												per night
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="text-block">
+						<p class="subtitle text-sm text-primary">{{ 'Reviews'|trans }}</p>
+						<h5 class="mb-4">{{ 'Listing Reviews'|trans }}</h5>
+						<div class="d-flex d-block d-sm-flex review">
+							<div class="text-md-center flex-shrink-0 me-4 me-xl-5">
+								<img class="d-block avatar avatar-xl p-2 mb-2" src="https://d19m59y37dris4.cloudfront.net/directory/2-0-2/img/avatar/avatar-8.jpg" alt="Padmé Amidala">
+								<span class="text-uppercase text-muted text-sm">Nov 2023</span>
+							</div>
+							<div>
+								<h6 class="mt-2 mb-1">Padmé Amidala</h6>
+								<div class="mb-2">
+									<i class="fa fa-xs fa-star text-primary"></i>
+									<i class="fa fa-xs fa-star text-primary"></i>
+									<i class="fa fa-xs fa-star text-primary"></i>
+									<i class="fa fa-xs fa-star text-primary"></i>
+									<i class="fa fa-xs fa-star text-primary"></i>
+								</div>
+								<p class="text-muted text-sm">
+									One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections
+								</p>
+							</div>
+						</div>
+
+						<div class="py-5">
+							<button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#leaveReview" aria-expanded="false" aria-controls="leaveReview">{{ 'Leave a review'|trans }}</button>
+							<div class="collapse mt-4" id="leaveReview">
+								<h5 class="mb-4">{{ 'Leave a review'|trans }}</h5>
+								<form class="form" id="contact-form" method="get" action="#">
+									<div class="mb-4">
+										<label class="form-label" for="rating">Your rating *</label>
+										<select class="form-select focus-shadow-0" name="rating" id="rating">
+											<option value="5">★★★★★ (5/5)</option>
+											<option value="4">★★★★☆ (4/5)</option>
+											<option value="3">★★★☆☆ (3/5)</option>
+											<option value="2">★★☆☆☆ (2/5)</option>
+											<option value="1">★☆☆☆☆ (1/5)</option>
+										</select>
+									</div>
+									<div class="mb-4">
+										<label class="form-label" for="details">Review text *</label>
+										<textarea class="form-control" rows="4" name="details" id="details" placeholder="Enter your detail" required="required"></textarea>
+									</div>
+									<button class="btn btn-primary" type="submit">Post review</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

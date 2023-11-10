@@ -1,0 +1,121 @@
+{% extends "base.html.twig" %}
+
+{% set pagetitle = 'Profile of '|trans ~ user.nickname %}
+{% block title pagetitle %}
+
+{% block body %}
+
+	<section class="py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 me-lg-auto">
+					<div class="card border-0 shadow mb-6 mb-lg-0">
+						<div class="card-header bg-gray-100 py-4 border-0 text-center">
+							<a class="d-inline-block">
+								{% set runtimeConfig = {"thumbnail": {"size": [80, 80] } } %}
+								<img 
+									src="{{ user.avatarName ? asset(user.getAvatarPath | imagine_filter('thumbnail', runtimeConfig)) : user.getAvatarPlaceholder }}" 
+									alt="{{ user.fullName }}" 
+									class="d-block avatar avatar-xxl p-2 mb-2"
+								>
+							</a>
+							<h5>{{ user.nickname }}</h5>
+							<p class="text-muted text-sm mb-0">Paris, FR</p>
+						</div>
+						<div class="card-body p-4">
+							<div class="d-flex align-items-center mb-3">
+								<div class="icon-rounded icon-rounded-sm bg-primary-light flex-shrink-0 me-2">
+									<svg class="svg-icon text-primary svg-icon-md">
+										<use xlink:href="#diploma-1"></use>
+									</svg>
+								</div>
+								<div>
+									<p class="mb-0">
+										{{ lastComments | length }} {{ lastComments | length > 1 ? "comments"|trans : "comment"|trans }}
+									</p>
+								</div>
+							</div>
+							<div class="d-flex align-items-center mb-3">
+								<div class="icon-rounded icon-rounded-sm bg-primary-light flex-shrink-0 me-2">
+									<svg class="svg-icon text-primary svg-icon-md">
+										<use xlink:href="#diploma-1"></use>
+									</svg>
+								</div>
+								<div>
+									<p class="mb-0">
+										{{ lastReviews | length }} {{ lastReviews | length  > 1 ? "reviews"|trans : "review"|trans }}
+									</p>
+								</div>
+							</div>
+							{% if user.suspended %}
+								<div class="d-flex align-items-center mb-3">
+									<div class="icon-rounded icon-rounded-sm bg-primary-light flex-shrink-0 me-2">
+										<svg class="svg-icon text-primary svg-icon-md">
+											<use xlink:href="#delete-circle-1"></use>
+										</svg>
+									</div>
+									<div>
+										<p class="mb-0">{{ 'Suspended'|trans }}</p>
+									</div>
+								</div>
+							{% else %}
+								<div class="d-flex align-items-center mb-3">
+									<div class="icon-rounded icon-rounded-sm bg-primary-light flex-shrink-0 me-2">
+										<svg class="svg-icon text-primary svg-icon-md">
+											<use xlink:href="#checkmark-1"></use>
+										</svg>
+									</div>
+									<div>
+										<p class="mb-0">{{ 'Not Suspended'|trans }}</p>
+									</div>
+								</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-9 ps-lg-5">
+					<h1 class="hero-heading mb-0">{{ "Hello, I'm"|trans }} {{ user.nickname }}!</h1>
+					<div class="text-block">
+						<p>
+							<span class="badge badge-secondary-light">{{ 'Joined in'|trans }} {{ user.createdAt | date('Y') }}</span>
+						</p>
+						{% if user.team == '1' %}
+							{% if user.about %}
+								<p class="text-muted">{{ user.about | html_markdown }}</p>
+							{% endif %}
+						{% endif %}
+					</div>
+					<div class="text-block">
+						<p class="subtitle text-sm text-primary">
+							{{ lastComments | length }} {{ lastComments | length > 1 ? "comments"|trans : "comment"|trans }}
+						</p>
+						{% if lastComments | length > 0 %}
+							<h5 class="mb-4">{{ 'His last comments'|trans }}</h5>
+							{{ dump(lastComments) }}
+							{% for comment in lastComments %}
+								{{ include('user/_lastcomment.html.twig', { comment, index: loop.index }) }}
+							{% endfor %}
+						{% else %}
+							{% include "global/message.html.twig" with { type: "info", message: ('No comments found'|trans), icon: "fas fa-exclamation-circle" } %}
+						{% endif %}
+					</div>
+					<div class="text-block">
+						<p class="subtitle text-sm text-primary">
+							{{ lastReviews | length }} {{ lastReviews | length  > 1 ? "reviews"|trans : "review"|trans }}
+						</p>
+						{% if lastReviews | length > 0 %}
+							<h5 class="mb-4">{{ 'His last reviews'|trans }}</h5>
+							{{ dump(lastReviews) }}
+							{% for review in lastReviews %}
+								{{ include('user/_lastreview.html.twig', { review, index: loop.index }) }}
+							{% endfor %}
+						{% else %}
+							{% include "global/message.html.twig" with { type: "info", message: ('No reviews found'|trans), icon: "fas fa-exclamation-circle" } %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

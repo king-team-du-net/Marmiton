@@ -2,30 +2,41 @@
 
 namespace App\Controller;
 
+use App\Service\SettingService;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ReviewController extends Controller
 {
-    /*
-        /**
-         * @Route("/event/{slug}/reviews", name="event_reviews")
-        /
-        public function eventreviews($slug, Request $request, PaginatorInterface $paginator, AppServices $services, TranslatorInterface $translator) {
-            $keyword = ($request->query->get('keyword')) == "" ? "all" : $request->query->get('keyword');
+    #[Route(path: '/recipe/{slug}/reviews', name: 'recipe_reviews', methods: [Request::METHOD_GET])]
+    public function recipereviews(
+        Request $request,
+        PaginatorInterface $paginator,
+        TranslatorInterface $translator,
+        SettingService $settingService,
+        string $slug
+    ): Response {
+        $keyword = '' == $request->query->get('keyword') ? 'all' : $request->query->get('keyword');
 
-            $event = $services->getEvents(array("slug" => $slug, "elapsed" => "all"))->getQuery()->getOneOrNullResult();
-            if (!$event) {
-                $this->addFlash('error', $translator->trans('The event not be found'));
-                return $services->redirectToReferer("events");
-            }
+        $recipe = $settingService->getRecipes(['slug' => $slug])->getQuery()->getOneOrNullResult();
+        if (!$recipe) {
+            $this->addFlash('danger', $translator->trans('The recipe not be found'));
 
-            $reviews = $paginator->paginate($services->getReviews(array("event" => $event->getSlug(), "keyword" => $keyword))->getQuery(), $request->query->getInt('page', 1), 10, array('wrap-queries' => true));
+            $referer = $request->headers->get('referer');
 
-            return $this->render('Front/Event/reviews.html.twig', [
-                        'reviews' => $reviews,
-                        'event' => $event
-            ]);
+            return $this->redirect($referer); // return to previous page
         }
-     */
+
+        $reviews = $paginator->paginate(
+            $settingService->getReviews(['recipe' => $recipe->getSlug(), 'keyword' => $keyword])->getQuery(),
+            $request->query->getInt('page', 1),
+            10,
+            ['wrap-queries' => true]
+        );
+
+        return $this->render('recipe/reviews.html.twig', compact('recipe', 'reviews'));
+    }
 }

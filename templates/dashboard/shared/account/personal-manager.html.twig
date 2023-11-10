@@ -17,7 +17,7 @@
 				<li class="breadcrumb-item active">{{pagetitle}}</li>
 			</ol>
 			<h1 class="hero-heading mb-0">{{pagetitle}}</h1>
-			<p class="text-muted mb-5">{{ 'Manage your Personal info and settings here'|trans }}.</p>
+			<p class="text-muted mb-5">{{ 'Manage your Personal info and settings here.'|trans }}</p>
 			<div class="row">
 				<div class="col-lg-7 mb-5 mb-lg-0">
 					<div class="text-block">
@@ -39,14 +39,14 @@
 							<i class="fa fa-phone fa-fw me-2"></i>{{ user.phone }}
 						</p>
 						<div class="collapse" id="personalDetails">
-							{{ form_start(formUpdateSettings, {attr: {novalidate: 'novalidate'}}) }}
-								{{ form_widget(formUpdateSettings._token) }}
-								{{ form_errors(formUpdateSettings) }}
+							{{ form_start(formUpdatePersonals, {attr: {novalidate: 'novalidate'}}) }}
+								{{ form_widget(formUpdatePersonals._token) }}
+								{{ form_errors(formUpdatePersonals) }}
 								<div class="row pt-4">
-									{{ include("dashboard/shared/partials/_personal-information.html.twig", {formUpdateSettings: formUpdateSettings}) }}
+									{{ include("dashboard/shared/partials/_personal-information.html.twig", {formUpdatePersonals: formUpdatePersonals}) }}
 								</div>
-								<button type="submit" name="action" value="settings" class="btn btn-outline-primary mb-4">{{ 'Save'|trans }}</button>
-							{{ form_end(formUpdateSettings, {'render_rest': false}) }}
+								<button type="submit" name="action" value="personals" class="btn btn-outline-primary mb-4">{{ 'Save'|trans }}</button>
+							{{ form_end(formUpdatePersonals, {'render_rest': false}) }}
 						</div>
 					</div>
 					<div class="text-block">
@@ -73,28 +73,28 @@
 							{{ form_end(formUpdateSocial, {'render_rest': false}) }}
 						</div>
 					</div>
+					{#
 					<div class="text-block">
 						<div class="row mb-3">
 							<div class="col-sm-9">
-								<h5>{{ 'Change password'|trans }}</h5>
+								<h5>{{ 'Address'|trans }}</h5>
 							</div>
 							<div class="col-sm-3 text-end">
-								<button class="btn btn-link ps-0 text-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#password" aria-expanded="false" aria-controls="password">{{ 'Update'|trans }}</button>
+								<button class="btn btn-link ps-0 text-primary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#address" aria-expanded="false" aria-controls="address">{{ 'Update'|trans }}</button>
 							</div>
 						</div>
-						<div class="collapse" id="password">
-							{#
-							{{ form_start(formUpdatePassword, {attr: {novalidate: 'novalidate'}}) }}
-								{{ form_widget(formUpdatePassword._token) }}
-								{{ form_errors(formUpdatePassword) }}
+						<div class="collapse" id="address">
+							{{ form_start(formUpdateAddress, {attr: {novalidate: 'novalidate'}}) }}
+								{{ form_widget(formUpdateAddress._token) }}
+								{{ form_errors(formUpdateAddress) }}
 								<div class="row pt-4">
-									{{ include("dashboard/shared/partials/_change-password.html.twig", {formUpdatePassword: formUpdatePassword}) }}
+									{{ include("dashboard/shared/partials/_address.html.twig", {formUpdateAddress: formUpdateAddress}) }}
 								</div>
-								<button type="submit" name="action" value="plainPassword" class="btn btn-outline-primary">{{ 'Save'|trans }}</button>
-							{{ form_end(formUpdatePassword, {'render_rest': false}) }}
-							#}
+								<button type="submit" name="action" value="address" class="btn btn-outline-primary">{{ 'Save'|trans }}</button>
+							{{ form_end(formUpdateAddress, {'render_rest': false}) }}
 						</div>
 					</div>
+					#}
 				</div>
 				<div class="col-md-8 col-lg-4 ms-lg-auto">
 					<div class="card border-0 shadow">

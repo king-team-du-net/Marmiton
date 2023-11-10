@@ -71,7 +71,7 @@
 							</a>
 							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenuLink">
 								<a class="dropdown-item" href="{{ path('dashboard_index') }}">{{'Dashboard'|trans}}</a>
-								<a class="dropdown-item" href="{{ path('dashboard_account_settings') }}">{{'Personal info'|trans}}</a>
+								<a class="dropdown-item" href="{{ path('dashboard_account_index') }}">{{'My account'|trans}}</a>
 								<div class="dropdown-divider"></div>
 								{% if is_granted('IS_IMPERSONATOR') %}
 									<a class="dropdown-item" href="{{ impersonation_exit_path(path('home')) }}">

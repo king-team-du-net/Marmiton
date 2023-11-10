@@ -1,20 +1,176 @@
 {% extends "base.html.twig" %}
 
 {% if is_granted('ROLE_USER') %}
-    {% set pagetitle = 'My reviews' | trans %}
+	{% set pagetitle = 'My reviews' | trans %}
 {% elseif is_granted('ROLE_ADMIN') %}
-    {% set pagetitle = 'Manage reviews' | trans %}
+	{% set pagetitle = 'Manage reviews' | trans %}
 {% endif %}
 
 {% block title pagetitle %}
 
-{% block breadcrumb %}
-	{% set breadcrumb = [{ "current":(pagetitle) }] %}
-	{% include "global/breadcrumb.html.twig" with breadcrumb %}
-{% endblock %}
-
 {% block body %}
 
-    {# Code #}
+	<div class="container-fluid py-5 px-lg-5">
+		<div class="row border-bottom mb-4">
+			<div class="col-12">
+                <ol class="breadcrumb ps-0 justify-content-start">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('home') }}">{{'Home'|trans}}</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('dashboard_account_index') }}">{{ 'My account'|trans }}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{pagetitle}}</li>
+                </ol>
+                <h1 class="hero-heading mb-0">{{pagetitle}}</h1>
+                <p class="text-muted mb-5"></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3 pt-3">
+				<form class="pe-xl-3">
+					<div class="mb-4">
+						<label class="form-label" for="form_keyword">{{ "Keyword"|trans }}</label>
+						<div class="input-label-absolute input-label-absolute-right">
+							<div class="label-absolute">
+								<i class="fa fa-search"></i>
+							</div>
+							<input class="form-control pe-4" type="text" name="keyword" placeholder="{{ "Search in reviews"|trans }}" id="form_keyword" value="{{ app.request.get('keyword') }}">
+						</div>
+					</div>
+					<div class="mb-4">
+						<label class="form-label" for="form_recipe">{{ "Recipe"|trans }}</label>
+						<div class="input-label-absolute input-label-absolute-right">
+							<div class="label-absolute">
+								<i class="fa fa-search"></i>
+							</div>
+							<input class="form-control pe-4 autocomplete" type="text" name="recipe" placeholder="" id="form_recipe" data-url-list="" data-minimum-input-length="0">
+						</div>
+					</div>
+					<div class="mb-4">
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="visible-filter-all" name="visible" value="all">
+                                    <label class="form-check-label" for="visible-filter-all">{{ "All"|trans }}</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="visible-filter-yes" name="visible" value="1">
+                                    <label class="form-check-label" for="visible-filter-yes">{{ "Visible only"|trans }}</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="visible-filter-no" name="visible" value="0">
+                                    <label class="form-check-label" for="visible-filter-no">{{ "Hidden only"|trans }}</label>
+                                </div>
+                            </li>
+                        </ul>
+					</div>
+					<div class="pb-4">
+						<div class="collapse" id="moreFilters">
+                            <div class="mb-4">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="rating-filter-all" name="rating" value="all">
+                                            <label class="form-check-label" for="rating-filter-all">{{ "All"|trans }}</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="rating-filter-5" name="rating" value="5">
+                                            <label class="form-check-label" for="rating-filter-5">{{ "5 stars"|trans }}</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="rating-filter-4" name="rating" value="4">
+                                            <label class="form-check-label" for="rating-filter-4">{{ "4 stars"|trans }}</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="rating-filter-3" name="rating" value="3">
+                                            <label class="form-check-label" for="rating-filter-3">{{ "3 stars"|trans }}</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="rating-filter-2" name="rating" value="2">
+                                            <label class="form-check-label" for="rating-filter-2">{{ "2 stars"|trans }}</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="rating-filter-1" name="rating" value="1">
+                                            <label class="form-check-label" for="rating-filter-1">{{ "1 star"|trans }}</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+						<div class="mb-4">
+							<button class="btn btn-link btn-collapse ps-0 text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters" data-expanded-text="Less filters" data-collapsed-text="More filters">More filters</button>
+						</div>
+                        <div class="mb-4">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-filter me-1"></i>{{ "Search"|trans }}
+                            </button>
+                            <button class="btn btn-primary" type="reset">
+                                <i class="fas fa-search-minus me-1"></i>{{ "Reset"|trans }}
+                            </button>
+                        </div>
+                    </div>
+				</form>
+			</div>
+			<div class="col-lg-9">
+                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ADMIN') %}
+                    <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
+                        <div class="me-3">
+                            <p class="mb-3 mb-md-0">
+                                {{ "%resultsCount% reviews(s) found"|trans({'%resultsCount%': reviews.getTotalItemCount}) }}
+                            </p>
+                        </div>
+                        <div>
+                            <label class="form-label me-2" for="form_sort">{{ "Sort by"|trans }}</label>
+                            {#  Action #}
+                        </div>
+                    </div>
+                {% endif %}
+				<div class="row">
+					{% if reviews.getTotalItemCount > 0 %}
+                        {% for review in reviews %}
+                            {% include "global/user-review.html.twig" with {review: review, showuser: 1} %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                {#  Action #}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% include "global/message.html.twig" with { type: "info", message: ('No reviews found'|trans), icon: "fas fa-exclamation-circle" } %}
+                    {% endif %}
+				</div>
+				{{ knp_pagination_render(reviews, null, {}, {'align': 'center'}) }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function () {
+            if (getURLParameter('visible') != "null") {
+                $('input[type="radio"][name="visible"][value="' + getURLParameter('visible') + '"]').attr("checked", "checked");
+            }
+
+            if (getURLParameter('rating') != "null") {
+                $('input[type="radio"][name="rating"][value="' + getURLParameter('rating') + '"]').attr("checked", "checked");
+            }
+        });
+    </script>
 
 {% endblock %}

@@ -39,9 +39,9 @@ class CommentRepository extends ServiceEntityRepository
     public function findLastByUser(User $user, int $maxResults): array //  (UserController)
     {
         return $this->createQueryBuilder('c')
-            ->join('c.article', 'a')
-            ->where('a.publishedAt', 'DESC')
-            ->andWhere('c.user = :user')
+            //->join('c.article', 'a')
+            //->where('a.publishedAt', 'DESC')
+            ->andWhere('c.author = :user')
             ->andWhere('c.isApproved = true')
             ->orderBy('c.publishedAt', 'DESC')
             ->setMaxResults($maxResults)

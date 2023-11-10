@@ -4,38 +4,34 @@ namespace App\Controller\Dashboard\Shared;
 
 use App\Controller\Controller;
 use App\Entity\HasRoles;
-use App\Form\Update\AccountUpdatePasswordType;
-use App\Form\Update\AccountUpdateSettingType;
+use App\Form\Update\AccountUpdateAddressType;
+use App\Form\Update\AccountUpdatePersonalType;
 use App\Form\Update\AccountUpdateSocialType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\Security\Http\Logout\LogoutUrlGenerator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[IsGranted(HasRoles::DEFAULT)]
 #[Route(path: '/%website_dashboard_path%/account', name: 'dashboard_account_')]
-class AccountSettingController extends Controller
+class AccountPersonalController extends Controller
 {
     public function __construct(
         private readonly TranslatorInterface $translator,
-        private readonly UserPasswordHasherInterface $hasher,
         private readonly EntityManagerInterface $em,
-        private readonly LogoutUrlGenerator $logoutUrlGenerator
     ) {
     }
 
-    #[Route(path: '/settings', name: 'settings', methods: [Request::METHOD_GET, Request::METHOD_POST]
+    #[Route(path: '/personals', name: 'personals', methods: [Request::METHOD_GET, Request::METHOD_POST]
     )]
-    public function settings(Request $request): Response
+    public function personals(Request $request): Response
     {
         $user = $this->getUserOrThrow();
 
-        // Profile processing
-        [$formUpdateSettings, $response] = $this->accountUpdateSettings($request);
+        // Personals processing
+        [$formUpdatePersonals, $response] = $this->accountUpdatePersonals($request);
         if ($response) {
             return $response;
         }
@@ -46,29 +42,30 @@ class AccountSettingController extends Controller
             return $response;
         }
 
-        // Password processing
+        // Address processing
         /*
-        [$formUpdatePassword, $response] = $this->accountUpdatePassword($request);
+        [$formUpdateAddress, $response] = $this->accountUpdateAddress($request);
         if ($response) {
             return $response;
         }
         */
 
-        return $this->render('dashboard/shared/account/setting/profile-manager.html.twig', compact(
-            'formUpdateSettings',
+        return $this->render('dashboard/shared/account/personal-manager.html.twig', compact(
+            'formUpdatePersonals',
             'formUpdateSocial',
+            // 'formUpdateAddress',
             'user'
         ));
     }
 
     /**
-     * Edit setting (profile) form.
+     * Edit personal (profile) form.
      */
-    private function accountUpdateSettings(Request $request): array
+    private function accountUpdatePersonals(Request $request): array
     {
         $user = $this->getUserOrThrow();
-        $form = $this->createForm(AccountUpdateSettingType::class, $user);
-        if ('settings' !== $request->get('action')) {
+        $form = $this->createForm(AccountUpdatePersonalType::class, $user);
+        if ('personals' !== $request->get('action')) {
             return [$form, null];
         }
 
@@ -109,27 +106,26 @@ class AccountSettingController extends Controller
         return [$form, null];
     }
 
-    /*
-     * Edit password form.
+    /**
+     * Edit address form.
      */
     /*
-    private function accountUpdatePassword(Request $request): array
+    private function accountUpdateAddress(Request $request): array
     {
-        $form = $this->createForm(AccountUpdatePasswordType::class);
-        if ('plainPassword' !== $request->get('action')) {
+        $user = $this->getUserOrThrow();
+        $form = $this->createForm(AccountUpdateAddressType::class, $user);
+        if ('address' !== $request->get('action')) {
             return [$form, null];
         }
 
-        $user = $this->getUserOrThrow();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($this->hasher->hashPassword($user, $form->get("plainPassword")->getData()));
-            $user->setResetPasswordToken(null);
             $this->em->flush();
-            $this->addFlash('success', $this->translator->trans('Your password has been successfully updated.'));
 
-            return [$form, $this->redirect($this->logoutUrlGenerator->getLogoutPath())];
+            $this->addFlash('success', $this->translator->trans('Your address has been successfully updated.'));
+
+            return [$form, $this->redirectToRoute('dashboard_account_index')];
         }
 
         return [$form, null];
